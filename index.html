@@ -112,8 +112,8 @@
             border-radius: 0.85em;
             flex: 0 1 auto; /* Organic dynamic width based on contents */
             width: max-content;
-            min-width: 4em;        
-            max-width: 15em;
+            min-width: 6.5em; /* Comfortable organic minimum pill width on PC */      
+            max-width: 18em;  /* Prevents longer category combinations from collapsing */
             min-height: 4.2em; /* Chunkier feel */
             padding: 0.6em 1.2em;
             font-size: 0.95em; /* Prevents text from being too small inside tiles */
@@ -548,10 +548,10 @@
                 "Cheeses": ["Cheddar", "Brie", "Camembert", "Feta", "Gouda", "American", "Mozzarella", "Asiago", "Cream", "Cottage", "Edam", "Emmental", "Monterey Jack", "Colby", "Cotija", "Basket", "Blue", "Burrata", "Fontina", "Gruyere", "Halloumi", "Maasdam", "Manchego", "Mascarpone", "Parmesan", "Swiss", "Gorgonzola", "Havarti", "Jarlsberg", "Limburger", "Muenster", "Neufchatel", "Paneer", "Provolone", "Ricotta", "Romano", "String", "Roquefort", "Epoisses", "Stilton", "Oaxaca", "Bundz", "Canastra", "Wensleydale", "Bocconcini"],
                 "Pastas": ["Fusilli", "Rigatoni", "Penne", "Bucatini", "Linguine", "Farfalle", "Fettuccine", "Orecchiette", "Spaghetti", "Macaroni", "Pappardelle", "Gnocchi", "Orzo", "Ditalini", "Ziti", "Lasagna", "Tagliatelle", "Angel Hair", "Capellini", "Cavatappi", "Gemelli", "Paccheri", "Ravioli", "Cannelloni", "Manicotti", "Rocchetti", "Radiatore", "Rotelle", "Rotini", "Tortellini", "Vermicelli", "Pastina", "Campanelle", "Riccioli", "Lumache", "Strozzapreti", "Calamarata", "Casarecce", "Croxetti", "Fregola", "Busiate", "Pici", "Mafalde", "Conchiglioni", "Cascatelli"],
                 "Cocktails": ["Old Fashioned", "Negroni", "Daiquiri", "Martini", "Margarita", "Whiskey Sour", "Manhattan", "Aperol Spritz", "Mojito", "Bloody Mary", "Gimlet", "Moscow Mule", "Dark 'N' Stormy", "Corpse Reviver", "Clover Club", "Boulevardier", "Mai Tai", "Sazerac", "French 75", "Paloma", "Pisco Sour", "Vieux Carre", "Americano", "Amaretto Sour", "Gin Fizz", "Bramble", "Brandy Crusta", "Bellini", "Pina Colada", "Sidecar", "Aviation", "Irish Coffee", "Last Word", "Tom Collins", "Caipirinha", "Hanky Panky", "Cosmopolitan", "El Diablo", "White Lady", "Gin Gin Mule", "Long Island Iced Tea", "Jungle Bird", "Painkiller", "Fitzgerald", "Old Cuban", "Bee's Knees", "Paper Plane", "Naked & Famous", "Screwdriver", "Kamikaze", "Mint Julep", "Mimosa", "Black Russian", "Cuba Libre", "Tequila Sunrise", "Sex On The Beach", "Vesper"],
-                //"African Countries": ["Nigeria", "Ethiopia", "Egypt", "DR Congo", "Tanzania", "South Africa", "Kenya", "Sudan", "Uganda", "Algeria", "Morocco", "Angola", "Ghana", "Mozambique", "Madagascar", "Ivory Coast", "Cameroon", "Niger", "Mali", "Burkina Faso", "Malawi", "Zambia", "Chad", "Somalia", "Senegal", "Zimbabwe", "Guinea", "Benin", "Rwanda", "Burundi", "Tunisia", "South Sudan", "Togo", "Sierra Leone", "Libya", "Republic Of The Congo", "Liberia", "Central African Republic", "Mauritania", "Eritrea", "Namibia", "Gambia", "Gabon", "Botswana", "Lesotho"],
                 "US State Capitols": ["Montgomery", "Juneau", "Little Rock", "Sacramento", "Denver", "Hartford", "Dover", "Tallahassee", "Atlanta", "Honolulu", "Boise", "Springfield", "Indianapolis", "Des Moines", "Topeka", "Frankfort", "Baton Rouge", "Augusta", "Annapolis", "Lansing", "St. Paul", "Jackson", "Jefferson City", "Helena", "Carson City", "Concord", "Trenton", "Santa Fe", "Albany", "Raleigh", "Bismarck", "Columbus", "Oklahoma City", "Salem", "Harrisburg", "Providence", "Columbia", "Pierre", "Nashville", "Austin", "Salt Lake City", "Montpelier", "Richmond", "Olympia", "Charleston", "Madison", "Cheyenne"],
                 "World Wonders": ["Statue Of Liberty", "Taj Mahal", "Eiffel Tower", "Golden Gate Bridge", "Colosseum", "Great Wall Of China", "Great Pyramid Of Giza", "Angkor Wat", "Machu Picchu", "Leaning Tower Of Pisa", "Mount Rushmore", "Empire State Building", "Grand Canyon", "Sydney Opera House", "The Acropolis", "Christ The Redeemer", "Hollywood Sign", "Niagara Falls", "La Sagrada Familia", "Stonehenge", "Big Ben", "Lincoln Memorial", "Mount Fuji", "London Eye", "St. Peter's Basilica", "Notre Dame", "Tokyo Tower", "St. Basil's Cathedral", "Arc De Triomphe", "The Great Sphinx", "Mount Kilimanjaro", "The Forbidden City", "Mount Everest", "Sears Tower", "Brooklyn Bridge", "Trevi Fountain", "Burj Al Arab Hotel", "Louvre Museum", "Times Square", "The White House", "Buckingham Palace", "Versailles", "Neuschwanstein Castle", "Pompeii", "Edinburgh Castle", "Matterhorn", "CN Tower"],
                 "Prepositions": ["About", "Above", "Across", "After", "Against", "Among", "Around", "Before", "Between", "Except", "For", "Along", "Amid", "As", "At", "Behind", "Below", "Beneath", "But", "By", "Despite", "During", "From", "In", "Inside", "Into", "Near", "Of", "Off", "On", "Onto", "Over", "Since", "With", "Within", "Without", "Unto", "Up", "Upon", "Under", "Until", "Toward", "To", "Than", "Through"],
+                "Famous Novels": ["The Great Gatsby", "To Kill A Mockingbird", "The Catcher In The Rye", "Ulysses", "Mrs. Dalloway", "Jane Eyre", "Catch-22", "Lord Of The Flies", "A Passage To India", "Adventures Of Huckleberry Finn", "Wuthering Heights", "Brave New World", "Lolita", "Anna Karenina", "Don Quixote", "The Grapes Of Wrath", "On The Road", "Little Women", "David Copperfield", "The Call Of The Wild", "Vanity Fair", "One Hundred Years Of Solitude", "The Scarlet Letter", "Middlemarch", "Robinson Crusoe", "Invisible Man", "The Sun Also Rises", "Gulliver's Travels", "Beloved", "Madame Bovary", "The Trial", "The Age Of Innocence", "Midnight's Children", "Dracula", "Alice's Adventures In Wonderland", "Treasure Island", "Pride And Prejudice", "Moby Dick", "The Pilgrim's Progress", "A Christmas Carol", "A Tale Of Two Cities", "Great Expectations", "The Hobbit", "Frankenstein", "Oliver Twist", "Uncle Tom's Cabin", "Crime And Punishment"],
                 "Fabrics": ["Brocade", "Burlap", "Cambric", "Cheesecloth", "Chenille", "Chiffon", "Chintz", "Corduroy", "Crepe", "Damask", "Denim", "Felt", "Fishnet", "Flannel", "Gabardine", "Gauze", "Georgette", "Gingham", "Gore-Tex", "Grosgrain", "Hemp", "Herringbone", "Jersey", "Lace", "Lame", "Leather", "Linen", "Loden", "Mackinaw", "Moleskin", "Muslin", "Oilskin", "Organza", "Pleather", "Polyester", "Poplin", "Rayon", "Sailcloth", "Seersucker", "Serge", "Silk", "Spandex", "Taffeta", "Terrycloth", "Tulle", "Tweed", "Twill", "Velour", "Velvet", "Velveteen"],               
                 "Musicals": ["Hamilton", "Hadestown", "The Lion King", "Wicked", "Fiddler On The Roof", "The Book Of Mormon", "The Sound Of Music", "The Phantom Of The Opera", "Annie", "Grease", "Hairspray", "Into The Woods", "Little Shop Of Horrors", "Mary Poppins", "My Fair Lady", "Cats", "Aladdin", "Mamma Mia", "Jersey Boys", "Beauty And The Beast", "Miss Saigon", "Kinky Boots", "The Producers", "Rent", "Dear Evan Hansen", "Cabaret", "Spider-Man: Turn Off The Dark", "Starlight Express", "Spamalot", "Jesus Christ Superstar", "In The Heights", "West Side Story", "Avenue Q", "Music Man", "Guys And Dolls", "Six", "Moulin Rouge", "Mean Girls", "Oklahoma!", "Sweeney Todd", "Man Of La Mancha", "Oliver!", "Chess", "South Pacific", "The King And I"],
                 "Poets": ["Robert Frost", "E. E. Cummings", "T. S. Eliot", "Dante", "Homer", "Maya Angelou", "Emily Dickinson", "Walt Whitman", "Edgar Allan Poe", "William Shakespeare", "Sylvia Plath", "Pablo Neruda", "Langston Hughes", "William Blake", "William Wordsworth", "John Keats", "William Butler Yeats", "Elizabeth Barrett Browning", "Rudyard Kipling", "Oscar Wilde", "Henry Longfellow", "John Milton", "Sappho", "Lord Byron", "Percy Shelley", "Alfred Tennyson", "Ralph Waldo Emerson", "W. H. Auden", "Robert Burns", "Allen Ginsberg", "Ogden Nash", "Philip Larkin", "Khalil Gibran", "Rainer Maria Rilke", "Dorothy Parker", "Chaucer", "Virgil", "Edmund Spenser", "John Donne", "Alexander Pope", "Samuel Coleridge", "Robert Browning", "Wallace Stevens", "John Dryden", "Ezra Pound", "Thomas Hardy", "John Ashbery"],
@@ -1352,18 +1352,18 @@
             
             if (isDesktop) {
                 // Desktop supports larger tiles to comfortably fill up wide PC screens
-                if (totalItems <= 8) {
-                    baseFontSize = 24;
-                } else if (totalItems <= 12) {
-                    baseFontSize = 22;
-                } else if (totalItems <= 16) {
-                    baseFontSize = 20;
-                } else if (totalItems <= 24) {
-                    baseFontSize = 18;
+                if (totalItems <= 16) {
+                    baseFontSize = 26; // High visibility scaling on widescreen PC
+                } else if (totalItems <= 25) {
+                    baseFontSize = 23;
                 } else if (totalItems <= 36) {
-                    baseFontSize = 16.5; // Level 7: Keeps words perfectly readable (prevents microscopic rendering)
+                    baseFontSize = 21;
+                } else if (totalItems <= 49) {
+                    baseFontSize = 19; // Level 9 (m:7, n:7 = 49 items) matches this generous profile
+                } else if (totalItems <= 64) {
+                    baseFontSize = 17.5;
                 } else {
-                    baseFontSize = Math.max(13.5, 16.5 - ((totalItems - 36) / 5));
+                    baseFontSize = Math.max(14.5, 17.5 - ((totalItems - 64) / 8));
                 }
             } else if (isTablet) {
                 if (totalItems <= 8) {
