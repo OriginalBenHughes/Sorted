@@ -3,73 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorted!</title>
+    <title>Word Groupings</title>
+    <!-- Import Google Font "Fredoka" for a bubbly, cute, rounded look -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Load Tone.js for high-quality synthetic cute sound effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
     <style>
         :root {
-            --bg-color: #1a1a2e;
-            --header-color: #16213e;
-            --text-color: #e9e9e9;
-            --accent-color: #4ecca3;
-            --button-bg: #0f3460;
-            --button-hover: #533483;
-            --cat-color: #555;
-            --cat-bg: rgba(85, 85, 85, 0.1);
-            --timer-bar-color: #4ecca3;
+            --bg-color: #1e1a2b;          /* Creamy plum/indigo night */
+            --header-color: #2b223d;      /* Taro yogurt violet */
+            --text-color: #fff4fc;        /* Strawberry cotton-candy white */
+            --accent-color: #ff8ebb;      /* Juicy strawberry pink */
+            --button-bg: #43335b;         /* Sweet lavender glaze */
+            --button-shadow: #2a1f3a;     /* Under-shadow for the 3D clay look */
+            --button-hover: #5d467d;      /* Bright purple jelly */
+            --cat-color: #ff8ebb;
+            --cat-bg: rgba(255, 142, 187, 0.1);
+            --timer-bar-color: #ff8ebb;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Fredoka', 'Segoe UI', Roboto, sans-serif;
             margin: 0;
             overflow-x: hidden;
             overflow-y: auto;
             min-height: 100vh;
+            /* Whimsical animated background bubbles */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 142, 187, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(123, 241, 168, 0.05) 0%, transparent 40%);
         }
 
-        /* Fixed Header Bar */
+        /* Cute decorative elements background */
+        body::before {
+            content: "✨";
+            position: fixed;
+            top: 80px;
+            left: 5%;
+            font-size: 2rem;
+            opacity: 0.15;
+            animation: floatSlow 6s ease-in-out infiniteAlternate;
+        }
+        body::after {
+            content: "☁️";
+            position: fixed;
+            bottom: 50px;
+            right: 5%;
+            font-size: 3rem;
+            opacity: 0.15;
+            animation: floatSlow 8s ease-in-out infiniteAlternate-reverse;
+        }
+
+        @keyframes floatSlow {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-15px) rotate(10deg); }
+        }
+
+        /* Fixed Header Bar styled like a bubbly cloud container */
         .floating {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            min-height: 50px;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1400px;
+            min-height: 60px;
             z-index: 999;
             background-color: var(--header-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 5px 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            border-bottom: 2px solid var(--accent-color);
+            padding: 8px 25px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3), inset 0 2px 2px rgba(255,255,255,0.1);
+            border-radius: 25px;
+            border: 3px solid var(--accent-color);
             box-sizing: border-box;
         }
 
         .floating button {
             background-color: var(--button-bg);
             color: white;
-            border: 1px solid var(--accent-color);
-            border-radius: 6px;
-            padding: 8px 16px;
-            font-size: 0.85em;
-            cursor: pointer;
+            border: 2px solid var(--accent-color);
+            border-radius: 16px;
+            padding: 8px 18px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.9em;
             font-weight: bold;
-            transition: all 0.2s ease;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 0 var(--button-shadow);
         }
 
         .floating button:hover {
             background-color: var(--button-hover);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 var(--button-shadow);
+        }
+
+        .floating button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--button-shadow);
         }
 
         #timer-progress-container {
             position: fixed;
-            top: 50px;
-            left: 0;
-            width: 100%;
-            height: 4px;
+            top: 76px;
+            left: 5%;
+            width: 90%;
+            height: 10px;
             background-color: rgba(255, 255, 255, 0.1);
             z-index: 998;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid var(--header-color);
             display: none;
         }
 
@@ -77,6 +125,7 @@
             width: 100%;
             height: 100%;
             background-color: var(--timer-bar-color);
+            border-radius: 10px;
             transition: width 0.1s linear, background-color 0.5s ease;
         }
 
@@ -84,7 +133,7 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            padding-top: 115px;
+            padding-top: 135px;
             padding-bottom: 50px;
             min-height: 100vh;
             box-sizing: border-box;
@@ -97,26 +146,27 @@
         .board-row {
             display: flex;
             width: 95%;
-            max-width: 1400px; /* Limit stretch on giant PC screens */
+            max-width: 1400px;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 15px;
+            margin-bottom: 15px;
             flex-wrap: nowrap;
         }
 
-        /* Responsive Premium Organic Tile Button Style */
         .game-button {
             background-color: var(--button-bg);
             color: var(--text-color);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 0.85em;
-            flex: 0 1 auto; /* Organic dynamic width based on contents */
+            border: 3px solid rgba(255,255,255,0.15);
+            border-radius: 1.25em;
+            flex: 0 1 auto;
             width: max-content;
-            min-width: 6.5em; /* Comfortable organic minimum pill width on PC */      
-            max-width: 18em;  /* Prevents longer category combinations from collapsing */
-            min-height: 4.2em; /* Chunkier feel */
-            padding: 0.6em 1.2em;
-            font-size: 0.95em; /* Prevents text from being too small inside tiles */
+            min-width: 6.8em;      
+            max-width: 18em;
+            min-height: 4.4em;
+            padding: 0.6em 1.4em;
+            font-size: 1em;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -125,10 +175,15 @@
             word-wrap: break-word;
             white-space: nowrap;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 5px 12px rgba(0,0,0,0.45);
-            outline-offset: -3px;
             position: relative;
+            /* 3D clay pop out */
+            box-shadow: 0 8px 0 var(--button-shadow), 0 12px 20px rgba(0,0,0,0.4);
+            transform: translateY(0px);
+            transition: 
+                transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.5),
+                box-shadow 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.5),
+                border-color 0.2s;
+            outline: none !important;
         }
 
         .game-button.partial-match,
@@ -136,80 +191,112 @@
             white-space: normal;
         }
 
+        /* Dotted cute boundary for incomplete matches - now styled like a chunky, tactile 3D button! */
         .game-button.partial-match {
-            border: 2px dashed var(--cat-color) !important;
-            background-color: transparent !important;
+            border: 3px dashed var(--cat-color) !important;
+            background-color: var(--button-bg) !important;
+            /* Blend the deep lavender glaze with a splash of the category's candy pastel for a merging look */
+            background-image: linear-gradient(135deg, var(--button-bg) 60%, var(--cat-bg)) !important;
+            box-shadow: 0 6px 0 var(--button-shadow), 0 10px 18px rgba(0,0,0,0.4) !important;
+            transform: translateY(2px) !important; /* Slightly elevated, thick button profile */
         }
 
+        /* Distinct interactive selected style for active partial matches */
+        .game-button.partial-match.is-selected {
+            border: 4px dashed #ffffff !important;
+            background-color: var(--button-hover) !important;
+            background-image: none !important;
+            transform: translateY(-2px) scale(1.05) !important; /* Pops back up high to capture selection focus! */
+            box-shadow: 0 10px 0 var(--button-shadow), 0 14px 24px rgba(255, 255, 255, 0.2) !important;
+            z-index: 12;
+        }
+
+        /* Soft disabled look */
         .game-button:disabled {
-            border: 2px solid var(--cat-color) !important;
+            border: 3px solid var(--cat-color) !important;
             background-color: var(--cat-bg) !important;
             cursor: default;
-            opacity: 0.9;
+            opacity: 0.95;
+            box-shadow: none !important;
+            transform: translateY(8px) !important;
+            color: rgba(255,255,255,0.6);
         }
 
+        /* Bouncy tactile hover effect */
         .game-button:hover:not(:disabled) {
             background-color: var(--button-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.6);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 0 var(--button-shadow), 0 16px 24px rgba(0,0,0,0.5);
             border-color: var(--accent-color);
         }
 
+        /* Visual state for selecting */
         .game-button.is-selected {
-            outline: 3px solid #ffffff !important;
-            transform: scale(1.05);
+            border-color: #ffffff !important;
+            transform: translateY(2px) scale(1.04);
+            box-shadow: 0 6px 0 var(--button-shadow), 0 8px 12px rgba(255,255,255,0.1);
             z-index: 10;
+        }
+
+        /* Tactile click */
+        .game-button:active:not(:disabled) {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 var(--button-shadow), 0 4px 8px rgba(0,0,0,0.3);
         }
 
         .word-count-badge {
             position: absolute;
-            top: -8px;
-            right: -8px;
-            background-color: var(--accent-color);
+            top: -10px;
+            right: -10px;
+            background-color: #ffbe0b; /* Bright gold star color */
             color: #1a1a2e;
-            font-size: 0.75em;
+            font-size: 0.8em;
             font-weight: 800;
-            padding: 2px 7px;
-            border-radius: 10px;
+            padding: 3px 9px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 2px solid white;
         }
 
         .level-info {
-            font-size: 0.9em;
+            font-size: 0.95em;
             color: var(--accent-color);
             background: rgba(0,0,0,0.3);
-            padding: 4px 12px;
+            padding: 6px 16px;
             border-radius: 20px;
-            border: 1px solid var(--accent-color);
+            border: 2.5px solid var(--accent-color);
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .intro-title {
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 900;
             color: var(--accent-color);
-            font-style: italic;
-            text-shadow: 0 0 15px rgba(78, 204, 163, 0.6), 0 0 30px rgba(78, 204, 163, 0.3);
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             margin-bottom: 15px;
             margin-top: 0;
             text-transform: uppercase;
+            text-shadow: 0 4px 0 #93224e, 0 10px 20px rgba(0,0,0,0.3);
         }
 
         @media (max-width: 480px) {
             .intro-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
         }
 
         .tips-container {
             text-align: left;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(78, 204, 163, 0.25);
-            padding: 18px 22px;
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 3px dashed rgba(255, 142, 187, 0.4);
+            padding: 20px 24px;
+            border-radius: 20px;
             margin: 20px 0;
-            font-size: 0.9em;
-            line-height: 1.5;
+            font-size: 0.95em;
+            line-height: 1.6;
         }
 
         .tips-list {
@@ -219,10 +306,10 @@
         }
 
         .tips-list li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 12px;
         }
 
         .tips-list li:last-child {
@@ -236,7 +323,7 @@
             z-index: 3000;
             left: 0; top: 0; 
             width: 100%; height: 100%;
-            background: rgba(10, 10, 25, 0.96);
+            background: rgba(20, 16, 28, 0.97);
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -245,12 +332,12 @@
         .modal-container {
             text-align: center;
             width: 90%;
-            max-width: 600px;
-            padding: 30px;
+            max-width: 620px;
+            padding: 35px;
             background: var(--header-color);
-            border: 2px solid var(--accent-color);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border: 4px solid var(--accent-color);
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
             box-sizing: border-box;
         }
 
@@ -264,27 +351,49 @@
 
         .reward-card, .mode-card {
             background: var(--button-bg);
-            border: 2px solid var(--accent-color);
-            padding: 20px;
-            border-radius: 15px;
-            width: 160px;
+            border: 3px solid var(--accent-color);
+            padding: 22px 18px;
+            border-radius: 22px;
+            width: 175px;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s, box-shadow 0.25s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 0 var(--button-shadow);
         }
 
         .reward-card:hover, .mode-card:hover {
-            transform: translateY(-8px);
-            background: var(--button-hover);
-            box-shadow: 0 5px 15px rgba(78, 204, 163, 0.4);
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 12px 0 var(--button-shadow), 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .reward-card:active, .mode-card:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 var(--button-shadow);
+        }
+
+        /* Whimsical star sparkles overlay */
+        .reward-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: 0.6s;
+        }
+
+        .reward-card:hover::after {
+            left: 100%;
         }
 
         .time-toast {
             position: absolute;
             font-weight: bold;
-            font-size: 1.1em;
+            font-size: 1.3em;
             pointer-events: none;
             z-index: 2000;
             animation: floatUp 0.8s ease-out forwards;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         /* "Sorted!" Celebration Overlay */
@@ -294,11 +403,11 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            font-size: 4.5rem;
+            font-size: 5rem;
             font-weight: 900;
-            color: var(--accent-color);
+            color: #ffbe0b;
             font-style: italic;
-            text-shadow: 0 0 15px rgba(78, 204, 163, 0.6), 0 0 30px rgba(78, 204, 163, 0.3);
+            text-shadow: 0 0 15px rgba(255,190,11, 0.6), 0 6px 0 #c78f00;
             letter-spacing: 2px;
             z-index: 1600;
             pointer-events: none;
@@ -308,18 +417,23 @@
         }
 
         .pop-in-sorted {
-            animation: sortedBounce 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: sortedBounce 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         @keyframes sortedBounce {
             0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
-            50% { transform: translate(-50%, -50%) scale(1.1); }
+            50% { transform: translate(-50%, -50%) scale(1.15); }
             100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
         @keyframes floatUp {
             0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-40px); opacity: 0; }
+            100% { transform: translateY(-55px); opacity: 0; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         #fireworks {
@@ -333,28 +447,99 @@
             display: none;
         }
 
-        .shake { animation: shake 0.5s; }
+        /* Soft cute shake animation */
+        .shake { animation: shake 0.4s; }
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
+            20% { transform: translateX(-6px) rotate(-1deg); }
+            40% { transform: translateX(6px) rotate(1deg); }
+            60% { transform: translateX(-4px) rotate(-0.5deg); }
+            80% { transform: translateX(4px) rotate(0.5deg); }
         }
 
-        /* Custom In-game Confirm/Alert Modals */
+        /* Custom In-game Confirm/Alert Modals styled cute */
         .modal-action-btn {
             background-color: var(--accent-color); 
-            color: #1a1a2e; 
+            color: #1e1a2b; 
             border: none; 
+            font-family: 'Fredoka', sans-serif;
             font-weight: bold; 
-            border-radius: 8px; 
-            padding: 12px 24px; 
-            font-size: 1em; 
+            border-radius: 16px; 
+            padding: 12px 28px; 
+            font-size: 1.1em; 
             cursor: pointer;
-            transition: transform 0.2s;
+            box-shadow: 0 4px 0 #93224e;
+            transition: transform 0.15s;
         }
         .modal-action-btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 6px 0 #93224e;
+        }
+        .modal-action-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #93224e;
+        }
+
+        /* Whimsical custom styled settings toggle */
+        .settings-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 15px 20px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 142, 187, 0.15);
+            margin-bottom: 15px;
+        }
+        .settings-label {
+            font-size: 1.15em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--button-bg);
+            border: 2px solid var(--accent-color);
+            transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 34px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "🍭";
+            font-size: 1.25em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 26px;
+            width: 26px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 50px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+        input:checked + .toggle-slider {
+            background-color: var(--button-hover);
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px) rotate(180deg);
         }
     </style>
 </head>
@@ -363,65 +548,65 @@
     <!-- Mode Selection Modal -->
     <div id="modeModal" class="custom-modal" style="display: flex;">
         <div class="modal-container">
-            <h1 class="intro-title">Sorted!</h1>
+            <h1 class="intro-title">🎉 Sorted! ✨</h1>
             
             <div class="tips-container">
                 <ul class="tips-list">
                     <li>
-                        <span style="font-size: 1.25em;">🎯</span>
-                        <span><strong>Objective:</strong> Discover hidden words that belong to the same category and merge them!</span>
+                        <span style="font-size: 1.45em;">🎯</span>
+                        <span><strong>Objective:</strong> Find lovely matching words belonging to the same secret category and merge them!</span>
                     </li>
                     <li>
-                        <span style="font-size: 1.25em;">🔗</span>
-                        <span><strong>How to Play:</strong> Click a word tile, then click a matching word to group them together.</span>
+                        <span style="font-size: 1.45em;">🔗</span>
+                        <span><strong>How to Play:</strong> Click a cute word bubble, then tap its matching partners to pack them together.</span>
                     </li>
                     <li>
-                        <span style="font-size: 1.25em;">🧩</span>
-                        <span><strong>Advance:</strong> Merge all words successfully to complete the board, level up, and unlock customizable reward themes!</span>
+                        <span style="font-size: 1.45em;">🎁</span>
+                        <span><strong>Level Up:</strong> Successfully merge the entire board to level up and roll for randomized sweet theme categories!</span>
                     </li>
                 </ul>
             </div>
 
-            <p style="font-size: 1.1em; opacity: 0.9; font-weight: bold; margin-bottom: 15px;">Choose your play style to begin:</p>
+            <p style="font-size: 1.15em; opacity: 0.95; font-weight: bold; margin-bottom: 15px;">Choose your play style to start:</p>
             <div class="mode-options">
                 <div class="mode-card" onclick="selectGameMode('relaxed')">
-                    <h3 style="margin: 5px 0; color: #4ecca3;">Relaxed</h3>
-                    <p style="font-size: 0.8em; opacity: 0.8; line-height: 1.3;">No clock. Self-paced play. Focus on solving categories at your own speed.</p>
+                    <h3 style="margin: 5px 0; color: #7bf1a8; font-size: 1.3em;">🌸 Relaxed</h3>
+                    <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">No stress, no clocks! Relaxing self-paced solving at your own tempo.</p>
                 </div>
                 <div class="mode-card" onclick="selectGameMode('timed')">
-                    <h3 style="margin: 5px 0; color: #ffbe0b;">Against Clock</h3>
-                    <p style="font-size: 0.8em; opacity: 0.8; line-height: 1.3;">A relentless sprint! No bonuses for grouping words, and incorrect guesses penalize your remaining time.</p>
+                    <h3 style="margin: 5px 0; color: #ffbe0b; font-size: 1.3em;">⏳ Timed</h3>
+                    <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">A fun, bouncy sprint! Mistakes shave precious seconds off your clock.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Custom Dialog Modal (Replaces browser Alert/Confirm) -->
+    <!-- Custom Dialog Modal (Replaces browser Alert/Confirm with cute style) -->
     <div id="dialogModal" class="custom-modal">
-        <div class="modal-container" style="max-width: 450px;">
-            <h2 id="dialogTitle" style="color: var(--accent-color); margin-top: 0; font-size: 1.8em;">Confirm</h2>
-            <p id="dialogMessage" style="font-size: 1.1em; line-height: 1.5; margin-bottom: 25px; color: var(--text-color);"></p>
+        <div class="modal-container" style="max-width: 460px;">
+            <h2 id="dialogTitle" style="color: var(--accent-color); margin-top: 0; font-size: 2em; text-shadow: 0 2px 0 rgba(0,0,0,0.2);">Confirm</h2>
+            <p id="dialogMessage" style="font-size: 1.15em; line-height: 1.6; margin-bottom: 25px; color: var(--text-color);"></p>
             <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                <button id="dialogConfirmBtn" class="modal-action-btn" style="min-width: 100px;">Yes</button>
-                <button id="dialogCancelBtn" class="modal-action-btn" style="background-color: transparent; color: #ff4b2b; border: 1px solid #ff4b2b; min-width: 100px;">Cancel</button>
+                <button id="dialogConfirmBtn" class="modal-action-btn" style="min-width: 110px;">Yes!</button>
+                <button id="dialogCancelBtn" class="modal-action-btn" style="background-color: transparent; color: #ff527b; border: 3px solid #ff527b; box-shadow: none; min-width: 110px;">Cancel</button>
             </div>
         </div>
     </div>
 
     <!-- Custom Checkpoint / Reset Modal -->
     <div id="checkpointModal" class="custom-modal">
-        <div class="modal-container" style="max-width: 500px;">
-            <h2 style="color: var(--accent-color); margin-top: 0; font-size: 1.8em;">New Game Options</h2>
-            <p id="checkpointText" style="font-size: 1.1em; margin-bottom: 25px; line-height: 1.5; color: var(--text-color);"></p>
-            <div style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+        <div class="modal-container" style="max-width: 520px;">
+            <h2 style="color: var(--accent-color); margin-top: 0; font-size: 2em;">New Game Options</h2>
+            <p id="checkpointText" style="font-size: 1.15em; margin-bottom: 25px; line-height: 1.6; color: var(--text-color);"></p>
+            <div style="display: flex; flex-direction: column; gap: 14px; width: 100%;">
                 <button id="checkpointLoadBtn" class="modal-action-btn" style="width: 100%;">
-                    Restart from Checkpoint (Level <span id="checkpointLevelNum"></span>)
+                    🌸 Restart from Checkpoint (Level <span id="checkpointLevelNum"></span>)
                 </button>
-                <button id="checkpointResetBtn" class="modal-action-btn" style="background-color: transparent; color: #ff4b2b; border: 1px solid #ff4b2b; width: 100%;">
-                    Full Reset (Wipe Progress & Themes)
+                <button id="checkpointResetBtn" class="modal-action-btn" style="background-color: transparent; color: #ff527b; border: 3px solid #ff527b; box-shadow: none; width: 100%;">
+                    Wipe Progress & Start Completely Fresh
                 </button>
-                <button onclick="document.getElementById('checkpointModal').style.display='none'" class="modal-action-btn" style="background-color: var(--button-bg); color: white; border: 1px solid rgba(255,255,255,0.2); width: 100%;">
-                    Cancel
+                <button onclick="document.getElementById('checkpointModal').style.display='none'" class="modal-action-btn" style="background-color: var(--button-bg); color: white; border: 3px solid rgba(255,255,255,0.15); box-shadow: 0 4px 0 var(--button-shadow); width: 100%;">
+                    Keep Playing
                 </button>
             </div>
         </div>
@@ -429,37 +614,58 @@
 
     <div id="rewardModal" class="custom-modal">
         <div class="modal-container">
-            <h1 style="color: var(--accent-color); font-size: 2.5em; margin-bottom: 5px;">LEVEL UP!</h1>
-            <p id="levelUpText" style="font-size: 1.1em;">You've reached a new level. Choose a new theme to unlock and play immediately:</p>
+            <h1 style="color: var(--accent-color); font-size: 2.8em; margin-bottom: 5px; text-shadow: 0 3px 0 #93224e;">🍰 LEVEL UP!</h1>
+            <p id="levelUpText" style="font-size: 1.15em; margin-bottom: 15px;">You've reached a new level milestone! Select a theme to roll for a new unlock:</p>
             <div class="reward-options" id="rewardOptions"></div>
         </div>
     </div>
 
     <div id="gameOverModal" class="custom-modal">
         <div class="modal-container">
-            <h1 style="color: #ff4b2b; font-size: 2.5em; margin-bottom: 5px; margin-top: 0;">TIME'S UP!</h1>
-            <p style="font-size: 1.1em;">You ran out of time on this level challenge.</p>
-            <div class="mode-options" style="margin-top: 20px;">
+            <h1 style="color: #ff527b; font-size: 2.8em; margin-bottom: 5px; margin-top: 0; text-shadow: 0 3px 0 #8b1633;">⏰ TIME'S UP!</h1>
+            <p style="font-size: 1.2em;">Oh no, you ran out of bubble time! Want to try again?</p>
+            <div class="mode-options" style="margin-top: 25px;">
                 <button onclick="retryCurrentLevel()" class="modal-action-btn">Retry Level</button>
-                <button onclick="resetToLevelOne()" class="modal-action-btn" style="background-color: transparent; color: #ff4b2b; border: 1px solid #ff4b2b;">New Game</button>
+                <button onclick="resetToLevelOne()" class="modal-action-btn" style="background-color: transparent; color: #ff527b; border: 3px solid #ff527b; box-shadow: none;">New Game</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Custom Settings Modal -->
+    <div id="settingsModal" class="custom-modal">
+        <div class="modal-container" style="max-width: 480px;">
+            <h2 style="color: var(--accent-color); margin-top: 0; font-size: 2.2em; text-shadow: 0 2px 0 rgba(0,0,0,0.2);">⚙️ Settings</h2>
+            
+            <div style="margin: 25px 0 30px 0; text-align: left;">
+                <div class="settings-row">
+                    <span class="settings-label">🔊 Sound Effects</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="soundToggle" onchange="toggleSoundSetting(this.checked)" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <!-- Future settings can be comfortably added here -->
+            </div>
+
+            <button onclick="closeSettings()" class="modal-action-btn" style="width: 100%;">Close Settings 🌟</button>
         </div>
     </div>
 
     <canvas id="fireworks"></canvas>
     
-    <div id="sorted-overlay">Sorted!</div>
+    <div id="sorted-overlay">✨ Sorted! ✨</div>
 
     <div class="floating">
         <div style="display: flex; align-items: center; gap: 15px;">
-            <h1 style="margin: 0; font-size: 1.1em; color: var(--accent-color);">Sorted!</h1>
-            <div class="level-info">Level: <span id="currentLevelDisplay">1</span></div>
-            <div id="hud-timer" class="level-info" style="border-color: #ffbe0b; color: #ffbe0b; display: none;">0:00</div>
+            <h1 style="margin: 0; font-size: 1.25em; color: var(--accent-color); text-shadow: 0 2px 0 rgba(0,0,0,0.2);">Sorted!</h1>
+            <div class="level-info">⭐ Level: <span id="currentLevelDisplay">1</span></div>
+            <div id="hud-timer" class="level-info" style="border-color: #ffbe0b; color: #ffbe0b; display: none;">⏰ 0:00</div>
         </div>
-        <div style="display: flex; gap: 10px;">
-            <button type="button" id="shuffle" onclick="shuffleAndSort()">Shuffle</button>
-            <button type="button" onclick="restartCurrentLevel()" style="border: 1px solid #ff4b2b; color: #ff4b2b; background-color: transparent;">Restart Level</button>
-            <button type="button" onclick="resetToLevelOne()" style="background-color: var(--accent-color); color: #1a1a2e;">New Game</button>
+        <div style="display: flex; gap: 12px; align-items: center;">
+            <button type="button" onclick="openSettings()" style="border: 2px solid var(--accent-color); color: var(--accent-color); background-color: transparent; box-shadow: none; display: flex; align-items: center; gap: 4px;">⚙️ Settings</button>
+            <button type="button" id="shuffle" onclick="shuffleAndSort()">🔀 Shuffle</button>
+            <button type="button" onclick="restartCurrentLevel()" style="border: 2px solid #ff527b; color: #ff527b; background-color: transparent; box-shadow: none;">🔄 Restart</button>
+            <button type="button" onclick="resetToLevelOne()" style="background-color: var(--accent-color); color: #1e1a2b;">✨ New Game</button>
         </div>
     </div>
 
@@ -468,6 +674,73 @@
     <div id="board"></div>
 
     <script>
+        // Cozy audio plucks for clicks, successes, and errors using standard Web Audio Synthesis via Tone.js
+        let synth, polySynth;
+        let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
+        
+        function initAudio() {
+            if (!synth) {
+                // Lowpass pluck synthesizer for bubble pops
+                synth = new Tone.MonoSynth({
+                    oscillator: { type: "triangle" },
+                    envelope: { attack: 0.005, decay: 0.1, sustain: 0.1, release: 0.15 },
+                    filterEnvelope: { attack: 0.001, decay: 0.08, sustain: 0.1, release: 0.2, baseFrequency: 300, octaves: 4 }
+                }).toDestination();
+                synth.volume.value = -4; // comfortable sound level
+
+                polySynth = new Tone.PolySynth(Tone.Synth).toDestination();
+                polySynth.volume.value = -10;
+            }
+        }
+
+        function playCutePop(highPitch = false) {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                Tone.start();
+                const note = highPitch ? "E5" : "G4";
+                synth.triggerAttackRelease(note, "16n");
+            } catch (e) { console.log("Audio not allowed yet"); }
+        }
+
+        function playCuteSuccess() {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                Tone.start();
+                const now = Tone.now();
+                polySynth.triggerAttackRelease("C5", "16n", now);
+                polySynth.triggerAttackRelease("E5", "16n", now + 0.08);
+                polySynth.triggerAttackRelease("G5", "16n", now + 0.16);
+                polySynth.triggerAttackRelease("C6", "8n", now + 0.24);
+            } catch (e) {}
+        }
+
+        function playSadBoop() {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                Tone.start();
+                const now = Tone.now();
+                synth.triggerAttackRelease("B3", "12n", now);
+                synth.triggerAttackRelease("Ab3", "8n", now + 0.12);
+            } catch (e) {}
+        }
+
+        function playWinArpeggio() {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                Tone.start();
+                const melody = ["C5", "D5", "E5", "G5", "A5", "C6", "E6", "G6"];
+                const now = Tone.now();
+                melody.forEach((note, index) => {
+                    polySynth.triggerAttackRelease(note, "16n", now + (index * 0.07));
+                });
+            } catch (e) {}
+        }
+
+        // Expanded starter and theme libraries matching the cute visual theme
         const THEME_DATA = {
             starterPool: {
                 "Colours": ["Red", "Blue", "Green", "Yellow", "Orange", "Purple", "Pink", "White", "Black", "Grey", "Brown", "Violet"],
@@ -509,15 +782,7 @@
                 "Stationery": ["Pen", "Pencil", "Eraser", "Ruler", "Stapler", "Notebook", "Binder", "Scissors", "Marker", "Highlighter", "Envelope", "Glue", "Tape"]
             },
             unlockPool: {
-                "Disney Princesses": ["Snow White", "Cinderella", "Aurora", "Ariel", "Belle", "Jasmine", "Pocahontas", "Mulan", "Tiana", "Rapunzel", "Merida", "Moana", "Raya"],
-				"Disney Villains": ["Maleficent", "Ursula", "Jafar", "Scar", "Gaston", "Cruella De Vil", "Captain Hook", "Hades", "Dr Facilier", "Yzma", "Mother Gothel", "Lady Tremaine", "Shere Khan"],
-				"Pixar Movies": ["Toy Story", "A Bug's Life", "Monsters Inc", "Finding Nemo", "The Incredibles", "Cars", "Ratatouille", "Wall-E", "Up", "Brave", "Inside Out", "Coco", "Soul", "Turning Red"],
-				"Disney Movies": ["The Lion King", "Aladdin", "Beauty And The Beast", "The Little Mermaid", "Frozen", "Tangled", "Moana", "Mulan", "Hercules", "Tarzan", "Peter Pan", "Pinocchio", "Bambi", "Dumbo", "Snow White and the Seven Dwarfs"],
-				"Star Wars Ships": ["Millennium Falcon", "X-Wing", "TIE Fighter", "Star Destroyer", "Death Star", "Slave I", "Y-Wing", "A-Wing", "Tantive IV", "Razor Crest", "Ghost", "Executor"],
-				"Star Wars Planets": ["Tatooine", "Hoth", "Endor", "Coruscant", "Naboo", "Dagobah", "Bespin", "Jakku", "Crait", "Mustafar", "Kamino", "Geonosis", "Alderaan", "Mandalore", "Ahch-To"],
-				"Star Wars Characters": ["Luke Skywalker", "Darth Vader", "Han Solo", "Princess Leia", "Chewbacca", "Obi-Wan Kenobi", "Yoda", "Ahsoka Tano", "Din Djarin", "Rey", "Kylo Ren", "Lando Calrissian", "Boba Fett", "Palpatine", "Mace Windu", "Anakin Skywalker", "Padme Amidala", "Qui-Gon Jinn", "Darth Maul", "Count Dooku", "General Grievous", "C-3PO", "R2-D2", "Grogu", "Grand Admiral Thrawn", "Ezra Bridger", "Kanan Jarrus", "Hera Syndulla", "Sabine Wren", "Zeb Orrelios", "Bo-Katan Kryze", "Asajj Ventress", "Cad Bane", "Captain Rex", "Commander Cody", "Poe Dameron", "Finn", "Supreme Leader Snoke", "General Hux", "Maz Kanata", "Rose Tico", "Cassian Andor", "Jyn Erso", "K-2SO", "Director Krennic", "Chirrut Imwe", "Baze Malbus", "Mon Mothma", "Grand Moff Tarkin", "Greedo", "Jabba The Hutt", "Wedge Antilles", "Admiral Ackbar", "Nien Nunb", "Wicket", "Jango Fett", "Cad Bane", "Cobb Vanth", "Fennec Shand", "Moff Gideon", "Asajj Ventress", "Savage Opress", "Bail Organa", "Shmi Skywalker", "Aayla Secura"],
-				"Grimm Fairy Tales": ["Cinderella", "Hansel And Gretel", "Rapunzel", "Rumpelstiltskin", "Snow White", "Little Red Riding Hood", "The Frog Prince", "Sleeping Beauty", "The Elves And The Shoemaker", "The Bremen Town Musicians", "Tom Thumb", "The Pied Piper", "The Golden Goose", "The Wolf And The Seven Young Goats", "The Valiant Little Tailor", "The Goose Girl", "Jorinda And Joringel", "Mother Holle", "The Fisherman And His Wife", "Doctor Know-All", "The Blue Light"],"Winnie the Pooh Characters": ["Winnie The Pooh", "Piglet", "Tigger", "Eeyore", "Rabbit", "Owl", "Kanga", "Roo", "Christopher Robin", "Gopher", "Lumpy"],
-				"Types of Swords": ["Longsword", "Katana", "Rapier", "Cutlass", "Scimitar", "Broadsword", "Claymore", "Sabre", "Falchion", "Epee", "Foil", "Gladius", "Zweihander", "Excalibur"],
+                "Types of Swords": ["Longsword", "Katana", "Rapier", "Cutlass", "Scimitar", "Broadsword", "Claymore", "Sabre", "Falchion", "Epee", "Foil", "Gladius", "Zweihander", "Excalibur"],
                 "Geography Terms": ["Continent", "Ocean", "Peninsula", "Archipelago", "Isthmus", "Plateau", "Canyon", "Valley", "Delta", "Lagoon", "Strait", "Equator", "Latitude", "Longitude", "Oasis"],
                 "Geology Terms": ["Magma", "Basalt", "Granite", "Obsidian", "Limestone", "Marble", "Quartz", "Fossil", "Erosion", "Sediment", "Tectonic", "Fault", "Crystal", "Bedrock"],
                 "Doctor Who Companions": ["Rose Tyler", "Martha Jones", "Donna Noble", "Amy Pond", "Rory Williams", "Clara Oswald", "Bill Potts", "Sarah Jane", "Ace", "Leela", "Ruby Sunday", "Graham O'Brien", "Ryan Sinclair"],
@@ -575,6 +840,41 @@
             }
         };
 
+        const UNLOCK_THEMES = {
+            "Pop Culture": [
+                "Doctor Who Companions", "Star Trek Captains", "Actors Who Have Played Doctor Who",
+                "Actors Who Have Played James Bond", "Pokemon", "Anime Series", "Streaming Services",
+                "Rock Bands", "Marvel Characters", "Memes", "Tolkien Characters", "Beatles Songs",
+                "Tom Hanks Movies", "Scifi TV Shows", "Musicals", "Muppets", "Retro Video Games", "Video Game Consoles"
+            ],
+            "Science & Tech": [
+                "Geology Terms", "Google Products", "Keyboard", "Scientific SI Units",
+                "Types Of Numbers", "Elements", "Constellations", "Dinosaur Species"
+            ],
+            "History & Myth": [
+                "Mythical Creatures", "Historical Periods", "US State Capitols", "World Wonders",
+                "Greek Gods", "Egyptian Gods", "Roman Emperors", "Books Of The Bible"
+            ],
+            "Language & Lit": [
+                "Palindromes", "Silent Letter Words", "Heteronyms", "Homophones",
+                "Prepositions", "Poets", "Famous Novels"
+            ],
+            "Lifestyle & Hobbies": [
+                "Cheeses", "Pastas", "Cocktails", "Fabrics", "Chocolate Bars",
+                "Luxury Car Brands", "Tools", "Gemstones", "Dog Breeds", "Board Games",
+                "Musical Instruments", "Types of Swords", "Geography Terms", "D&D Monsters"
+            ]
+        };
+
+        // Colorful premium cute gradients matching our sweet candy world
+        const THEME_METADATA = {
+            "Pop Culture": { icon: "🎬", color: "#ff2a5f", gradient: "linear-gradient(135deg, #ff527b, #9c3df3)" },
+            "Science & Tech": { icon: "🔬", color: "#00f0ff", gradient: "linear-gradient(135deg, #00d6ff, #0056f9)" },
+            "History & Myth": { icon: "🏛️", color: "#ffb700", gradient: "linear-gradient(135deg, #ffb000, #ff5e00)" },
+            "Language & Lit": { icon: "✍️", color: "#00ff87", gradient: "linear-gradient(135deg, #0ce68b, #00a0f0)" },
+            "Lifestyle & Hobbies": { icon: "🍹", color: "#f2709c", gradient: "linear-gradient(135deg, #ff7ba0, #ffb076)" }
+        };
+
         var M = 4;
         var N = 4;
         var selected = 0;
@@ -585,24 +885,48 @@
         var totalTimerSeconds = 0;
         var clockInterval = null;
 
+        // Custom Settings Panel Controls
+        function openSettings() {
+            playCutePop(true);
+            document.getElementById("soundToggle").checked = soundEnabled;
+            document.getElementById("settingsModal").style.display = "flex";
+        }
+
+        function closeSettings() {
+            playCutePop();
+            document.getElementById("settingsModal").style.display = "none";
+        }
+
+        function toggleSoundSetting(enabled) {
+            soundEnabled = enabled;
+            localStorage.setItem('soundEnabled', enabled);
+            if (enabled) {
+                // give immediate sound feedback on turn-on
+                playCutePop(true);
+            }
+        }
+
+        // Cute custom popup system replaces boring browser dialogue boxes
         function showCustomConfirm(title, message, onConfirm, onCancel = null) {
+            playCutePop(true);
             const modal = document.getElementById("dialogModal");
             document.getElementById("dialogTitle").innerText = title;
-            document.getElementById("dialogTitle").style.color = "var(--accent-color)";
             document.getElementById("dialogMessage").innerText = message;
             
             const confirmBtn = document.getElementById("dialogConfirmBtn");
             const cancelBtn = document.getElementById("dialogCancelBtn");
             
-            confirmBtn.innerText = "Yes";
+            confirmBtn.innerText = "Yes! ✨";
             cancelBtn.style.display = "inline-block";
             
             confirmBtn.onclick = () => {
+                playCutePop();
                 modal.style.display = "none";
                 if (onConfirm) onConfirm();
             };
             
             cancelBtn.onclick = () => {
+                playSadBoop();
                 modal.style.display = "none";
                 if (onCancel) onCancel();
             };
@@ -611,20 +935,21 @@
         }
 
         function showCustomAlert(title, message, onOk = null) {
+            playCutePop(true);
             const modal = document.getElementById("dialogModal");
             document.getElementById("dialogTitle").innerText = title;
-            document.getElementById("dialogTitle").style.color = "var(--accent-color)";
             document.getElementById("dialogMessage").innerText = message;
             
             const confirmBtn = document.getElementById("dialogConfirmBtn");
             const cancelBtn = document.getElementById("dialogCancelBtn");
             
             cancelBtn.style.display = "none";
-            confirmBtn.innerText = "OK";
+            confirmBtn.innerText = "Yippee! 💕";
             
             confirmBtn.onclick = () => {
+                playCutePop();
                 modal.style.display = "none";
-                confirmBtn.innerText = "Yes"; // Reset default
+                confirmBtn.innerText = "Yes! ✨"; // reset
                 if (onOk) onOk();
             };
             
@@ -633,8 +958,8 @@
 
         function restartCurrentLevel() {
             showCustomConfirm(
-                "Restart Level", 
-                "Are you sure you want to restart this level? This will generate a completely fresh board of words for your current level.",
+                "Restart current level?", 
+                "This will scramble the board and generate completely fresh words for this level. Ready for a new mix?",
                 () => {
                     localStorage.removeItem('game_state');
                     selected = 0;
@@ -652,7 +977,7 @@
 
         function applyCategoryStyle(btn, catName) {
             const baseColor = stringToLightColor(catName);
-            const bg = baseColor.replace(/,\s*[0-9]+%\)/g, ', 22%, 0.18)').replace('hsl', 'hsla');
+            const bg = baseColor.replace(/,\s*[0-9]+%\)/g, ', 30%, 0.16)').replace('hsl', 'hsla');
             btn.style.setProperty('--cat-color', baseColor);
             btn.style.setProperty('--cat-bg', bg);
         }
@@ -749,7 +1074,6 @@
                 let maxToAdd = Math.min(N, words.length);
                 let tempWords = [];
 
-                // Pass 1: Grab non-duplicate words
                 for (let i = 0; i < words.length; i++) {
                     if (tempWords.length >= maxToAdd) break;
 
@@ -759,8 +1083,6 @@
                     }
                 }
 
-                // Pass 2: Safety valve fallback. If we have fewer than 2 words,
-                // relax the deduplication check so that we guarantee a solvable group.
                 if (tempWords.length < 2 && words.length > tempWords.length) {
                     for (let i = 0; i < words.length; i++) {
                         if (tempWords.length >= Math.min(2, maxToAdd)) break;
@@ -770,7 +1092,6 @@
                     }
                 }
 
-                // Push resolved words to the active level pool with their actual resolved target size
                 tempWords.forEach(w => {
                     usedWordsOnBoard.add(w.trim().toLowerCase());
                     wordlist.push([w, cat, tempWords.length]);
@@ -779,7 +1100,8 @@
         }
 
         function finishCategory(b) {
-            b.innerHTML = `<div style="font-size:0.75em; opacity: 0.85;">CATEGORY</div><b style="font-size: 1.1em; letter-spacing: 0.5px;">${b.category.toUpperCase()}</b><div style="font-size:0.75em; margin-top: 3px; font-style: italic; opacity: 0.9;">${b.cluster.join(', ')}</div>`;
+            playCuteSuccess();
+            b.innerHTML = `<div style="font-size:0.75em; opacity: 0.85; letter-spacing: 0.5px;">🌸 CATEGORY 🌸</div><b style="font-size: 1.15em; color: #ffeb3b;">${b.category.toUpperCase()}</b><div style="font-size:0.8em; margin-top: 4px; font-style: italic; opacity: 0.9;">${b.cluster.join(', ')}</div>`;
             b.disabled = true;
             b.classList.remove('partial-match');
             const badge = b.querySelector('.word-count-badge');
@@ -793,11 +1115,12 @@
             const remaining = document.querySelectorAll('.game-button:not([disabled])');
             if (remaining.length === 0) {
                 stopClock();
+                playWinArpeggio();
                 startFireworks();
                 setTimeout(() => { 
                     stopFireworks();
                     triggerLevelUp(); 
-                }, 2000);
+                }, 2800);
             }
         }
 
@@ -810,11 +1133,11 @@
             localStorage.removeItem('game_state');
             localStorage.removeItem('game_time_remaining');
             
-            const message = `Level ${newLvl} Unlocked!\n\n` +
-                            `New Challenge:\n` +
-                            `- ${config.m} Categories\n` +
-                            `- ${config.n} Words per category\n\n` +
-                            `The board is resetting. Good luck!`;
+            const message = `✨ Level ${newLvl} Unlocked! ✨\n\n` +
+                            `Ready for a new adventure?\n` +
+                            `🧁 ${config.m} Secret Categories\n` +
+                            `🍬 ${config.n} Words per category\n\n` +
+                            `Let's pop some bubbles!`;
 
             const proceedToNextLevel = () => {
                 if (newLvl > 1 && newLvl % 2 !== 0) {
@@ -833,7 +1156,7 @@
                 let highestCheckpoint = parseInt(localStorage.getItem('highestCheckpoint') || 1);
                 if (newLvl > highestCheckpoint) {
                     localStorage.setItem('highestCheckpoint', newLvl);
-                    showCustomAlert("Milestone Reached!", `🎉 Milestone reached! Permanent checkpoint unlocked at Level ${newLvl}.`, proceedToNextLevel);
+                    showCustomAlert("Milestone Cookie Reached! 🍪", `🎉 Incredible! You unlocked a permanent checkpoint milestone at Level ${newLvl}.`, proceedToNextLevel);
                 } else {
                     proceedToNextLevel();
                 }
@@ -842,79 +1165,184 @@
             }
         }
 
-        function showRewardOptions() {
+        function getRemainingThemes() {
             const discovered = JSON.parse(localStorage.getItem('discoveredThemes')) || Object.keys(THEME_DATA.starterPool);
-            const available = Object.keys(THEME_DATA.unlockPool).filter(t => !discovered.includes(t));
+            const remainingThemes = {};
             
-            if (available.length === 0) return false;
+            for (const [themeName, categories] of Object.entries(UNLOCK_THEMES)) {
+                const lockedInTheme = categories.filter(cat => !discovered.includes(cat));
+                if (lockedInTheme.length > 0) {
+                    remainingThemes[themeName] = lockedInTheme;
+                }
+            }
+            return remainingThemes;
+        }
 
-            shuffleArray(available);
-            // Slice up to 4 earned choices instead of 3
-            const choicesCount = Math.min(4, available.length);
-            const choices = available.slice(0, choicesCount);
+        function showRewardOptions() {
+            const remainingThemes = getRemainingThemes();
+            const themeNames = Object.keys(remainingThemes);
+            
+            if (themeNames.length === 0) return false;
+
             const container = document.getElementById("rewardOptions");
             container.innerHTML = "";
 
-            // Render the 4 chosen theme cards
-            choices.forEach(theme => {
+            themeNames.forEach(themeName => {
+                const lockedCats = remainingThemes[themeName];
+                const meta = THEME_METADATA[themeName] || { icon: "🔮", color: "#ff8ebb", gradient: "linear-gradient(135deg, var(--button-bg), var(--button-hover))" };
+                
                 const card = document.createElement('div');
                 card.className = "reward-card";
-                card.innerHTML = `<h3>${theme}</h3><p>Click to Unlock</p>`;
+                card.style.background = meta.gradient;
+                card.style.borderColor = "rgba(255,255,255,0.25)";
+                card.style.boxShadow = `0 6px 0 var(--button-shadow)`;
+                card.style.color = "#ffffff";
                 
-                const themeColor = stringToLightColor(theme);
-                card.style.borderColor = themeColor;
-                card.style.boxShadow = `0 4px 15px ${themeColor.replace('hsl', 'hsla').replace(')', ', 0.35)')}`;
+                card.innerHTML = `
+                    <div style="font-size: 2.4rem; margin-bottom: 8px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">${meta.icon}</div>
+                    <h3 style="margin: 0; font-size: 1.2em; text-shadow: 0 2px 4px rgba(0,0,0,0.4);">${themeName}</h3>
+                    <p style="font-size: 0.8em; opacity: 0.9; margin: 8px 0 0 0; font-weight: bold; background: rgba(0,0,0,0.15); padding: 2px 8px; border-radius: 10px; display: inline-block;">
+                        ${lockedCats.length} left!
+                    </p>
+                `;
                 
-                card.onclick = () => selectReward(theme);
+                card.onclick = () => selectThemeReward(themeName, lockedCats);
                 container.appendChild(card);
             });
 
-            // Append the 5th option: "Surprise Me!"
-            const surpriseCard = document.createElement('div');
-            surpriseCard.className = "reward-card";
-            surpriseCard.style.background = "linear-gradient(135deg, var(--button-bg), var(--button-hover))";
-            surpriseCard.style.borderColor = "#ffbe0b";
-            surpriseCard.style.boxShadow = "0 4px 15px rgba(255, 190, 11, 0.4)";
-            surpriseCard.innerHTML = `<h3 style="color: #ffbe0b; text-shadow: 0 0 5px rgba(255, 190, 11, 0.3);">Surprise Me!</h3><p style="font-size: 0.8em; opacity: 0.95; line-height: 1.3; margin-top: 5px;">give me a random new category please</p>`;
-            
-            surpriseCard.onclick = () => {
-                // Randomly draw a theme from the remaining available themes
-                const randomTheme = available[Math.floor(Math.random() * available.length)];
-                selectReward(randomTheme);
-            };
-            container.appendChild(surpriseCard);
+            if (themeNames.length > 1) {
+                const surpriseCard = document.createElement('div');
+                surpriseCard.className = "reward-card";
+                surpriseCard.style.background = "linear-gradient(135deg, #2b223d, #14101c)";
+                surpriseCard.style.borderColor = "#ffbe0b";
+                surpriseCard.style.boxShadow = "0 6px 0 var(--button-shadow)";
+                surpriseCard.innerHTML = `
+                    <div style="font-size: 2.4rem; margin-bottom: 8px; animation: spin 5s linear infinite; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">🎲</div>
+                    <h3 style="color: #ffbe0b; margin: 0; font-size: 1.2em; text-shadow: 0 2px 4px rgba(0,0,0,0.4);">Surprise! 🎁</h3>
+                    <p style="font-size: 0.85em; opacity: 0.9; margin: 8px 0 0 0; font-weight: 500;">Random from all pools</p>
+                `;
+                
+                surpriseCard.onclick = () => {
+                    let allLocked = [];
+                    Object.values(remainingThemes).forEach(cats => {
+                        allLocked = allLocked.concat(cats);
+                    });
+                    if (allLocked.length > 0) {
+                        const randomCat = allLocked[Math.floor(Math.random() * allLocked.length)];
+                        let parentTheme = "Surprise Me";
+                        for (const [tName, cats] of Object.entries(UNLOCK_THEMES)) {
+                            if (cats.includes(randomCat)) {
+                                parentTheme = tName;
+                                break;
+                            }
+                        }
+                        selectRewardWithAnimation(randomCat, parentTheme);
+                    }
+                };
+                container.appendChild(surpriseCard);
+            }
 
-            // Expand the reward container's maximum width so all 5 options sit neatly side-by-side on wide screens
             const rewardModalContainer = document.querySelector("#rewardModal .modal-container");
             if (rewardModalContainer) {
                 rewardModalContainer.style.maxWidth = "960px";
             }
 
+            document.getElementById("levelUpText").style.display = "block";
             document.getElementById("rewardModal").style.display = "flex";
             return true;
         }
 
-        function selectReward(chosenCategory) {
-            let discovered = JSON.parse(localStorage.getItem('discoveredThemes')) || Object.keys(THEME_DATA.starterPool);
-            let enabled = JSON.parse(localStorage.getItem('themePrefs')) || [...discovered];
+        function selectThemeReward(themeName, lockedCats) {
+            if (!lockedCats || lockedCats.length === 0) return;
+            const chosenCategory = lockedCats[Math.floor(Math.random() * lockedCats.length)];
+            selectRewardWithAnimation(chosenCategory, themeName);
+        }
 
-            if (!discovered.includes(chosenCategory)) {
-                discovered.push(chosenCategory);
-                enabled.push(chosenCategory);
+        // Animated slot machine roll sequence for cute premium polish
+        function selectRewardWithAnimation(chosenCategory, themeName) {
+            playCutePop(true);
+            const container = document.getElementById("rewardOptions");
+            document.getElementById("levelUpText").style.display = "none";
+            
+            container.innerHTML = `
+                <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0;">
+                    <div style="font-size: 1.2em; color: var(--accent-color); font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">
+                        🎰 Rolling within ${themeName}... 🎰
+                    </div>
+                    <div id="roll-box" style="font-size: 2.2rem; font-weight: 900; background: rgba(0,0,0,0.4); padding: 30px 40px; border-radius: 20px; border: 4px solid var(--accent-color); margin: 20px 0; min-width: 320px; text-align: center; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); overflow: hidden; position: relative;">
+                        <span id="roll-text">---</span>
+                    </div>
+                    <p id="roll-desc" style="font-size: 1.1em; opacity: 0.8; height: 1.5em; margin: 0 0 25px 0;">Summoning magic word sprites...</p>
+                    <button id="roll-action-btn" class="modal-action-btn" style="display: none; width: 220px; font-size: 1.15em; box-shadow: 0 4px 0 #93224e;">Start Level! 🍓</button>
+                </div>
+            `;
+
+            const rollText = document.getElementById("roll-text");
+            const rollDesc = document.getElementById("roll-desc");
+            const actionBtn = document.getElementById("roll-action-btn");
+            
+            let cyclePool = ["🦄 MYSTERY 🦄", "🍪 SECRET 🍪", "🎀 HIDDEN 🎀", "🍬 SURPRISE 🍬", "🧸 PUZZLE 🧸", "🧁 COZY 🧁", "🌟 CANDY 🌟"];
+
+            let shuffleInterval = 50; 
+            let totalTime = 0;
+            let counter = 0;
+
+            function doShuffle() {
+                playCutePop();
+                rollText.textContent = cyclePool[counter % cyclePool.length];
+                rollText.style.color = stringToLightColor(rollText.textContent);
+                counter++;
+                totalTime += shuffleInterval;
+
+                if (totalTime < 1300) {
+                    setTimeout(doShuffle, shuffleInterval);
+                } else if (totalTime < 2000) {
+                    shuffleInterval = 120; 
+                    setTimeout(doShuffle, shuffleInterval);
+                } else if (totalTime < 2600) {
+                    shuffleInterval = 250; 
+                    setTimeout(doShuffle, shuffleInterval);
+                } else {
+                    /* */
+                    setTimeout(() => {
+                        playCuteSuccess();
+                        rollText.textContent = `🎁 SECRET UNLOCKED! 🎁`;
+                        rollText.style.color = "#ffbe0b";
+                        rollText.style.fontSize = "2.0rem";
+                        rollText.style.textShadow = "0 0 15px rgba(255, 190, 11, 0.7)";
+                        document.getElementById("roll-box").style.borderColor = "#ffbe0b";
+                        document.getElementById("roll-box").style.boxShadow = "0 0 25px rgba(255, 190, 11, 0.4), inset 0 0 20px rgba(0,0,0,0.8)";
+                        
+                        rollDesc.innerHTML = `🎉 A magical new mystery category has been quietly shuffled into your rotation under <strong>${themeName}</strong>! Keep an eye out for it on your upcoming boards!`;
+                        rollDesc.style.color = "#ffbe0b";
+                        actionBtn.style.display = "block";
+                        
+                        let discovered = JSON.parse(localStorage.getItem('discoveredThemes')) || Object.keys(THEME_DATA.starterPool);
+                        let enabled = JSON.parse(localStorage.getItem('themePrefs')) || [...discovered];
+
+                        if (!discovered.includes(chosenCategory)) {
+                            discovered.push(chosenCategory);
+                            enabled.push(chosenCategory);
+                        }
+
+                        localStorage.setItem('discoveredThemes', JSON.stringify(discovered));
+                        localStorage.setItem('themePrefs', JSON.stringify(enabled));
+                        localStorage.setItem('forcedNextCategory', chosenCategory);
+                        
+                        actionBtn.onclick = () => {
+                            document.getElementById("rewardModal").style.display = "none";
+                            window.location.reload();
+                        };
+                    }, 350);
+                }
             }
 
-            localStorage.setItem('discoveredThemes', JSON.stringify(discovered));
-            localStorage.setItem('themePrefs', JSON.stringify(enabled));
-            localStorage.setItem('forcedNextCategory', chosenCategory);
-            
-            document.getElementById("rewardModal").style.display = "none";
-            setTimeout(() => { window.location.reload(); }, 50);
+            doShuffle();
         }
 
         function deselect() {
             if (selected) {
                 selected.classList.remove('is-selected');
-                selected.style.outline = "";
                 selected = 0;
             }
         }
@@ -951,12 +1379,14 @@
 
         function handleButtonClick(button) {
             if (selected === button) { 
+                playCutePop(true);
                 button.classList.remove('is-selected');
                 deselect(); 
                 return; 
             }
             
             if (!selected) {
+                playCutePop();
                 button.classList.add('is-selected');
                 selected = button;
                 return;
@@ -975,6 +1405,7 @@
                     finishCategory(button);
                     selected = 0;
                 } else {
+                    playCutePop(true);
                     button.classList.add('partial-match');
                     let b = button.querySelector('.word-count-badge') || document.createElement('span');
                     b.className = 'word-count-badge';
@@ -987,8 +1418,9 @@
                 saveState();
                 applyFontSizeScaling();
             } else {
-                button.style.outline = "3px solid #ff4b2b";
-                selected.style.outline = "3px solid #ff4b2b";
+                playSadBoop();
+                button.style.outline = "3px solid #ff527b";
+                selected.style.outline = "3px solid #ff527b";
                 button.classList.add('shake');
                 selected.classList.add('shake');
                 
@@ -1004,7 +1436,7 @@
                     b.style.outline = "";
                     s.style.outline = "";
                     deselect();
-                }, 500);
+                }, 400);
             }
         }
 
@@ -1013,8 +1445,8 @@
 
             if (highestCheckpoint === 1) {
                 showCustomConfirm(
-                    "Reset Progress", 
-                    "This will reset all progress and return you to Level 1. Are you sure?", 
+                    "Reset sweet progress?", 
+                    "This will return you back to Level 1. Are you ready for a full clean start?", 
                     () => { executeHardReset(1); }
                 );
                 return;
@@ -1022,18 +1454,20 @@
 
             document.getElementById("checkpointLevelNum").innerText = highestCheckpoint;
             document.getElementById("checkpointText").innerText = 
-                `You have unlocked checkpoint milestones!\nChoose whether you want to restart from your highest checkpoint milestone or perform a complete wipe back to Level 1.`;
+                `Yippee! You have unlocked a permanent checkpoint at Level ${highestCheckpoint}.\nDo you want to restore from that milestone, or perform a total game reset back to Level 1?`;
             
             document.getElementById("checkpointLoadBtn").onclick = () => {
+                playCutePop();
                 document.getElementById("checkpointModal").style.display = "none";
                 executeHardReset(highestCheckpoint);
             };
 
             document.getElementById("checkpointResetBtn").onclick = () => {
+                playCutePop();
                 document.getElementById("checkpointModal").style.display = "none";
                 showCustomConfirm(
-                    "Confirm Full Reset", 
-                    "Are you absolutely sure you want to delete ALL progress, including unlocked themes and checkpoints?", 
+                    "Confirm Total Wipe?", 
+                    "Are you absolutely sure you want to delete ALL levels, checkpoints, and custom rewards? This cannot be undone!", 
                     () => {
                         localStorage.removeItem('highestCheckpoint');
                         executeHardReset(1);
@@ -1064,10 +1498,9 @@
             }
             const goldenRatioConjugate = 0.618033988749895;
             let tempValue = Math.abs(hash) * goldenRatioConjugate;
+            // Kawaii palette ranges: High saturation, soft bright pastel hues
             const h = Math.round((tempValue - Math.floor(tempValue)) * 360);
-            const s = 65 + (Math.abs(hash) % 20);
-            const l = 45 + (Math.abs(hash >> 3) % 15);
-            return `hsl(${h}, ${s}%, ${l}%)`;
+            return `hsl(${h}, 90%, 75%)`;
         }
 
         function saveState() {
@@ -1116,6 +1549,7 @@
         }
 
         function shuffleAndSort() {
+            playCutePop(true);
             let partials = [], unstarted = [], completed = [];
             const board = document.getElementById("board");
             const currentButtons = board.querySelectorAll('.game-button');
@@ -1153,6 +1587,7 @@
         }
 
         function selectGameMode(mode) {
+            playCuteSuccess();
             gameMode = mode;
             localStorage.setItem('gameMode', mode);
             document.getElementById("modeModal").style.display = "none";
@@ -1172,7 +1607,7 @@
                 }
                 totalTimerSeconds = 15 + Math.floor(totalWords * 3.5);
                 
-                document.getElementById("hud-timer").style.display = "block";
+                document.getElementById("hud-timer").style.display = "flex";
                 document.getElementById("timer-progress-container").style.display = "block";
                 updateTimerDisplay();
             } else {
@@ -1206,24 +1641,24 @@
         function updateTimerDisplay() {
             const hud = document.getElementById("hud-timer");
             if (gameMode === 'timed') {
-                hud.innerText = formatTime(remainingSeconds);
+                hud.innerText = `⏰ ${formatTime(remainingSeconds)}`;
                 
                 const percent = Math.min(100, (remainingSeconds / totalTimerSeconds) * 100);
                 const progressBar = document.getElementById("timer-progress-bar");
                 progressBar.style.width = `${percent}%`;
 
                 if (percent > 50) {
-                    document.documentElement.style.setProperty('--timer-bar-color', '#4ecca3');
-                    hud.style.color = '#ffbe0b';
-                    hud.style.borderColor = '#ffbe0b';
+                    document.documentElement.style.setProperty('--timer-bar-color', '#7bf1a8');
+                    hud.style.color = '#7bf1a8';
+                    hud.style.borderColor = '#7bf1a8';
                 } else if (percent > 20) {
                     document.documentElement.style.setProperty('--timer-bar-color', '#ffbe0b');
                     hud.style.color = '#ffbe0b';
                     hud.style.borderColor = '#ffbe0b';
                 } else {
-                    document.documentElement.style.setProperty('--timer-bar-color', '#ff4b2b');
-                    hud.style.color = '#ff4b2b';
-                    hud.style.borderColor = '#ff4b2b';
+                    document.documentElement.style.setProperty('--timer-bar-color', '#ff527b');
+                    hud.style.color = '#ff527b';
+                    hud.style.borderColor = '#ff527b';
                 }
             }
         }
@@ -1245,14 +1680,15 @@
             toast.className = "time-toast";
             toast.style.left = `${rect.left + (rect.width / 2)}px`;
             toast.style.top = `${rect.top}px`;
-            toast.style.color = amount > 0 ? "#4ecca3" : "#ff4b2b";
-            toast.innerText = `${amount > 0 ? '+' : ''}${amount}s`;
+            toast.style.color = amount > 0 ? "#7bf1a8" : "#ff527b";
+            toast.innerText = `${amount > 0 ? '➕' : '➖'}${Math.abs(amount)}s`;
             
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 800);
         }
 
         function triggerGameOver() {
+            playSadBoop();
             stopClock();
             document.querySelectorAll('.game-button').forEach(btn => {
                 btn.style.pointerEvents = 'none';
@@ -1278,11 +1714,14 @@
                 this.y = y;
                 this.color = color;
                 this.angle = Math.random() * Math.PI * 2;
-                this.speed = Math.random() * 5 + 2;
-                this.friction = 0.95;
-                this.gravity = 0.12;
+                this.speed = Math.random() * 5 + 3;
+                this.friction = 0.96;
+                this.gravity = 0.1;
                 this.alpha = 1;
-                this.decay = Math.random() * 0.015 + 0.01;
+                this.decay = Math.random() * 0.012 + 0.008;
+                // Cute random shapes: Heart, Star, or round bubble
+                this.shape = ["❤️", "⭐", "🌸", "✨", "🎈"][Math.floor(Math.random() * 5)];
+                this.size = Math.random() * 12 + 10;
             }
             update() {
                 this.speed *= this.friction;
@@ -1293,28 +1732,26 @@
             draw() {
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
+                ctx.font = `${this.size}px Arial`;
+                ctx.fillText(this.shape, this.x, this.y);
                 ctx.restore();
             }
         }
 
         function createExplosion() {
             const x = Math.random() * canvas.width;
-            const y = Math.random() * (canvas.height * 0.6) + (canvas.height * 0.1);
-            const colors = ['#4ecca3', '#ff4b2b', '#ffbe0b', '#3a86ff', '#8338ec'];
+            const y = Math.random() * (canvas.height * 0.5) + (canvas.height * 0.15);
+            const colors = ['#ff8ebb', '#ffbe0b', '#7bf1a8', '#9c3df3', '#00d6ff'];
             const color = colors[Math.floor(Math.random() * colors.length)];
             
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 25; i++) {
                 particles.push(new Particle(x, y, color));
             }
         }
 
         function updateFireworks() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if (Math.random() < 0.1) {
+            if (Math.random() < 0.12) {
                 createExplosion();
             }
             particles = particles.filter(p => p.alpha > 0);
@@ -1352,22 +1789,20 @@
             const board = document.getElementById("board");
             const totalItems = board.querySelectorAll('.game-button').length;
             
-            // Screen classification
             const isDesktop = window.innerWidth > 1024;
             const isTablet = window.innerWidth > 600 && window.innerWidth <= 1024;
             
             let baseFontSize = 16;
             
             if (isDesktop) {
-                // Desktop supports larger tiles to comfortably fill up wide PC screens
                 if (totalItems <= 16) {
-                    baseFontSize = 26; // High visibility scaling on widescreen PC
+                    baseFontSize = 26; 
                 } else if (totalItems <= 25) {
                     baseFontSize = 23;
                 } else if (totalItems <= 36) {
                     baseFontSize = 21;
                 } else if (totalItems <= 49) {
-                    baseFontSize = 19; // Level 9 (m:7, n:7 = 49 items) matches this generous profile
+                    baseFontSize = 19; 
                 } else if (totalItems <= 64) {
                     baseFontSize = 17.5;
                 } else {
@@ -1384,7 +1819,6 @@
                     baseFontSize = Math.max(12, 17 - ((totalItems - 16) / 4));
                 }
             } else {
-                // Mobile
                 if (totalItems <= 8) {
                     baseFontSize = 18;
                 } else if (totalItems <= 12) {
