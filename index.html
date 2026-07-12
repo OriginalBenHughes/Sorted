@@ -637,6 +637,10 @@
                     <h3 style="margin: 5px 0; color: #ffbe0b; font-size: 1.3em;">⏳ Timed</h3>
                     <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">A fun, bouncy sprint! Mistakes shave precious seconds off your clock.</p>
                 </div>
+                <div class="mode-card" onclick="selectGameMode('hardcore')">
+                    <h3 style="margin: 5px 0; color: #ff527b; font-size: 1.3em;">💥 Hard Core</h3>
+                    <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">Make a mistake and start the level again!</p>
+                </div>
             </div>
         </div>
     </div>
@@ -918,6 +922,84 @@
             };
             
             modal.style.display = "flex";
+        }
+
+        function showOkAlert(title, message, onOk = null) {
+            playCutePop(true);
+            const modal = document.getElementById("dialogModal");
+            document.getElementById("dialogTitle").innerText = title;
+            document.getElementById("dialogMessage").innerText = message;
+            
+            const confirmBtn = document.getElementById("dialogConfirmBtn");
+            const cancelBtn = document.getElementById("dialogCancelBtn");
+            
+            cancelBtn.style.display = "none";
+            confirmBtn.innerText = "OK";
+            
+            confirmBtn.onclick = () => {
+                playCutePop();
+                modal.style.display = "none";
+                confirmBtn.innerText = "Yes! ✨";
+                if (onOk) onOk();
+            };
+            
+            modal.style.display = "flex";
+        }
+
+        function captureBoardSnapshot() {
+            const board = document.getElementById("board");
+            return Array.from(board.querySelectorAll('.game-button')).map(btn => ({
+                cat: btn.category,
+                clu: [...btn.cluster],
+                htm: btn.innerHTML,
+                dis: btn.disabled,
+                tN: btn.targetN
+            }));
+        }
+
+        function rebuildBoardFromSnapshot(snapshot) {
+            const board = document.getElementById("board");
+            board.innerHTML = "";
+
+            const shuffledSnapshot = [...snapshot];
+            shuffleArray(shuffledSnapshot);
+
+            const cols = calculateColumns(shuffledSnapshot.length);
+            let currentRow;
+            shuffledSnapshot.forEach((item, index) => {
+                if (index % cols === 0) {
+                    currentRow = document.createElement('div');
+                    currentRow.className = "board-row";
+                    board.appendChild(currentRow);
+                }
+                currentRow.appendChild(createButtonFromData({
+                    category: item.cat,
+                    cluster: [...item.clu],
+                    innerHTML: item.htm,
+                    disabled: item.dis,
+                    targetN: item.tN
+                }));
+            });
+
+            applyFontSizeScaling();
+            saveState();
+        }
+
+        function restartLevelForHardcoreMistake() {
+            const seed = JSON.parse(localStorage.getItem('hardcoreLevelSeed') || 'null');
+            if (!seed || seed.length === 0) {
+                window.location.reload();
+                return;
+            }
+
+            showOkAlert(
+                "Oops, wrong match!",
+                "Oops, wrong match! Starting this level again with the same words, shuffled.\n\nSome words may fit into more than one category!\nExample: Orange could be a fruit or a colour...\nIf you feel unsure, solve all the words you can and that orange will only fit into the one that remains.",
+                () => {
+                    selected = 0;
+                    rebuildBoardFromSnapshot(seed);
+                }
+            );
         }
 
         function restartCurrentLevel() {
@@ -1518,6 +1600,12 @@
                 applyFontSizeScaling();
             } else {
                 playSadBoop();
+
+                if (gameMode === 'hardcore') {
+                    restartLevelForHardcoreMistake();
+                    return;
+                }
+
                 button.style.outline = "3px solid #ff527b";
                 selected.style.outline = "3px solid #ff527b";
                 button.classList.add('shake');
@@ -1690,6 +1778,22 @@
             gameMode = mode;
             localStorage.setItem('gameMode', mode);
             document.getElementById("modeModal").style.display = "none";
+
+            if (mode === 'hardcore') {
+                const shown = localStorage.getItem('hardcoreIntroShown');
+                if (!shown) {
+                    showCustomAlert(
+                        "Hard Core Tip",
+                        "Some words may fit into more than one category!\n\nExample: Orange could be a fruit or a colour...\n\nIf you feel unsure, solve all the words you can and that orange will only fit into the one that remains.",
+                        () => {
+                            localStorage.setItem('hardcoreIntroShown', 'true');
+                            startClockEngine();
+                        }
+                    );
+                    return;
+                }
+            }
+
             startClockEngine();
         }
 
@@ -1967,6 +2071,8 @@
                         targetN: w[2]
                     }));
                 });
+
+                localStorage.setItem('hardcoreLevelSeed', JSON.stringify(captureBoardSnapshot()));
                 saveState();
             } else {
                 loadState(); 
