@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
     <!-- Load Tone.js for high-quality synthetic cute sound effects -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    
     <style>
         :root {
             --bg-color: #1e1a2b;          /* Creamy plum/indigo night */
@@ -34,26 +35,7 @@
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(255, 142, 187, 0.05) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(123, 241, 168, 0.05) 0%, transparent 40%);
-        }
-
-        /* Cute decorative elements background */
-        body::before {
-            content: "✨";
-            position: fixed;
-            top: 80px;
-            left: 5%;
-            font-size: 2rem;
-            opacity: 0.15;
-            animation: floatSlow 6s ease-in-out infiniteAlternate;
-        }
-        body::after {
-            content: "☁️";
-            position: fixed;
-            bottom: 50px;
-            right: 5%;
-            font-size: 3rem;
-            opacity: 0.15;
-            animation: floatSlow 8s ease-in-out infiniteAlternate-reverse;
+            background-attachment: fixed;
         }
 
         @keyframes floatSlow {
@@ -184,6 +166,7 @@
                 box-shadow 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.5),
                 border-color 0.2s;
             outline: none !important;
+            touch-action: manipulation;
         }
 
         .game-button.partial-match,
@@ -191,27 +174,27 @@
             white-space: normal;
         }
 
-        /* Dotted cute boundary for incomplete matches - now styled like a chunky, tactile 3D button! */
+        /* Dotted cute boundary for incomplete matches */
         .game-button.partial-match {
             border: 3px dashed var(--cat-color) !important;
             background-color: var(--button-bg) !important;
-            /* Blend the deep lavender glaze with a splash of the category's candy pastel for a merging look */
+            /* Blend lavender glaze with category pastel */
             background-image: linear-gradient(135deg, var(--button-bg) 60%, var(--cat-bg)) !important;
             box-shadow: 0 6px 0 var(--button-shadow), 0 10px 18px rgba(0,0,0,0.4) !important;
-            transform: translateY(2px) !important; /* Slightly elevated, thick button profile */
+            transform: translateY(2px) !important;
         }
 
-        /* Distinct interactive selected style for active partial matches */
+        /* Selected interactive focus for partial matches */
         .game-button.partial-match.is-selected {
             border: 4px dashed #ffffff !important;
             background-color: var(--button-hover) !important;
             background-image: none !important;
-            transform: translateY(-2px) scale(1.05) !important; /* Pops back up high to capture selection focus! */
+            transform: translateY(-2px) scale(1.05) !important;
             box-shadow: 0 10px 0 var(--button-shadow), 0 14px 24px rgba(255, 255, 255, 0.2) !important;
             z-index: 12;
         }
 
-        /* Soft disabled look */
+        /* Soft disabled look once fully grouped */
         .game-button:disabled {
             border: 3px solid var(--cat-color) !important;
             background-color: var(--cat-bg) !important;
@@ -219,7 +202,7 @@
             opacity: 0.95;
             box-shadow: none !important;
             transform: translateY(8px) !important;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.75);
         }
 
         /* Bouncy tactile hover effect */
@@ -339,6 +322,8 @@
             border-radius: 30px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.8);
             box-sizing: border-box;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .reward-options, .mode-options {
@@ -408,6 +393,7 @@
             color: #ffbe0b;
             font-style: italic;
             text-shadow: 0 0 15px rgba(255,190,11, 0.6), 0 6px 0 #c78f00;
+            -webkit-text-stroke: 3px #120e1a;
             letter-spacing: 2px;
             z-index: 1600;
             pointer-events: none;
@@ -521,7 +507,7 @@
         }
         .toggle-slider:before {
             position: absolute;
-            content: "🍭";
+            content: "🔍";
             font-size: 1.25em;
             display: flex;
             align-items: center;
@@ -540,6 +526,76 @@
         }
         input:checked + .toggle-slider:before {
             transform: translateX(26px) rotate(180deg);
+        }
+
+        /* Discovered list container and grid */
+        .discovered-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+        }
+        .discovered-item {
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            font-size: 0.85em;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid rgba(255, 142, 187, 0.15);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media (max-width: 768px) {
+            .floating {
+                padding: 6px 12px;
+                min-height: 50px;
+                border-radius: 16px;
+            }
+            .floating h1 {
+                font-size: 1.1em;
+            }
+            .level-info {
+                padding: 4px 10px;
+                font-size: 0.85em;
+            }
+            .btn-text {
+                display: none;
+            }
+            .floating button {
+                padding: 8px 10px;
+                font-size: 1.1em;
+                border-radius: 12px;
+            }
+            #board {
+                padding-top: 100px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .modal-container {
+                padding: 20px 15px;
+                border-radius: 22px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            .reward-options, .mode-options {
+                gap: 12px;
+                margin-top: 15px;
+            }
+            .reward-card, .mode-card {
+                width: 100%;
+                max-width: 280px;
+                padding: 16px 14px;
+                border-radius: 18px;
+            }
         }
     </style>
 </head>
@@ -612,14 +668,16 @@
         </div>
     </div>
 
+    <!-- Reward Modal -->
     <div id="rewardModal" class="custom-modal">
         <div class="modal-container">
-            <h1 style="color: var(--accent-color); font-size: 2.8em; margin-bottom: 5px; text-shadow: 0 3px 0 #93224e;">🍰 LEVEL UP!</h1>
+            <h1 style="color: var(--accent-color); font-size: 2.8em; margin-bottom: 5px; text-shadow: 0 3px 0 #93224e;">🧩 LEVEL UP!</h1>
             <p id="levelUpText" style="font-size: 1.15em; margin-bottom: 15px;">You've reached a new level milestone! Select a theme to roll for a new unlock:</p>
             <div class="reward-options" id="rewardOptions"></div>
         </div>
     </div>
 
+    <!-- Game Over Modal -->
     <div id="gameOverModal" class="custom-modal">
         <div class="modal-container">
             <h1 style="color: #ff527b; font-size: 2.8em; margin-bottom: 5px; margin-top: 0; text-shadow: 0 3px 0 #8b1633;">⏰ TIME'S UP!</h1>
@@ -631,7 +689,7 @@
         </div>
     </div>
 
-    <!-- Custom Settings Modal -->
+    <!-- Custom Settings Modal with Discovered Categories feature -->
     <div id="settingsModal" class="custom-modal">
         <div class="modal-container" style="max-width: 480px;">
             <h2 style="color: var(--accent-color); margin-top: 0; font-size: 2.2em; text-shadow: 0 2px 0 rgba(0,0,0,0.2);">⚙️ Settings</h2>
@@ -644,7 +702,11 @@
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
-                <!-- Future settings can be comfortably added here -->
+                
+                <h3 style="margin: 20px 0 5px 0; color: var(--accent-color); font-size: 1.2em;">📖 Unlocked Word Groups:</h3>
+                <div id="discovered-themes-list" class="discovered-grid">
+                    <!-- Loaded dynamically in JavaScript -->
+                </div>
             </div>
 
             <button onclick="closeSettings()" class="modal-action-btn" style="width: 100%;">Close Settings 🌟</button>
@@ -662,10 +724,10 @@
             <div id="hud-timer" class="level-info" style="border-color: #ffbe0b; color: #ffbe0b; display: none;">⏰ 0:00</div>
         </div>
         <div style="display: flex; gap: 12px; align-items: center;">
-            <button type="button" onclick="openSettings()" style="border: 2px solid var(--accent-color); color: var(--accent-color); background-color: transparent; box-shadow: none; display: flex; align-items: center; gap: 4px;">⚙️ Settings</button>
-            <button type="button" id="shuffle" onclick="shuffleAndSort()">🔀 Shuffle</button>
-            <button type="button" onclick="restartCurrentLevel()" style="border: 2px solid #ff527b; color: #ff527b; background-color: transparent; box-shadow: none;">🔄 Restart</button>
-            <button type="button" onclick="resetToLevelOne()" style="background-color: var(--accent-color); color: #1e1a2b;">✨ New Game</button>
+            <button type="button" onclick="openSettings()" style="border: 2px solid var(--accent-color); color: var(--accent-color); background-color: transparent; box-shadow: none; display: flex; align-items: center; gap: 4px;">⚙️ <span class="btn-text">Settings</span></button>
+            <button type="button" id="shuffle" onclick="shuffleAndSort()">🔀 <span class="btn-text">Shuffle</span></button>
+            <button type="button" onclick="restartCurrentLevel()" style="border: 2px solid #ff527b; color: #ff527b; background-color: transparent; box-shadow: none;">🔄 <span class="btn-text">Restart</span></button>
+            <button type="button" onclick="resetToLevelOne()" style="background-color: var(--accent-color); color: #1e1a2b;">🔍 <span class="btn-text">New Game</span></button>
         </div>
     </div>
 
@@ -741,7 +803,7 @@
         }
 
         // Expanded starter and theme libraries matching the cute visual theme
-        const THEME_DATA = {
+ const THEME_DATA = {
             starterPool: {
                 "Colours": ["Red", "Blue", "Green", "Yellow", "Orange", "Purple", "Pink", "White", "Black", "Grey", "Brown", "Violet"],
                 "Fruits": ["Apple", "Banana", "Orange", "Pear", "Grape", "Kiwi", "Mango", "Strawberry", "Blueberry", "Raspberry", "Blackberry", "Watermelon", "Pineapple", "Peach", "Plum", "Cherry", "Apricot", "Lemon", "Lime", "Grapefruit", "Pomegranate", "Coconut", "Fig", "Date", "Cranberry", "Papaya", "Lychee", "Passionfruit", "Guava", "Dragonfruit", "Melon", "Avocado"],
@@ -779,10 +841,13 @@
                 "Dairy Products": ["Milk", "Butter", "Cream", "Yogurt", "Cheese", "Sour Cream", "Custard", "Buttermilk", "Ghee", "Condensed Milk"],
                 "Footwear": ["Boot", "Sneaker", "Sandal", "Slipper", "Heel", "Loafers", "Clog", "Moccasin", "Brogue", "Thong", "Wellington"],
                 "Containers": ["Box", "Bottle", "Jar", "Can", "Basket", "Bucket", "Tin", "Mug", "Tub", "Carton", "Bag", "Barrel", "Flask", "Crate"],
-                "Stationery": ["Pen", "Pencil", "Eraser", "Ruler", "Stapler", "Notebook", "Binder", "Scissors", "Marker", "Highlighter", "Envelope", "Glue", "Tape"]
+                "Stationery": ["Pen", "Pencil", "Eraser", "Ruler", "Stapler", "Notebook", "Binder", "Scissors", "Marker", "Highlighter", "Envelope", "Glue", "Tape"],
+                "Music Genres": ["Rock", "Pop", "Jazz", "Classical", "Hip Hop", "Country", "Electronic", "Reggae", "Blues", "Heavy Metal", "Folk", "Punk", "Disco", "Soul", "Gospel", "Synthwave"],
+                "Geographic Divisions": ["Equator", "Tropic of Cancer", "Tropic of Capricorn", "Prime Meridian", "Arctic Circle", "Antarctic Circle", "Northern Hemisphere", "Southern Hemisphere", "Eastern Hemisphere", "Western Hemisphere"],
+                "Time Divisions": ["Date", "Millennium", "Century", "Decade", "Year", "Month", "Week", "Day", "Hour", "Minute", "Second", "Millisecond", "Microsecond", "Nanosecond", "Era", "Epoch", "Age"]
             },
             unlockPool: {
-                "Types of Swords": ["Longsword", "Katana", "Rapier", "Cutlass", "Scimitar", "Broadsword", "Claymore", "Sabre", "Falchion", "Epee", "Foil", "Gladius", "Zweihander", "Excalibur"],
+                "Medieval Arms & Armour": ["Broadsword", "Halberd", "Mace", "Crossbow", "Longbow", "Trebuchet", "Chainmail", "Plate Armour", "Gauntlet", "Visor", "Shield", "Morningstar", "Lance", "Warhammer", "Greaves"],
                 "Geography Terms": ["Continent", "Ocean", "Peninsula", "Archipelago", "Isthmus", "Plateau", "Canyon", "Valley", "Delta", "Lagoon", "Strait", "Equator", "Latitude", "Longitude", "Oasis"],
                 "Geology Terms": ["Magma", "Basalt", "Granite", "Obsidian", "Limestone", "Marble", "Quartz", "Fossil", "Erosion", "Sediment", "Tectonic", "Fault", "Crystal", "Bedrock"],
                 "Doctor Who Companions": ["Rose Tyler", "Martha Jones", "Donna Noble", "Amy Pond", "Rory Williams", "Clara Oswald", "Bill Potts", "Sarah Jane", "Ace", "Leela", "Ruby Sunday", "Graham O'Brien", "Ryan Sinclair"],
@@ -836,7 +901,26 @@
                 "Retro Video Games": ["Pac-Man", "Tetris", "Donkey Kong", "Frogger", "Asteroids", "Galaga", "Centipede", "Dig Dug", "Q*bert", "Space Invaders", "Pitfall", "Pong", "Defender", "Joust", "Gauntlet", "Out Run", "Paperboy", "Bubble Bobble", "Contra", "Lemmings"],
                 "Chocolate Bars": ["Snickers", "Mars", "Twix", "Bounty", "Milky Way", "Kit Kat", "Crunch", "Aero", "Flake", "Picnic", "Boost", "Skor", "Heath", "Butterfinger", "Toblerone", "Wispa", "Maltesers", "Rolo", "Daim", "Freddo"],
                 "Luxury Car Brands": ["Ferrari", "Lamborghini", "Porsche", "Maserati", "Aston Martin", "Bentley", "Rolls-Royce", "Bugatti", "McLaren", "Pagani", "Lotus", "Maybach", "Lexus", "Jaguar", "Tesla"],
-                "Tools": ["Hammer", "Screwdriver", "Wrench", "Pliers", "Chisel", "Level", "Saw", "Drill", "Mallet", "Plane", "Clamp", "Sander", "Router", "File", "Vice", "Square", "Tape Measure", "Awl", "Bolt Cutter", "Crowbar"]
+                "Tools": ["Hammer", "Screwdriver", "Wrench", "Pliers", "Chisel", "Level", "Saw", "Drill", "Mallet", "Plane", "Clamp", "Sander", "Router", "File", "Vice", "Square", "Tape Measure", "Awl", "Bolt Cutter", "Crowbar"],
+                
+                // NEW REQUESTED CATEGORIES
+                "DC Characters": ["Batman", "Superman", "Wonder Woman", "The Flash", "Aquaman", "Green Lantern", "Robin", "Cyborg", "Supergirl", "Batgirl", "Nightwing", "Shazam", "Joker", "Harley Quinn", "Catwoman", "Lex Luthor", "Riddler", "Poison Ivy", "Bane", "Two-Face", "Penguin", "Deathstroke", "Darkseid", "Brainiac", "Sinestro", "Black Adam", "Martian Manhunter", "Hawkgirl", "Green Arrow", "Zatanna"],
+                "Addams Family Characters": ["Gomez", "Morticia", "Wednesday", "Pugsley", "Uncle Fester", "Lurch", "Thing", "Cousin Itt", "Grandmama", "Pubert", "Debbie Jellinsky"],
+                "K-Pop Groups": ["BTS", "Blackpink", "Twice", "Red Velvet", "Exo", "Seventeen", "Stray Kids", "NewJeans", "Aespa", "Itzy", "NCT", "TXT"],
+                "Pop Divas": ["Madonna", "Beyonce", "Taylor Swift", "Lady Gaga", "Ariana Grande", "Britney Spears", "Rihanna", "Adele", "Billie Eilish", "Dua Lipa", "Katy Perry", "Whitney Houston"],
+                "Classical Composers": ["Bach", "Beethoven", "Mozart", "Chopin", "Tchaikovsky", "Vivaldi", "Debussy", "Wagner", "Schubert", "Handel", "Brahms", "Liszt"],
+                "Jazz Legends": ["Miles Davis", "Louis Armstrong", "John Coltrane", "Ella Fitzgerald", "Billie Holiday", "Duke Ellington", "Thelonious Monk", "Charlie Parker", "Nina Simone", "Chet Baker"],
+                "Hip Hop Pioneers": ["Run DMC", "Outkast", "Wu-Tang Clan", "Public Enemy", "Beastie Boys", "A Tribe Called Quest", "Grandmaster Flash", "NWA", "De La Soul"],
+                "Famous Boybands": ["Backstreet Boys", "One Direction", "NSYNC", "Boyz II Men", "Westlife", "New Kids On The Block", "Jonas Brothers", "Take That"],
+                "Olympic Sports": ["Archery", "Gymnastics", "Athletics", "Equestrian", "Fencing", "Rowing", "Sailing", "Weightlifting", "Triathlon", "Badminton", "Judo"],
+                "Water Sports": ["Surfing", "Windsurfing", "Kayaking", "Water Polo", "Diving", "Rowing", "Sailing", "Snorkeling", "Wakeboarding", "Rafting"],
+                "Sports Equipment": ["Racket", "Shuttlecock", "Helmet", "Goggles", "Bat", "Puck", "Skis", "Surfboard", "Club", "Paddle"],
+                "Ball Games": ["Basketball", "Volleyball", "Soccer", "Tennis", "Baseball", "Rugby", "Handball", "Water Polo", "Netball", "Dodgeball", "Billiards", "Squash"],
+                "Famous Athletes": ["Michael Jordan", "Muhammad Ali", "Serena Williams", "Roger Federer", "Usain Bolt", "Lionel Messi", "Cristiano Ronaldo", "Simone Biles", "LeBron James", "Michael Phelps", "Tiger Woods", "Tom Brady"],
+                "Types of Art Movements": ["Impressionism", "Cubism", "Surrealism", "Expressionism", "Abstract Expressionism", "Dadaism", "Baroque", "Renaissance", "Romanticism", "Pop Art", "Minimalism", "Art Nouveau", "Fauvism", "Futurism", "Realism", "Rococo"],
+                "Artists": ["Leonardo Da Vinci", "Vincent Van Gogh", "Pablo Picasso", "Claude Monet", "Michelangelo", "Salvador Dali", "Henri Matisse", "Georgia O'Keeffe", "Frida Kahlo", "Andy Warhol", "Jackson Pollock", "Rembrandt", "Johannes Vermeer", "Edvard Munch", "Gustav Klimt", "Pierre Auguste Renoir", "Auguste Rodin", "Donatello"],
+                "Authors": ["William Shakespeare", "Jane Austen", "Charles Dickens", "George Orwell", "Mark Twain", "Virginia Woolf", "Ernest Hemingway", "Leo Tolstoy", "Fyodor Dostoevsky", "Mary Shelley", "Edgar Allan Poe", "Agatha Christie", "Stephen King", "Gabriel Garcia Marquez", "Franz Kafka", "James Joyce"],
+                "Religions": ["Buddhism", "Christianity", "Hinduism", "Islam", "Judaism", "Sikhism", "Shinto", "Taoism", "Zoroastrianism", "Jainism", "Bahai", "Animism"]
             }
         };
 
@@ -844,8 +928,8 @@
             "Pop Culture": [
                 "Doctor Who Companions", "Star Trek Captains", "Actors Who Have Played Doctor Who",
                 "Actors Who Have Played James Bond", "Pokemon", "Anime Series", "Streaming Services",
-                "Rock Bands", "Marvel Characters", "Memes", "Tolkien Characters", "Beatles Songs",
-                "Tom Hanks Movies", "Scifi TV Shows", "Musicals", "Muppets", "Retro Video Games", "Video Game Consoles"
+                "Marvel Characters", "Memes", "Tolkien Characters", "Beatles Songs",
+                "Tom Hanks Movies", "Scifi TV Shows", "Musicals", "Muppets", "Retro Video Games", "Video Game Consoles", "DC Characters", "Addams Family Characters"
             ],
             "Science & Tech": [
                 "Geology Terms", "Google Products", "Keyboard", "Scientific SI Units",
@@ -853,16 +937,24 @@
             ],
             "History & Myth": [
                 "Mythical Creatures", "Historical Periods", "US State Capitols", "World Wonders",
-                "Greek Gods", "Egyptian Gods", "Roman Emperors", "Books Of The Bible"
+                "Greek Gods", "Egyptian Gods", "Roman Emperors", "Books Of The Bible", "Medieval Arms & Armour", "Religions"
             ],
             "Language & Lit": [
                 "Palindromes", "Silent Letter Words", "Heteronyms", "Homophones",
-                "Prepositions", "Poets", "Famous Novels"
+                "Prepositions", "Poets", "Famous Novels", "Authors"
             ],
-            "Lifestyle & Hobbies": [
+            "Food & Lifestyle": [
                 "Cheeses", "Pastas", "Cocktails", "Fabrics", "Chocolate Bars",
-                "Luxury Car Brands", "Tools", "Gemstones", "Dog Breeds", "Board Games",
-                "Musical Instruments", "Types of Swords", "Geography Terms", "D&D Monsters"
+                "Luxury Car Brands", "Tools", "Gemstones", "Dog Breeds", "Board Games"
+            ],
+            "Music": [
+                "Rock Bands", "Musical Instruments", "K-Pop Groups", "Pop Divas", "Classical Composers", "Jazz Legends", "Hip Hop Pioneers", "Famous Boybands"
+            ],
+            "Sports": [
+                "Olympic Sports", "Water Sports", "Sports Equipment", "Ball Games", "Famous Athletes"
+            ],
+            "Art & Culture": [
+                "Types of Art Movements", "Artists"
             ]
         };
 
@@ -872,7 +964,10 @@
             "Science & Tech": { icon: "🔬", color: "#00f0ff", gradient: "linear-gradient(135deg, #00d6ff, #0056f9)" },
             "History & Myth": { icon: "🏛️", color: "#ffb700", gradient: "linear-gradient(135deg, #ffb000, #ff5e00)" },
             "Language & Lit": { icon: "✍️", color: "#00ff87", gradient: "linear-gradient(135deg, #0ce68b, #00a0f0)" },
-            "Lifestyle & Hobbies": { icon: "🍹", color: "#f2709c", gradient: "linear-gradient(135deg, #ff7ba0, #ffb076)" }
+            "Food & Lifestyle": { icon: "🍹", color: "#f2709c", gradient: "linear-gradient(135deg, #ff7ba0, #ffb076)" },
+            "Music": { icon: "🎵", color: "#e879f9", gradient: "linear-gradient(135deg, #f472b6, #c084fc)" },
+            "Sports": { icon: "🏆", color: "#38bdf8", gradient: "linear-gradient(135deg, #60a5fa, #0284c7)" },
+            "Art & Culture": { icon: "🎨", color: "#a855f7", gradient: "linear-gradient(135deg, #c084fc, #7e22ce)" }
         };
 
         var M = 4;
@@ -889,6 +984,21 @@
         function openSettings() {
             playCutePop(true);
             document.getElementById("soundToggle").checked = soundEnabled;
+            
+            // Render discovered categories in settings
+            const discoveredContainer = document.getElementById("discovered-themes-list");
+            discoveredContainer.innerHTML = "";
+            let discovered = JSON.parse(localStorage.getItem('discoveredThemes')) || Object.keys(THEME_DATA.starterPool);
+            
+            discovered.forEach(theme => {
+                const item = document.createElement("div");
+                item.className = "discovered-item";
+                const icon = getCategoryIcon(theme);
+                item.innerHTML = `<span>${icon} ${theme}</span>`;
+                item.style.borderColor = stringToLightColor(theme);
+                discoveredContainer.appendChild(item);
+            });
+
             document.getElementById("settingsModal").style.display = "flex";
         }
 
@@ -1099,9 +1209,145 @@
             });
         }
 
+        const CATEGORY_TO_THEME_MAP = {
+            // Pop Culture
+            "Zodiac": "Pop Culture",
+            "Chess Pieces": "Pop Culture",
+            "Doctor Who Companions": "Pop Culture",
+            "Star Trek Captains": "Pop Culture",
+            "Actors Who Have Played Doctor Who": "Pop Culture",
+            "Actors Who Have Played James Bond": "Pop Culture",
+            "Pokemon": "Pop Culture",
+            "Anime Series": "Pop Culture",
+            "Streaming Services": "Pop Culture",
+            "Marvel Characters": "Pop Culture",
+            "Memes": "Pop Culture",
+            "Tolkien Characters": "Pop Culture",
+            "Tom Hanks Movies": "Pop Culture",
+            "Scifi TV Shows": "Pop Culture",
+            "Musicals": "Pop Culture",
+            "Muppets": "Pop Culture",
+            "Retro Video Games": "Pop Culture",
+            "Video Game Consoles": "Pop Culture",
+            "DC Characters": "Pop Culture",
+            "Addams Family Characters": "Pop Culture",
+
+            // Science & Tech
+            "Planets": "Science & Tech",
+            "Shapes": "Science & Tech",
+            "Days": "Science & Tech",
+            "Months": "Science & Tech",
+            "Oceans": "Science & Tech",
+            "Mammals": "Science & Tech",
+            "Birds": "Science & Tech",
+            "Reptiles": "Science & Tech",
+            "Fish": "Science & Tech",
+            "Insects": "Science & Tech",
+            "Trees": "Science & Tech",
+            "Weather Words": "Science & Tech",
+            "Amphibians": "Science & Tech",
+            "Body Parts": "Science & Tech",
+            "Materials": "Science & Tech",
+            "Geology Terms": "Science & Tech",
+            "Google Products": "Science & Tech",
+            "Keyboard": "Science & Tech",
+            "Scientific SI Units": "Science & Tech",
+            "Types Of Numbers": "Science & Tech",
+            "Elements": "Science & Tech",
+            "Constellations": "Science & Tech",
+            "Dinosaur Species": "Science & Tech",
+            "Geographic Divisions": "Science & Tech",
+            "Time Divisions": "Science & Tech",
+
+            // History & Myth
+            "Countries": "History & Myth",
+            "Mythical Creatures": "History & Myth",
+            "Historical Periods": "History & Myth",
+            "US State Capitols": "History & Myth",
+            "World Wonders": "History & Myth",
+            "Greek Gods": "History & Myth",
+            "Egyptian Gods": "History & Myth",
+            "Roman Emperors": "History & Myth",
+            "Books Of The Bible": "History & Myth",
+            "Medieval Arms & Armour": "History & Myth",
+            "Religions": "History & Myth",
+
+            // Language & Lit
+            "Types of Words": "Language & Lit",
+            "Collective Nouns": "Language & Lit",
+            "Palindromes": "Language & Lit",
+            "Silent Letter Words": "Language & Lit",
+            "Heteronyms": "Language & Lit",
+            "Homophones": "Language & Lit",
+            "Prepositions": "Language & Lit",
+            "Poets": "Language & Lit",
+            "Famous Novels": "Language & Lit",
+            "Authors": "Language & Lit",
+
+            // Food & Lifestyle
+            "Colours": "Food & Lifestyle",
+            "Fruits": "Food & Lifestyle",
+            "Kitchen Appliances": "Food & Lifestyle",
+            "Clothing": "Food & Lifestyle",
+            "Furniture": "Food & Lifestyle",
+            "Vegetables": "Food & Lifestyle",
+            "Flowers": "Food & Lifestyle",
+            "Vehicles": "Food & Lifestyle",
+            "Occupations": "Food & Lifestyle",
+            "Cooking Terms": "Food & Lifestyle",
+            "Card Game Ranks": "Food & Lifestyle",
+            "Herbs and Spices": "Food & Lifestyle",
+            "Dairy Products": "Food & Lifestyle",
+            "Footwear": "Food & Lifestyle",
+            "Containers": "Food & Lifestyle",
+            "Stationery": "Food & Lifestyle",
+            "Cheeses": "Food & Lifestyle",
+            "Pastas": "Food & Lifestyle",
+            "Cocktails": "Food & Lifestyle",
+            "Fabrics": "Food & Lifestyle",
+            "Chocolate Bars": "Food & Lifestyle",
+            "Luxury Car Brands": "Food & Lifestyle",
+            "Tools": "Food & Lifestyle",
+            "Gemstones": "Food & Lifestyle",
+            "Dog Breeds": "Food & Lifestyle",
+            "Board Games": "Food & Lifestyle",
+
+            // Music
+            "Music Genres": "Music",
+            "Rock Bands": "Music",
+            "Musical Instruments": "Music",
+            "K-Pop Groups": "Music",
+            "Pop Divas": "Music",
+            "Classical Composers": "Music",
+            "Jazz Legends": "Music",
+            "Hip Hop Pioneers": "Music",
+            "Famous Boybands": "Music",
+
+            // Sports
+            "Sports": "Sports",
+            "Olympic Sports": "Sports",
+            "Water Sports": "Sports",
+            "Sports Equipment": "Sports",
+            "Ball Games": "Sports",
+            "Famous Athletes": "Sports",
+
+            // Art & Culture
+            "Types of Art Movements": "Art & Culture",
+            "Artists": "Art & Culture"
+        };
+
+        function getCategoryIcon(catName) {
+            const themeName = CATEGORY_TO_THEME_MAP[catName];
+            if (themeName) {
+                return THEME_METADATA[themeName]?.icon || "🧩";
+            }
+            return "🧩";
+        }
+
         function finishCategory(b) {
             playCuteSuccess();
-            b.innerHTML = `<div style="font-size:0.75em; opacity: 0.85; letter-spacing: 0.5px;">🌸 CATEGORY 🌸</div><b style="font-size: 1.15em; color: #ffeb3b;">${b.category.toUpperCase()}</b><div style="font-size:0.8em; margin-top: 4px; font-style: italic; opacity: 0.9;">${b.cluster.join(', ')}</div>`;
+            const icon = getCategoryIcon(b.category);
+            b.innerHTML = `<div style="font-size:0.75em; opacity: 0.85; letter-spacing: 0.5px;">${icon} CATEGORY ${icon}</div><b style="font-size: 1.15em; color: #ffeb3b;">${b.category.toUpperCase()}</b><div style="font-size:0.8em; margin-top: 4px; font-style: italic; opacity: 0.9;">${b.cluster.join(', ')}</div>`;
             b.disabled = true;
             b.classList.remove('partial-match');
             const badge = b.querySelector('.word-count-badge');
@@ -1272,8 +1518,8 @@
                     <div id="roll-box" style="font-size: 2.2rem; font-weight: 900; background: rgba(0,0,0,0.4); padding: 30px 40px; border-radius: 20px; border: 4px solid var(--accent-color); margin: 20px 0; min-width: 320px; text-align: center; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); overflow: hidden; position: relative;">
                         <span id="roll-text">---</span>
                     </div>
-                    <p id="roll-desc" style="font-size: 1.1em; opacity: 0.8; height: 1.5em; margin: 0 0 25px 0;">Summoning magic word sprites...</p>
-                    <button id="roll-action-btn" class="modal-action-btn" style="display: none; width: 220px; font-size: 1.15em; box-shadow: 0 4px 0 #93224e;">Start Level! 🍓</button>
+                    <p id="roll-desc" style="font-size: 1.1em; opacity: 0.8; height: 1.5em; margin: 0 0 25px 0;">Analyzing word relations...</p>
+                    <button id="roll-action-btn" class="modal-action-btn" style="display: none; width: 220px; font-size: 1.15em; box-shadow: 0 4px 0 #93224e;">Start Level! 🔍</button>
                 </div>
             `;
 
@@ -1281,7 +1527,7 @@
             const rollDesc = document.getElementById("roll-desc");
             const actionBtn = document.getElementById("roll-action-btn");
             
-            let cyclePool = ["🦄 MYSTERY 🦄", "🍪 SECRET 🍪", "🎀 HIDDEN 🎀", "🍬 SURPRISE 🍬", "🧸 PUZZLE 🧸", "🧁 COZY 🧁", "🌟 CANDY 🌟"];
+            let cyclePool = ["🔍 SEARCHING...", "🧠 THINKING...", "✏️ DE-SCRAMBLING...", "💡 COMPILING...", "🧩 SOLVING...", "📖 ANALYZING...", "📚 SCANNING..."];
 
             let shuffleInterval = 50; 
             let totalTime = 0;
@@ -1303,17 +1549,16 @@
                     shuffleInterval = 250; 
                     setTimeout(doShuffle, shuffleInterval);
                 } else {
-                    /* */
                     setTimeout(() => {
                         playCuteSuccess();
-                        rollText.textContent = `🎁 SECRET UNLOCKED! 🎁`;
+                        rollText.textContent = `🎁 NEW CATEGORY UNLOCKED! 🎁`;
                         rollText.style.color = "#ffbe0b";
                         rollText.style.fontSize = "2.0rem";
                         rollText.style.textShadow = "0 0 15px rgba(255, 190, 11, 0.7)";
                         document.getElementById("roll-box").style.borderColor = "#ffbe0b";
                         document.getElementById("roll-box").style.boxShadow = "0 0 25px rgba(255, 190, 11, 0.4), inset 0 0 20px rgba(0,0,0,0.8)";
                         
-                        rollDesc.innerHTML = `🎉 A magical new mystery category has been quietly shuffled into your rotation under <strong>${themeName}</strong>! Keep an eye out for it on your upcoming boards!`;
+                        rollDesc.innerHTML = `🎉 A brand new secret category has been merged into your rotation under <strong>${themeName}</strong>! Prepare your brain to search for it on upcoming levels!`;
                         rollDesc.style.color = "#ffbe0b";
                         actionBtn.style.display = "block";
                         
@@ -1719,8 +1964,7 @@
                 this.gravity = 0.1;
                 this.alpha = 1;
                 this.decay = Math.random() * 0.012 + 0.008;
-                // Cute random shapes: Heart, Star, or round bubble
-                this.shape = ["❤️", "⭐", "🌸", "✨", "🎈"][Math.floor(Math.random() * 5)];
+                this.shape = ["🧩", "🔍", "💡", "✏️", "📖", "✨"][Math.floor(Math.random() * 6)];
                 this.size = Math.random() * 12 + 10;
             }
             update() {
