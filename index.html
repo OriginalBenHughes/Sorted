@@ -141,14 +141,14 @@
             background-color: var(--button-bg);
             color: var(--text-color);
             border: 3px solid rgba(255,255,255,0.15);
-            border-radius: 1.25em;
+            border-radius: 1.05em;
             flex: 0 1 auto;
             width: max-content;
-            min-width: 6.8em;      
-            max-width: 18em;
-            min-height: 4.4em;
-            padding: 0.6em 1.4em;
-            font-size: 1em;
+            min-width: 5.1em;
+            max-width: 13.5em;
+            min-height: 2.8em;
+            padding: 0.45em 0.9em;
+            font-size: 0.92em;
             font-family: 'Fredoka', sans-serif;
             font-weight: 600;
             display: flex;
@@ -157,11 +157,11 @@
             align-items: center;
             text-align: center;
             word-wrap: break-word;
+            overflow: hidden;
             white-space: nowrap;
             cursor: pointer;
             position: relative;
-            /* 3D clay pop out */
-            box-shadow: 0 8px 0 var(--button-shadow), 0 12px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 0 var(--button-shadow), 0 8px 14px rgba(0,0,0,0.35);
             transform: translateY(0px);
             transition: 
                 transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.5),
@@ -176,6 +176,17 @@
             white-space: normal;
         }
 
+        .game-button .combined-contents {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2;
+            max-height: 2.4em;
+            width: 100%;
+        }
+
         /* Dotted cute boundary for incomplete matches */
         .game-button.partial-match {
             border: 3px dashed var(--cat-color) !important;
@@ -184,6 +195,7 @@
             background-image: linear-gradient(135deg, var(--button-bg) 60%, var(--cat-bg)) !important;
             box-shadow: 0 6px 0 var(--button-shadow), 0 10px 18px rgba(0,0,0,0.4) !important;
             transform: translateY(2px) !important;
+            min-height: 3.2em;
         }
 
         /* Selected interactive focus for partial matches */
@@ -230,17 +242,28 @@
         }
 
         .word-count-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: #ffbe0b; /* Bright gold star color */
+            display: inline-block;
+            align-self: center;
+            margin-bottom: 0.35em;
+            background-color: #ffbe0b;
             color: #1a1a2e;
-            font-size: 0.8em;
+            font-size: 0.68em;
             font-weight: 800;
-            padding: 3px 9px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 3px 8px;
+            border-radius: 999px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.22);
             border: 2px solid white;
+            line-height: 1.1;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .game-button .button-label {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         .level-info {
@@ -445,7 +468,7 @@
             80% { transform: translateX(4px) rotate(0.5deg); }
         }
 
-        /* Custom In-game Confirm/Alert Modals styled cute */
+    
         .modal-action-btn {
             background-color: var(--accent-color); 
             color: #1e1a2b; 
@@ -614,11 +637,11 @@
                 <ul class="tips-list">
                     <li>
                         <span style="font-size: 1.45em;">🎯</span>
-                        <span><strong>Objective:</strong> Find lovely matching words belonging to the same secret category and merge them!</span>
+                        <span><strong>Objective:</strong> Find matching words belonging to the same secret category and merge them!</span>
                     </li>
                     <li>
                         <span style="font-size: 1.45em;">🔗</span>
-                        <span><strong>How to Play:</strong> Click a cute word bubble, then tap its matching partners to pack them together.</span>
+                        <span><strong>How to Play:</strong> Click a word bubble, then tap its matching partners to pack them together.</span>
                     </li>
                     <li>
                         <span style="font-size: 1.45em;">🎁</span>
@@ -1283,7 +1306,7 @@
         function finishCategory(b) {
             playCuteSuccess();
             const icon = getCategoryIcon(b.category);
-            b.innerHTML = `<div style="font-size:0.75em; opacity: 0.85; letter-spacing: 0.5px;">${icon} CATEGORY ${icon}</div><b style="font-size: 1.15em; color: #ffeb3b;">${b.category.toUpperCase()}</b><div style="font-size:0.8em; margin-top: 4px; font-style: italic; opacity: 0.9;">${b.cluster.join(', ')}</div>`;
+            b.innerHTML = `<div style="font-size:0.9em; font-weight: 800; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; gap: 0.3em;">${icon} <span>${b.category.toUpperCase()}</span> ${icon}</div><div class="combined-contents" style="font-size:0.8em; margin-top: 4px; font-style: italic; opacity: 0.9;">${b.cluster.join(', ')}</div>`;
             b.disabled = true;
             b.classList.remove('partial-match');
             const badge = b.querySelector('.word-count-badge');
@@ -1534,7 +1557,6 @@
             btn.category = data.category;
             btn.cluster = data.cluster || [];
             btn.targetN = data.targetN || N;
-            btn.innerHTML = data.innerHTML || btn.cluster[0];
             btn.disabled = data.disabled || false;
 
             applyCategoryStyle(btn, btn.category);
@@ -1544,7 +1566,16 @@
                 const badge = document.createElement('span');
                 badge.className = 'word-count-badge';
                 badge.textContent = `${btn.cluster.length}/${btn.targetN}`;
+
+                const label = document.createElement('div');
+                label.className = 'button-label';
+                const labelMarkup = String(data.innerHTML || btn.cluster[0] || '');
+                label.innerHTML = labelMarkup.replace(/<span class="word-count-badge"[^>]*>[\s\S]*?<\/span>/gi, '') || btn.cluster[0];
+
                 btn.appendChild(badge);
+                btn.appendChild(label);
+            } else {
+                btn.innerHTML = data.innerHTML || btn.cluster[0];
             }
 
             btn.onclick = () => handleButtonClick(btn);
