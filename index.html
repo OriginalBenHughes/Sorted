@@ -71,9 +71,11 @@
             color: white;
             border: 2px solid var(--accent-color);
             border-radius: 16px;
-            padding: 8px 18px;
+            padding: 8px 12px;
+            min-width: 44px;
+            min-height: 44px;
             font-family: 'Fredoka', sans-serif;
-            font-size: 0.9em;
+            font-size: 0.95em;
             font-weight: bold;
             cursor: pointer;
             display: inline-flex;
@@ -585,35 +587,39 @@
 
         @media (max-width: 768px) {
             .floating {
-                padding: 6px 12px;
-                min-height: 50px;
+                padding: 8px 12px;
+                min-height: auto;
                 border-radius: 16px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
             }
             .floating h1 {
-                font-size: 1.1em;
+                font-size: 1.05em;
+                white-space: nowrap;
             }
             .level-info {
-                padding: 4px 10px;
-                font-size: 0.85em;
+                padding: 4px 8px;
+                font-size: 0.8em;
+                white-space: nowrap;
             }
-            .btn-text {
-                display: none;
+            .floating > div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 6px;
+                width: 100%;
             }
             .floating button {
                 padding: 7px 8px;
                 font-size: 0.95em;
                 border-radius: 12px;
-                flex-direction: column;
-                gap: 2px;
-                min-width: 54px;
-            }
-            .btn-text {
-                display: block;
-                font-size: 0.58rem;
-                line-height: 1.05;
+                min-width: 44px;
+                min-height: 44px;
             }
             #board {
-                padding-top: 100px;
+                padding-top: 120px;
             }
         }
 
@@ -762,17 +768,16 @@
     <div id="sorted-overlay">Sorted</div>
 
     <div class="floating">
-        <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
             <h1 style="margin: 0; font-size: 1.25em; color: var(--accent-color); text-shadow: 0 2px 0 rgba(0,0,0,0.2);">Sorted!</h1>
             <div class="level-info">⭐ Level: <span id="currentLevelDisplay">1</span></div>
             <div id="hardcore-lives" class="level-info" style="border-color: #ff527b; color: #ff527b; display: none;">Lives: 3/3</div>
             <div id="hud-timer" class="level-info" style="border-color: #ffbe0b; color: #ffbe0b; display: none;">0:00</div>
         </div>
-        <div style="display: flex; gap: 12px; align-items: center;">
-            <button type="button" onclick="openSettings()" style="border: 2px solid var(--accent-color); color: var(--accent-color); background-color: transparent; box-shadow: none; display: flex; align-items: center; gap: 4px;"><span class="btn-text">Settings</span></button>
-            <button type="button" id="shuffle" onclick="shuffleAndSort()"><span class="btn-text">Shuffle</span></button>
-            <button type="button" onclick="restartCurrentLevel()" style="border: 2px solid #ff527b; color: #ff527b; background-color: transparent; box-shadow: none;"><span class="btn-text">Restart</span></button>
-            <button type="button" onclick="resetToLevelOne()" style="background-color: var(--accent-color); color: #1e1a2b;"><span class="btn-text">New Game</span></button>
+        <div style="display: flex; gap: 8px; align-items: center; justify-content: flex-end; flex-wrap: wrap;">
+            <button type="button" onclick="openSettings()" aria-label="Settings" title="Settings" style="border: 2px solid var(--accent-color); color: var(--accent-color); background-color: transparent; box-shadow: none;">⚙️</button>
+            <button type="button" id="shuffle" onclick="shuffleAndSort()" aria-label="Shuffle" title="Shuffle">🔀</button>
+            <button type="button" onclick="resetToLevelOne()" aria-label="New Game" title="New Game" style="background-color: var(--accent-color); color: #1e1a2b;">🆕</button>
         </div>
     </div>
 
