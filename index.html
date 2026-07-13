@@ -76,6 +76,10 @@
             font-size: 0.9em;
             font-weight: bold;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 4px 0 var(--button-shadow);
         }
@@ -180,6 +184,7 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             overflow: hidden;
             text-overflow: ellipsis;
             line-height: 1.2;
@@ -595,9 +600,17 @@
                 display: none;
             }
             .floating button {
-                padding: 8px 10px;
-                font-size: 1.1em;
+                padding: 7px 8px;
+                font-size: 0.95em;
                 border-radius: 12px;
+                flex-direction: column;
+                gap: 2px;
+                min-width: 54px;
+            }
+            .btn-text {
+                display: block;
+                font-size: 0.58rem;
+                line-height: 1.05;
             }
             #board {
                 padding-top: 100px;
@@ -631,50 +644,50 @@
     <!-- Mode Selection Modal -->
     <div id="modeModal" class="custom-modal" style="display: flex;">
         <div class="modal-container">
-            <h1 class="intro-title">🎉 Sorted! ✨</h1>
+            <h1 class="intro-title">Sorted</h1>
             
             <div class="tips-container">
                 <ul class="tips-list">
                     <li>
-                        <span style="font-size: 1.45em;">🎯</span>
-                        <span><strong>Objective:</strong> Find matching words belonging to the same secret category and merge them!</span>
+                        <span style="font-size: 1.1em;">•</span>
+                        <span><strong>Objective:</strong> Group matching words into their hidden categories.</span>
                     </li>
                     <li>
-                        <span style="font-size: 1.45em;">🔗</span>
-                        <span><strong>How to Play:</strong> Click a word bubble, then tap its matching partners to pack them together.</span>
+                        <span style="font-size: 1.1em;">•</span>
+                        <span><strong>How to Play:</strong> Select a word, then tap its matching partners to complete the group.</span>
                     </li>
                     <li>
-                        <span style="font-size: 1.45em;">🎁</span>
-                        <span><strong>Level Up:</strong> Successfully merge the entire board to level up and roll for randomized theme categories!</span>
+                        <span style="font-size: 1.1em;">•</span>
+                        <span><strong>Level Up:</strong> Complete the board to advance and unlock new category themes.</span>
                     </li>
                 </ul>
             </div>
 
-            <p style="font-size: 1.15em; opacity: 0.95; font-weight: bold; margin-bottom: 15px;">Choose your play style to start:</p>
+            <p style="font-size: 1.15em; opacity: 0.95; font-weight: bold; margin-bottom: 15px;">Choose a mode to begin:</p>
             <div class="mode-options">
                 <div class="mode-card" onclick="selectGameMode('relaxed')">
-                    <h3 style="margin: 5px 0; color: #7bf1a8; font-size: 1.3em;">🌸 Relaxed</h3>
-                    <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">No stress, no clocks! Relaxing self-paced solving at your own tempo.</p>
+                    <h3 style="margin: 5px 0; color: #7bf1a8; font-size: 1.3em;">Relaxed</h3>
+                    <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">A slower-paced mode for careful play and steady progress.</p>
                 </div>
                 <div class="mode-card" onclick="selectGameMode('timed')">
-                    <h3 style="margin: 5px 0; color: #ffbe0b; font-size: 1.3em;">⏳ Timed</h3>
-                    <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">A fun, bouncy sprint! Mistakes shave precious seconds off your clock.</p>
+                    <h3 style="margin: 5px 0; color: #ffbe0b; font-size: 1.3em;">Timed</h3>
+                    <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">A quicker mode where mistakes cost time.</p>
                 </div>
                 <div class="mode-card" onclick="selectGameMode('hardcore')">
-                    <h3 style="margin: 5px 0; color: #ff527b; font-size: 1.3em;">💥 Hard Core</h3>
-                    <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">Make a mistake and start the level again!</p>
+                    <h3 style="margin: 5px 0; color: #ff527b; font-size: 1.3em;">Hard Core</h3>
+                    <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">Three mistakes before the current level restarts.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Custom Dialog Modal (Replaces browser Alert/Confirm with cute style) -->
+    <!-- Custom Dialog Modal -->
     <div id="dialogModal" class="custom-modal">
         <div class="modal-container" style="max-width: 460px;">
             <h2 id="dialogTitle" style="color: var(--accent-color); margin-top: 0; font-size: 2em; text-shadow: 0 2px 0 rgba(0,0,0,0.2);">Confirm</h2>
             <p id="dialogMessage" style="font-size: 1.15em; line-height: 1.6; margin-bottom: 25px; color: var(--text-color);"></p>
             <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                <button id="dialogConfirmBtn" class="modal-action-btn" style="min-width: 110px;">Yes!</button>
+                <button id="dialogConfirmBtn" class="modal-action-btn" style="min-width: 110px;">Confirm</button>
                 <button id="dialogCancelBtn" class="modal-action-btn" style="background-color: transparent; color: #ff527b; border: 3px solid #ff527b; box-shadow: none; min-width: 110px;">Cancel</button>
             </div>
         </div>
@@ -687,10 +700,10 @@
             <p id="checkpointText" style="font-size: 1.15em; margin-bottom: 25px; line-height: 1.6; color: var(--text-color);"></p>
             <div style="display: flex; flex-direction: column; gap: 14px; width: 100%;">
                 <button id="checkpointLoadBtn" class="modal-action-btn" style="width: 100%;">
-                    🌸 Restart from Checkpoint (Level <span id="checkpointLevelNum"></span>)
+                    Restart from checkpoint (Level <span id="checkpointLevelNum"></span>)
                 </button>
                 <button id="checkpointResetBtn" class="modal-action-btn" style="background-color: transparent; color: #ff527b; border: 3px solid #ff527b; box-shadow: none; width: 100%;">
-                    Wipe Progress & Start Completely Fresh
+                    Wipe progress and start fresh
                 </button>
                 <button onclick="document.getElementById('checkpointModal').style.display='none'" class="modal-action-btn" style="background-color: var(--button-bg); color: white; border: 3px solid rgba(255,255,255,0.15); box-shadow: 0 4px 0 var(--button-shadow); width: 100%;">
                     Keep Playing
@@ -702,8 +715,8 @@
     <!-- Reward Modal -->
     <div id="rewardModal" class="custom-modal">
         <div class="modal-container">
-            <h1 style="color: var(--accent-color); font-size: 2.8em; margin-bottom: 5px; text-shadow: 0 3px 0 #93224e;">🧩 LEVEL UP!</h1>
-            <p id="levelUpText" style="font-size: 1.15em; margin-bottom: 15px;">You've reached a new level milestone! Select a theme to roll for a new unlock:</p>
+            <h1 style="color: var(--accent-color); font-size: 2.8em; margin-bottom: 5px; text-shadow: 0 3px 0 #93224e;">Level Up</h1>
+            <p id="levelUpText" style="font-size: 1.15em; margin-bottom: 15px;">You have reached a new level milestone. Choose a theme to reveal a new unlock:</p>
             <div class="reward-options" id="rewardOptions"></div>
         </div>
     </div>
@@ -711,8 +724,8 @@
     <!-- Game Over Modal -->
     <div id="gameOverModal" class="custom-modal">
         <div class="modal-container">
-            <h1 style="color: #ff527b; font-size: 2.8em; margin-bottom: 5px; margin-top: 0; text-shadow: 0 3px 0 #8b1633;">⏰ TIME'S UP!</h1>
-            <p style="font-size: 1.2em;">Oh no, you ran out of bubble time! Want to try again?</p>
+            <h1 style="color: #ff527b; font-size: 2.8em; margin-bottom: 5px; margin-top: 0; text-shadow: 0 3px 0 #8b1633;">Time's Up</h1>
+            <p style="font-size: 1.2em;">The time limit has expired. Would you like to try this level again?</p>
             <div class="mode-options" style="margin-top: 25px;">
                 <button onclick="retryCurrentLevel()" class="modal-action-btn">Retry Level</button>
                 <button onclick="resetToLevelOne()" class="modal-action-btn" style="background-color: transparent; color: #ff527b; border: 3px solid #ff527b; box-shadow: none;">New Game</button>
@@ -723,42 +736,43 @@
     <!-- Custom Settings Modal with Discovered Categories feature -->
     <div id="settingsModal" class="custom-modal">
         <div class="modal-container" style="max-width: 480px;">
-            <h2 style="color: var(--accent-color); margin-top: 0; font-size: 2.2em; text-shadow: 0 2px 0 rgba(0,0,0,0.2);">⚙️ Settings</h2>
+            <h2 style="color: var(--accent-color); margin-top: 0; font-size: 2.2em; text-shadow: 0 2px 0 rgba(0,0,0,0.2);">Settings</h2>
             
             <div style="margin: 25px 0 30px 0; text-align: left;">
                 <div class="settings-row">
-                    <span class="settings-label">🔊 Sound Effects</span>
+                    <span class="settings-label">Sound Effects</span>
                     <label class="toggle-switch">
                         <input type="checkbox" id="soundToggle" onchange="toggleSoundSetting(this.checked)" checked>
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
                 
-                <h3 style="margin: 20px 0 5px 0; color: var(--accent-color); font-size: 1.2em;">📖 Unlocked Word Groups:</h3>
+                <h3 style="margin: 20px 0 5px 0; color: var(--accent-color); font-size: 1.2em;">Unlocked Word Groups</h3>
                 <div id="discovered-themes-list" class="discovered-grid">
                     <!-- Loaded dynamically in JavaScript -->
                 </div>
             </div>
 
-            <button onclick="closeSettings()" class="modal-action-btn" style="width: 100%;">Close Settings 🌟</button>
+            <button onclick="closeSettings()" class="modal-action-btn" style="width: 100%;">Close</button>
         </div>
     </div>
 
     <canvas id="fireworks"></canvas>
     
-    <div id="sorted-overlay">✨ Sorted! ✨</div>
+    <div id="sorted-overlay">Sorted</div>
 
     <div class="floating">
         <div style="display: flex; align-items: center; gap: 15px;">
             <h1 style="margin: 0; font-size: 1.25em; color: var(--accent-color); text-shadow: 0 2px 0 rgba(0,0,0,0.2);">Sorted!</h1>
             <div class="level-info">⭐ Level: <span id="currentLevelDisplay">1</span></div>
-            <div id="hud-timer" class="level-info" style="border-color: #ffbe0b; color: #ffbe0b; display: none;">⏰ 0:00</div>
+            <div id="hardcore-lives" class="level-info" style="border-color: #ff527b; color: #ff527b; display: none;">Lives: 3/3</div>
+            <div id="hud-timer" class="level-info" style="border-color: #ffbe0b; color: #ffbe0b; display: none;">0:00</div>
         </div>
         <div style="display: flex; gap: 12px; align-items: center;">
-            <button type="button" onclick="openSettings()" style="border: 2px solid var(--accent-color); color: var(--accent-color); background-color: transparent; box-shadow: none; display: flex; align-items: center; gap: 4px;">⚙️ <span class="btn-text">Settings</span></button>
-            <button type="button" id="shuffle" onclick="shuffleAndSort()">🔀 <span class="btn-text">Shuffle</span></button>
-            <button type="button" onclick="restartCurrentLevel()" style="border: 2px solid #ff527b; color: #ff527b; background-color: transparent; box-shadow: none;">🔄 <span class="btn-text">Restart</span></button>
-            <button type="button" onclick="resetToLevelOne()" style="background-color: var(--accent-color); color: #1e1a2b;">🔍 <span class="btn-text">New Game</span></button>
+            <button type="button" onclick="openSettings()" style="border: 2px solid var(--accent-color); color: var(--accent-color); background-color: transparent; box-shadow: none; display: flex; align-items: center; gap: 4px;"><span class="btn-text">Settings</span></button>
+            <button type="button" id="shuffle" onclick="shuffleAndSort()"><span class="btn-text">Shuffle</span></button>
+            <button type="button" onclick="restartCurrentLevel()" style="border: 2px solid #ff527b; color: #ff527b; background-color: transparent; box-shadow: none;"><span class="btn-text">Restart</span></button>
+            <button type="button" onclick="resetToLevelOne()" style="background-color: var(--accent-color); color: #1e1a2b;"><span class="btn-text">New Game</span></button>
         </div>
     </div>
 
@@ -860,6 +874,28 @@
         var remainingSeconds = 0;
         var totalTimerSeconds = 0;
         var clockInterval = null;
+        var hardcoreLives = 3;
+
+        function setHardcoreLives(lives) {
+            hardcoreLives = Math.max(0, Math.min(3, lives));
+            localStorage.setItem('hardcoreLives', String(hardcoreLives));
+            updateHardcoreLivesUI();
+        }
+
+        function resetHardcoreLives() {
+            setHardcoreLives(3);
+        }
+
+        function updateHardcoreLivesUI() {
+            const livesEl = document.getElementById('hardcore-lives');
+            if (!livesEl) return;
+            if (gameMode === 'hardcore') {
+                livesEl.style.display = 'flex';
+                livesEl.innerText = `Lives: ${hardcoreLives}/3`;
+            } else {
+                livesEl.style.display = 'none';
+            }
+        }
 
         // Custom Settings Panel Controls
         function openSettings() {
@@ -907,7 +943,7 @@
             const confirmBtn = document.getElementById("dialogConfirmBtn");
             const cancelBtn = document.getElementById("dialogCancelBtn");
             
-            confirmBtn.innerText = "Yes! ✨";
+            confirmBtn.innerText = "Confirm";
             cancelBtn.style.display = "inline-block";
             
             confirmBtn.onclick = () => {
@@ -935,12 +971,12 @@
             const cancelBtn = document.getElementById("dialogCancelBtn");
             
             cancelBtn.style.display = "none";
-            confirmBtn.innerText = "Yippee! 💕";
+            confirmBtn.innerText = "Continue";
             
             confirmBtn.onclick = () => {
                 playCutePop();
                 modal.style.display = "none";
-                confirmBtn.innerText = "Yes! ✨"; // reset
+                confirmBtn.innerText = "Continue"; // reset
                 if (onOk) onOk();
             };
             
@@ -962,7 +998,7 @@
             confirmBtn.onclick = () => {
                 playCutePop();
                 modal.style.display = "none";
-                confirmBtn.innerText = "Yes! ✨";
+                confirmBtn.innerText = "Continue";
                 if (onOk) onOk();
             };
             
@@ -1016,10 +1052,11 @@
             }
 
             showOkAlert(
-                "Oops, wrong match!",
-                "Oops, wrong match! Starting this level again with the same words, shuffled.\n\nSome words may fit into more than one category!\nExample: Orange could be a fruit or a colour...\nIf you feel unsure, solve all the words you can and that orange will only fit into the one that remains.",
+                "Level reset",
+                "You used all three lives. The level will restart with the same words, shuffled.\n\nSome words may fit into more than one category!\nExample: Orange could be a fruit or a colour...\nIf you feel unsure, solve all the words you can. There will be only one place for that orange to fit.",
                 () => {
                     selected = 0;
+                    resetHardcoreLives();
                     rebuildBoardFromSnapshot(seed);
                 }
             );
@@ -1338,11 +1375,10 @@
             localStorage.removeItem('game_state');
             localStorage.removeItem('game_time_remaining');
             
-            const message = `✨ Level ${newLvl} Unlocked! ✨\n\n` +
-                            `Ready for a new adventure?\n` +
-                            `🧁 ${config.m} Secret Categories\n` +
-                            `🍬 ${config.n} Words per category\n\n` +
-                            `Let's pop some bubbles!`;
+            const message = `Level ${newLvl} unlocked.\n\n` +
+                            `The next board introduces a new set of challenges.\n` +
+                            `${config.m} categories will be in play, with ${config.n} words in each.\n\n` +
+                            `Take your time and solve carefully.`;
 
             const proceedToNextLevel = () => {
                 if (newLvl > 1 && newLvl % 2 !== 0) {
@@ -1361,7 +1397,7 @@
                 let highestCheckpoint = parseInt(localStorage.getItem('highestCheckpoint') || 1);
                 if (newLvl > highestCheckpoint) {
                     localStorage.setItem('highestCheckpoint', newLvl);
-                    showCustomAlert("Milestone Cookie Reached! 🍪", `🎉 Incredible! You unlocked a permanent checkpoint milestone at Level ${newLvl}.`, proceedToNextLevel);
+                    showCustomAlert("Checkpoint Reached", `You have unlocked a permanent checkpoint at Level ${newLvl}.`, proceedToNextLevel);
                 } else {
                     proceedToNextLevel();
                 }
@@ -1422,8 +1458,8 @@
                 surpriseCard.style.borderColor = "#ffbe0b";
                 surpriseCard.style.boxShadow = "0 6px 0 var(--button-shadow)";
                 surpriseCard.innerHTML = `
-                    <div style="font-size: 2.4rem; margin-bottom: 8px; animation: spin 5s linear infinite; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">🎲</div>
-                    <h3 style="color: #ffbe0b; margin: 0; font-size: 1.2em; text-shadow: 0 2px 4px rgba(0,0,0,0.4);">Surprise! 🎁</h3>
+                    <div style="font-size: 2.4rem; margin-bottom: 8px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">?</div>
+                    <h3 style="color: #ffbe0b; margin: 0; font-size: 1.2em; text-shadow: 0 2px 4px rgba(0,0,0,0.4);">Surprise Option</h3>
                     <p style="font-size: 0.85em; opacity: 0.9; margin: 8px 0 0 0; font-weight: 500;">Random from all pools</p>
                 `;
                 
@@ -1472,13 +1508,13 @@
             container.innerHTML = `
                 <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0;">
                     <div style="font-size: 1.2em; color: var(--accent-color); font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">
-                        🎰 Rolling within ${themeName}... 🎰
+                        Checking ${themeName}...
                     </div>
                     <div id="roll-box" style="font-size: 2.2rem; font-weight: 900; background: rgba(0,0,0,0.4); padding: 30px 40px; border-radius: 20px; border: 4px solid var(--accent-color); margin: 20px 0; min-width: 320px; text-align: center; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); overflow: hidden; position: relative;">
                         <span id="roll-text">---</span>
                     </div>
                     <p id="roll-desc" style="font-size: 1.1em; opacity: 0.8; height: 1.5em; margin: 0 0 25px 0;">Analyzing word relations...</p>
-                    <button id="roll-action-btn" class="modal-action-btn" style="display: none; width: 220px; font-size: 1.15em; box-shadow: 0 4px 0 #93224e;">Start Level! 🔍</button>
+                    <button id="roll-action-btn" class="modal-action-btn" style="display: none; width: 220px; font-size: 1.15em; box-shadow: 0 4px 0 #93224e;">Continue</button>
                 </div>
             `;
 
@@ -1486,7 +1522,7 @@
             const rollDesc = document.getElementById("roll-desc");
             const actionBtn = document.getElementById("roll-action-btn");
             
-            let cyclePool = ["🔍 SEARCHING...", "🧠 THINKING...", "✏️ DE-SCRAMBLING...", "💡 COMPILING...", "🧩 SOLVING...", "📖 ANALYZING...", "📚 SCANNING..."];
+            let cyclePool = ["Searching...", "Analyzing...", "Checking relations...", "Compiling results...", "Preparing category...", "Reviewing words..."];
 
             let shuffleInterval = 50; 
             let totalTime = 0;
@@ -1510,14 +1546,14 @@
                 } else {
                     setTimeout(() => {
                         playCuteSuccess();
-                        rollText.textContent = `🎁 NEW CATEGORY UNLOCKED! 🎁`;
+                        rollText.textContent = `New category unlocked`;
                         rollText.style.color = "#ffbe0b";
                         rollText.style.fontSize = "2.0rem";
                         rollText.style.textShadow = "0 0 15px rgba(255, 190, 11, 0.7)";
                         document.getElementById("roll-box").style.borderColor = "#ffbe0b";
                         document.getElementById("roll-box").style.boxShadow = "0 0 25px rgba(255, 190, 11, 0.4), inset 0 0 20px rgba(0,0,0,0.8)";
                         
-                        rollDesc.innerHTML = `🎉 A brand new secret category has been merged into your rotation under <strong>${themeName}</strong>! Prepare your brain to search for it on upcoming levels!`;
+                        rollDesc.innerHTML = `A new secret category has been added to your rotation under <strong>${themeName}</strong>. It will appear in future levels.`;
                         rollDesc.style.color = "#ffbe0b";
                         actionBtn.style.display = "block";
                         
@@ -1632,15 +1668,37 @@
             } else {
                 playSadBoop();
 
-                if (gameMode === 'hardcore') {
-                    restartLevelForHardcoreMistake();
-                    return;
-                }
-
                 button.style.outline = "3px solid #ff527b";
                 selected.style.outline = "3px solid #ff527b";
                 button.classList.add('shake');
                 selected.classList.add('shake');
+
+                if (gameMode === 'hardcore') {
+                    const nextLives = hardcoreLives - 1;
+                    setHardcoreLives(nextLives);
+
+                    if (nextLives > 0) {
+                        showOkAlert(
+                            "Wrong match",
+                            `That was a mismatch. You have ${nextLives} life${nextLives === 1 ? '' : 's'} remaining before this level restarts.`,
+                            () => {
+                                let s = selected;
+                                let b = button;
+                                setTimeout(() => {
+                                    b.classList.remove('shake', 'is-selected');
+                                    s.classList.remove('shake', 'is-selected');
+                                    b.style.outline = "";
+                                    s.style.outline = "";
+                                    deselect();
+                                }, 400);
+                            }
+                        );
+                        return;
+                    }
+
+                    restartLevelForHardcoreMistake();
+                    return;
+                }
                 
                 if (gameMode === 'timed') {
                     adjustTimer(-5, button);
@@ -1672,7 +1730,7 @@
 
             document.getElementById("checkpointLevelNum").innerText = highestCheckpoint;
             document.getElementById("checkpointText").innerText = 
-                `Yippee! You have unlocked a permanent checkpoint at Level ${highestCheckpoint}.\nDo you want to restore from that milestone, or perform a total game reset back to Level 1?`;
+                `You have unlocked a permanent checkpoint at Level ${highestCheckpoint}.\nDo you want to restore from that milestone, or reset the game back to Level 1?`;
             
             document.getElementById("checkpointLoadBtn").onclick = () => {
                 playCutePop();
@@ -1700,6 +1758,7 @@
             localStorage.removeItem('game_state');
             localStorage.removeItem('game_time_remaining');
             localStorage.removeItem('gameMode');
+            localStorage.removeItem('hardcoreLives');
             localStorage.setItem('gameLevel', targetLevel);
 
             if (targetLevel === 1) {
@@ -1808,6 +1867,11 @@
             playCuteSuccess();
             gameMode = mode;
             localStorage.setItem('gameMode', mode);
+            if (mode === 'hardcore') {
+                resetHardcoreLives();
+            } else {
+                updateHardcoreLivesUI();
+            }
             document.getElementById("modeModal").style.display = "none";
 
             if (mode === 'hardcore') {
@@ -1875,7 +1939,7 @@
         function updateTimerDisplay() {
             const hud = document.getElementById("hud-timer");
             if (gameMode === 'timed') {
-                hud.innerText = `⏰ ${formatTime(remainingSeconds)}`;
+                hud.innerText = formatTime(remainingSeconds);
                 
                 const percent = Math.min(100, (remainingSeconds / totalTimerSeconds) * 100);
                 const progressBar = document.getElementById("timer-progress-bar");
@@ -2114,9 +2178,16 @@
             const storedMode = localStorage.getItem('gameMode');
             if (storedMode) {
                 gameMode = storedMode;
+                const storedLives = parseInt(localStorage.getItem('hardcoreLives') || '3', 10);
+                if (gameMode === 'hardcore') {
+                    setHardcoreLives(storedLives);
+                } else {
+                    updateHardcoreLivesUI();
+                }
                 document.getElementById("modeModal").style.display = "none";
                 startClockEngine();
             } else {
+                updateHardcoreLivesUI();
                 document.getElementById("modeModal").style.display = "flex";
             }
         }
