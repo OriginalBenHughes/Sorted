@@ -13,16 +13,18 @@
 
 	
         :root {
-            --bg-color: #1e1a2b;          /* Creamy plum/indigo night */
-            --header-color: #2b223d;      /* Taro yogurt violet */
-            --text-color: #fff4fc;        /* Strawberry cotton-candy white */
-            --accent-color: #ff8ebb;      /* Juicy strawberry pink */
-            --button-bg: #43335b;         /* Sweet lavender glaze */
-            --button-shadow: #2a1f3a;     /* Under-shadow for the 3D clay look */
-            --button-hover: #5d467d;      /* Bright purple jelly */
-            --cat-color: #ff8ebb;
-            --cat-bg: rgba(255, 142, 187, 0.1);
-            --timer-bar-color: #ff8ebb;
+            --bg-color: #140f24;          /* Deep midnight purple */
+            --header-color: #24183f;      /* Dark lilac header */
+            --text-color: #f4ebff;        /* Soft lavender text */
+            --accent-color: #9d84ff;      /* Bright luminous purple */
+            --button-bg: #5d3fd0;         /* Rich purple button */
+            --button-shadow: #2e1c5f;     /* Deep shadow */
+            --button-hover: #7a5eff;      /* Brighter hover */
+            --cat-color: #9d84ff;
+            --cat-bg: rgba(157, 132, 255, 0.16);
+            --timer-bar-color: #9d84ff;
+            --danger-color: #ff826f;      /* Coral warning */
+            --warning-color: #ffd166;     /* Softer golden highlight */
         }
 
         body {
@@ -35,8 +37,8 @@
             min-height: 100vh;
             /* Whimsical animated background bubbles */
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 142, 187, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(123, 241, 168, 0.05) 0%, transparent 40%);
+                radial-gradient(circle at 10% 20%, rgba(157, 132, 255, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 130, 111, 0.08) 0%, transparent 40%);
             background-attachment: fixed;
         }
 
@@ -182,6 +184,19 @@
             white-space: normal;
         }
 
+        .game-button .button-label {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2;
+            max-height: 2.4em;
+            width: 100%;
+            word-break: break-word;
+        }
+
         .game-button .combined-contents {
             display: -webkit-box;
             -webkit-box-orient: vertical;
@@ -203,6 +218,7 @@
             box-shadow: 0 6px 0 var(--button-shadow), 0 10px 18px rgba(0,0,0,0.4) !important;
             transform: translateY(2px) !important;
             min-height: 3.2em;
+            max-height: 4.8em;
         }
 
         /* Selected interactive focus for partial matches */
@@ -275,15 +291,16 @@
 
         .level-info {
             font-size: 0.95em;
-            color: var(--accent-color);
-            background: rgba(0,0,0,0.3);
+            color: #ffffff;
+            background: rgba(12, 8, 24, 0.92);
             padding: 6px 16px;
             border-radius: 20px;
-            border: 2.5px solid var(--accent-color);
+            border: 2.5px solid #ffffff;
             font-weight: bold;
             display: flex;
             align-items: center;
             gap: 6px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
         }
 
         .intro-title {
@@ -294,12 +311,60 @@
             margin-bottom: 15px;
             margin-top: 0;
             text-transform: uppercase;
-            text-shadow: 0 4px 0 #93224e, 0 10px 20px rgba(0,0,0,0.3);
+            text-shadow: 0 4px 0 #5a3fb1, 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .unlock-roller-title {
+            font-size: 1.05em;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .unlock-roller-box {
+            font-size: 1.55rem;
+            font-weight: 900;
+            background: rgba(0,0,0,0.4);
+            padding: 22px 24px;
+            border-radius: 20px;
+            border: 4px solid var(--accent-color);
+            margin: 20px 0;
+            min-width: min(320px, 90vw);
+            text-align: center;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+            overflow: hidden;
+            position: relative;
+            line-height: 1.2;
+            word-break: break-word;
+            white-space: normal;
+        }
+
+        .unlock-roller-desc {
+            font-size: 0.95em;
+            opacity: 0.85;
+            line-height: 1.45;
+            height: 1.5em;
+            margin: 0 0 25px 0;
         }
 
         @media (max-width: 480px) {
             .intro-title {
                 font-size: 2.2rem;
+            }
+            .unlock-roller-title {
+                font-size: 0.92em;
+            }
+            .unlock-roller-box {
+                font-size: 1.2rem;
+                padding: 16px 18px;
+                min-width: 0;
+                width: 100%;
+            }
+            .unlock-roller-desc {
+                font-size: 0.85em;
+                height: auto;
             }
         }
 
@@ -498,7 +563,7 @@
             box-shadow: 0 2px 0 #93224e;
         }
 
-        /* Whimsical custom styled settings toggle */
+        /* Settings controls */
         .settings-row {
             display: flex;
             align-items: center;
@@ -508,6 +573,7 @@
             border-radius: 20px;
             border: 2px solid rgba(255, 142, 187, 0.15);
             margin-bottom: 15px;
+            gap: 12px;
         }
         .settings-label {
             font-size: 1.15em;
@@ -515,49 +581,32 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex: 1;
         }
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: var(--button-bg);
+        .settings-checkbox {
+            appearance: none;
+            width: 1.2rem;
+            height: 1.2rem;
             border: 2px solid var(--accent-color);
-            transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-radius: 34px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+            border-radius: 0.35rem;
+            background: rgba(255,255,255,0.12);
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
         }
-        .toggle-slider:before {
+        .settings-checkbox:checked {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        .settings-checkbox:checked::after {
+            content: "✓";
             position: absolute;
-            content: "🔍";
-            font-size: 1.25em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 26px;
-            width: 26px;
-            left: 2px;
-            bottom: 2px;
-            background-color: white;
-            transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-radius: 50px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-        }
-        input:checked + .toggle-slider {
-            background-color: var(--button-hover);
-        }
-        input:checked + .toggle-slider:before {
-            transform: translateX(26px) rotate(180deg);
+            inset: 0;
+            display: grid;
+            place-items: center;
+            color: #140f24;
+            font-size: 0.9rem;
+            font-weight: 800;
         }
 
         /* Discovered list container and grid */
@@ -584,7 +633,19 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
+/* Optimize modal for mobile devices */
+@media (max-width: 480px) {
+    .modal-container {
+        width: 95% !important; /* Take more screen width */
+        padding: 20px 10px !important; /* Reduce padding on tiny screens */
+        max-height: 85vh !important;
+    }
+    
+    .reward-card {
+        width: 100% !important; /* Stack reward cards vertically */
+        max-width: 260px !important;
+    }
+}
         @media (max-width: 768px) {
             .floating {
                 padding: 8px 12px;
@@ -650,7 +711,7 @@
     <!-- Mode Selection Modal -->
     <div id="modeModal" class="custom-modal" style="display: flex;">
         <div class="modal-container">
-            <h1 class="intro-title">Sorted</h1>
+            <h1 class="intro-title">Sorted!</h1>
             
             <div class="tips-container">
                 <ul class="tips-list">
@@ -680,7 +741,7 @@
                     <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">A quicker mode where mistakes cost time.</p>
                 </div>
                 <div class="mode-card" onclick="selectGameMode('hardcore')">
-                    <h3 style="margin: 5px 0; color: #ff527b; font-size: 1.3em;">Hard Core</h3>
+                    <h3 style="margin: 5px 0; color: var(--accent-color); font-size: 1.3em;">Hard Core</h3>
                     <p style="font-size: 0.85em; opacity: 0.85; line-height: 1.4;">Three mistakes before the current level restarts.</p>
                 </div>
             </div>
@@ -694,7 +755,7 @@
             <p id="dialogMessage" style="font-size: 1.15em; line-height: 1.6; margin-bottom: 25px; color: var(--text-color);"></p>
             <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
                 <button id="dialogConfirmBtn" class="modal-action-btn" style="min-width: 110px;">Confirm</button>
-                <button id="dialogCancelBtn" class="modal-action-btn" style="background-color: transparent; color: #ff527b; border: 3px solid #ff527b; box-shadow: none; min-width: 110px;">Cancel</button>
+                <button id="dialogCancelBtn" class="modal-action-btn" style="background-color: transparent; color: var(--danger-color); border: 3px solid var(--danger-color); box-shadow: none; min-width: 110px;">Cancel</button>
             </div>
         </div>
     </div>
@@ -708,7 +769,7 @@
                 <button id="checkpointLoadBtn" class="modal-action-btn" style="width: 100%;">
                     Restart from checkpoint (Level <span id="checkpointLevelNum"></span>)
                 </button>
-                <button id="checkpointResetBtn" class="modal-action-btn" style="background-color: transparent; color: #ff527b; border: 3px solid #ff527b; box-shadow: none; width: 100%;">
+                <button id="checkpointResetBtn" class="modal-action-btn" style="background-color: transparent; color: var(--danger-color); border: 3px solid var(--danger-color); box-shadow: none; width: 100%;">
                     Wipe progress and start fresh
                 </button>
                 <button onclick="document.getElementById('checkpointModal').style.display='none'" class="modal-action-btn" style="background-color: var(--button-bg); color: white; border: 3px solid rgba(255,255,255,0.15); box-shadow: 0 4px 0 var(--button-shadow); width: 100%;">
@@ -730,33 +791,44 @@
     <!-- Game Over Modal -->
     <div id="gameOverModal" class="custom-modal">
         <div class="modal-container">
-            <h1 style="color: #ff527b; font-size: 2.8em; margin-bottom: 5px; margin-top: 0; text-shadow: 0 3px 0 #8b1633;">Time's Up</h1>
+            <h1 style="color: var(--danger-color); font-size: 2.8em; margin-bottom: 5px; margin-top: 0; text-shadow: 0 3px 0 #9b4d3d;">Time's Up</h1>
             <p style="font-size: 1.2em;">The time limit has expired. Would you like to try this level again?</p>
             <div class="mode-options" style="margin-top: 25px;">
                 <button onclick="retryCurrentLevel()" class="modal-action-btn">Retry Level</button>
-                <button onclick="resetToLevelOne()" class="modal-action-btn" style="background-color: transparent; color: #ff527b; border: 3px solid #ff527b; box-shadow: none;">New Game</button>
+                <button onclick="resetToLevelOne()" class="modal-action-btn" style="background-color: transparent; color: var(--danger-color); border: 3px solid var(--danger-color); box-shadow: none;">New Game</button>
             </div>
         </div>
     </div>
 
-    <!-- Custom Settings Modal with Discovered Categories feature -->
+    <!-- Custom Settings Modal -->
     <div id="settingsModal" class="custom-modal">
         <div class="modal-container" style="max-width: 480px;">
             <h2 style="color: var(--accent-color); margin-top: 0; font-size: 2.2em; text-shadow: 0 2px 0 rgba(0,0,0,0.2);">Settings</h2>
             
-            <div style="margin: 25px 0 30px 0; text-align: left;">
+            <div id="settings-main-view" style="margin: 25px 0 30px 0; text-align: left;">
                 <div class="settings-row">
                     <span class="settings-label">Sound Effects</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="soundToggle" onchange="toggleSoundSetting(this.checked)" checked>
-                        <span class="toggle-slider"></span>
-                    </label>
+                    <input type="checkbox" id="soundToggle" class="settings-checkbox" onchange="toggleSoundSetting(this.checked)" checked>
                 </div>
-                
-                <h3 style="margin: 20px 0 5px 0; color: var(--accent-color); font-size: 1.2em;">Unlocked Word Groups</h3>
-                <div id="discovered-themes-list" class="discovered-grid">
-                    <!-- Loaded dynamically in JavaScript -->
+
+                <div class="settings-row">
+                    <span class="settings-label">Keep selection after match</span>
+                    <input type="checkbox" id="selectionToggle" class="settings-checkbox" onchange="toggleSelectionBehavior(this.checked)" checked>
                 </div>
+
+<button type="button" onclick="showCategorySettings()" class="modal-action-btn" style="width: 100%; margin-top: 6px;">Manage unlocked categories</button>
+                </div>
+
+<div id="category-settings-view" style="display: none; margin: 20px 0 30px 0; text-align: left;">
+    <div class="settings-row" style="margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+        <span class="settings-label">Unlocked categories</span>
+        <div style="display: flex; gap: 8px;">
+            <button type="button" onclick="toggleAllCategories(true)" class="modal-action-btn" style="padding: 8px 14px; font-size: 0.95em;">Select All</button>
+            <button type="button" onclick="showSettingsMainView()" class="modal-action-btn" style="padding: 8px 14px; font-size: 0.95em; min-width: 70px;">Back</button>
+        </div>
+    </div>
+    <p style="margin: 0 0 10px 0; opacity: 0.8; font-size: 0.9em;">Turn categories off to keep them out of future boards.</p>
+    <div id="category-settings-list" class="discovered-grid"></div>
             </div>
 
             <button onclick="closeSettings()" class="modal-action-btn" style="width: 100%;">Close</button>
@@ -769,9 +841,9 @@
 
     <div class="floating">
         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-            <h1 style="margin: 0; font-size: 1.25em; color: var(--accent-color); text-shadow: 0 2px 0 rgba(0,0,0,0.2);">Sorted!</h1>
+            <h1 style="margin: 0; font-size: 1.25em; color: #ffffff; text-shadow: 0 2px 0 rgba(0,0,0,0.2);">Sorted!</h1>
             <div class="level-info">⭐ Level: <span id="currentLevelDisplay">1</span></div>
-            <div id="hardcore-lives" class="level-info" style="border-color: #ff527b; color: #ff527b; display: none;">Lives: 3/3</div>
+            <div id="hardcore-lives" class="level-info" style="border-color: var(--danger-color); color: var(--danger-color); display: none;">Lives: 3/3</div>
             <div id="hud-timer" class="level-info" style="border-color: #ffbe0b; color: #ffbe0b; display: none;">0:00</div>
         </div>
         <div style="display: flex; gap: 8px; align-items: center; justify-content: flex-end; flex-wrap: wrap;">
@@ -795,6 +867,13 @@
         // Cozy audio plucks for clicks, successes, and errors using standard Web Audio Synthesis via Tone.js
         let synth, polySynth;
         let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
+        let keepSelectionAfterMatch = true;
+
+        function loadSelectionPreference() {
+            const stored = localStorage.getItem('keepSelectionAfterMatch');
+            keepSelectionAfterMatch = stored === null ? true : stored === 'true';
+        }
+        loadSelectionPreference();
         
         function initAudio() {
             if (!synth) {
@@ -860,14 +939,14 @@
 
 
         const THEME_METADATA = {
-            "Pop Culture": { icon: "🎬", color: "#ff2a5f", gradient: "linear-gradient(135deg, #ff527b, #9c3df3)" },
-            "Science & Tech": { icon: "🔬", color: "#00f0ff", gradient: "linear-gradient(135deg, #00d6ff, #0056f9)" },
-            "History & Myth": { icon: "🏛️", color: "#ffb700", gradient: "linear-gradient(135deg, #ffb000, #ff5e00)" },
-            "Language & Lit": { icon: "✍️", color: "#00ff87", gradient: "linear-gradient(135deg, #0ce68b, #00a0f0)" },
-            "Food & Lifestyle": { icon: "🍹", color: "#f2709c", gradient: "linear-gradient(135deg, #ff7ba0, #ffb076)" },
-            "Music": { icon: "🎵", color: "#e879f9", gradient: "linear-gradient(135deg, #f472b6, #c084fc)" },
-            "Sports": { icon: "🏆", color: "#38bdf8", gradient: "linear-gradient(135deg, #60a5fa, #0284c7)" },
-            "Art & Culture": { icon: "🎨", color: "#a855f7", gradient: "linear-gradient(135deg, #c084fc, #7e22ce)" }
+            "Pop Culture": { icon: "🎬", color: "#7c5cff", gradient: "linear-gradient(135deg, #8d74ff, #5d39d8)" },
+            "Science & Tech": { icon: "🔬", color: "#00b8c4", gradient: "linear-gradient(135deg, #2fcdd9, #2c7cc2)" },
+            "History & Myth": { icon: "🏛️", color: "#ff9f43", gradient: "linear-gradient(135deg, #ffb56b, #ff7a3d)" },
+            "Language & Lit": { icon: "✍️", color: "#2fbf95", gradient: "linear-gradient(135deg, #4fd1ae, #2477bb)" },
+            "Food & Lifestyle": { icon: "🍹", color: "#9a74ff", gradient: "linear-gradient(135deg, #b596ff, #7e5af7)" },
+            "Music": { icon: "🎵", color: "#7c5cff", gradient: "linear-gradient(135deg, #a088ff, #6b43e8)" },
+            "Sports": { icon: "🏆", color: "#38bdf8", gradient: "linear-gradient(135deg, #60c5ff, #2f7ed8)" },
+            "Art & Culture": { icon: "🎨", color: "#a855f7", gradient: "linear-gradient(135deg, #b783ff, #7b3ed0)" }
         };
 
         var M = 4;
@@ -906,26 +985,15 @@
         function openSettings() {
             playCutePop(true);
             document.getElementById("soundToggle").checked = soundEnabled;
-            
-            // Render discovered categories in settings
-            const discoveredContainer = document.getElementById("discovered-themes-list");
-            discoveredContainer.innerHTML = "";
-            let discovered = JSON.parse(localStorage.getItem('discoveredThemes')) || Object.keys(THEME_DATA.starterPool);
-            
-            discovered.forEach(theme => {
-                const item = document.createElement("div");
-                item.className = "discovered-item";
-                const icon = getCategoryIcon(theme);
-                item.innerHTML = `<span>${icon} ${theme}</span>`;
-                item.style.borderColor = stringToLightColor(theme);
-                discoveredContainer.appendChild(item);
-            });
-
+            document.getElementById("selectionToggle").checked = keepSelectionAfterMatch;
+            showSettingsMainView();
+            renderCategorySettings();
             document.getElementById("settingsModal").style.display = "flex";
         }
 
         function closeSettings() {
             playCutePop();
+            showSettingsMainView();
             document.getElementById("settingsModal").style.display = "none";
         }
 
@@ -936,6 +1004,110 @@
                 // give immediate sound feedback on turn-on
                 playCutePop(true);
             }
+        }
+
+        function toggleSelectionBehavior(enabled) {
+            keepSelectionAfterMatch = enabled;
+            localStorage.setItem('keepSelectionAfterMatch', String(enabled));
+        }
+
+        function getEnabledCategoryPrefs() {
+            const discovered = JSON.parse(localStorage.getItem('discoveredThemes')) || Object.keys(THEME_DATA.starterPool);
+            const savedPrefs = JSON.parse(localStorage.getItem('themePrefs'));
+            if (Array.isArray(savedPrefs)) {
+                return savedPrefs.filter(cat => discovered.includes(cat));
+            }
+            return [...discovered];
+        }
+
+        function getCategoryPoolForGame() {
+            const discovered = JSON.parse(localStorage.getItem('discoveredThemes')) || Object.keys(THEME_DATA.starterPool);
+            const enabledCategories = getEnabledCategoryPrefs();
+            const enabledSet = new Set(enabledCategories);
+            const categoryPool = {};
+            const allAvailableThemes = { ...THEME_DATA.starterPool, ...THEME_DATA.unlockPool };
+
+            discovered.forEach(category => {
+                if (!enabledSet.has(category)) return;
+                const source = allAvailableThemes[category];
+                if (source) {
+                    if (Array.isArray(source)) {
+                        categoryPool[category] = source;
+                    } else if (typeof source === 'object' && Array.isArray(source.words)) {
+                        categoryPool[category] = source.words;
+                    }
+                }
+            });
+
+            if (Object.keys(categoryPool).length === 0) {
+                Object.keys(THEME_DATA.starterPool).forEach(category => {
+                    const source = THEME_DATA.starterPool[category];
+                    if (Array.isArray(source)) {
+                        categoryPool[category] = source;
+                    }
+                });
+            }
+
+            return categoryPool;
+        }
+
+        function showSettingsMainView() {
+            const mainView = document.getElementById('settings-main-view');
+            const categoryView = document.getElementById('category-settings-view');
+            if (mainView) mainView.style.display = 'block';
+            if (categoryView) categoryView.style.display = 'none';
+        }
+
+        function showCategorySettings() {
+            renderCategorySettings();
+            const mainView = document.getElementById('settings-main-view');
+            const categoryView = document.getElementById('category-settings-view');
+            if (mainView) mainView.style.display = 'none';
+            if (categoryView) categoryView.style.display = 'block';
+        }
+
+        function renderCategorySettings() {
+            const container = document.getElementById('category-settings-list');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const discovered = JSON.parse(localStorage.getItem('discoveredThemes')) || Object.keys(THEME_DATA.starterPool);
+            const enabledCategories = new Set(getEnabledCategoryPrefs());
+
+            if (discovered.length === 0) {
+                container.innerHTML = '<p style="opacity: 0.75;">No unlocked categories yet.</p>';
+                return;
+            }
+
+            discovered.forEach(category => {
+                const row = document.createElement('div');
+                row.className = 'settings-row';
+                row.style.marginBottom = '10px';
+                row.innerHTML = `
+                    <span class="settings-label"><span>${getCategoryIcon(category)}</span> ${category}</span>
+                    <input type="checkbox" class="settings-checkbox" data-category="${category}" ${enabledCategories.has(category) ? 'checked' : ''}>`;
+
+                const checkbox = row.querySelector('input');
+                checkbox.addEventListener('change', event => {
+                    toggleCategoryEnabled(category, event.target.checked);
+                });
+
+                container.appendChild(row);
+            });
+        }
+
+        function toggleCategoryEnabled(category, enabled) {
+            const discovered = JSON.parse(localStorage.getItem('discoveredThemes')) || Object.keys(THEME_DATA.starterPool);
+            let prefs = JSON.parse(localStorage.getItem('themePrefs')) || [...discovered];
+
+            if (enabled) {
+                if (!prefs.includes(category)) prefs.push(category);
+            } else {
+                prefs = prefs.filter(item => item !== category);
+            }
+
+            localStorage.setItem('themePrefs', JSON.stringify(prefs));
+            renderCategorySettings();
         }
 
         // Cute custom popup system replaces boring browser dialogue boxes
@@ -1146,20 +1318,7 @@
                 localStorage.setItem('discoveredThemes', JSON.stringify(discovered));
             }
 
-            let categoryPool = {};
-            const allAvailableThemes = { ...THEME_DATA.starterPool, ...THEME_DATA.unlockPool };
-            
-            discovered.forEach(t => {
-                let source = allAvailableThemes[t];
-                if (source) {
-                    if (Array.isArray(source)) {
-                        categoryPool[t] = source;
-                    } else {
-                        Object.assign(categoryPool, source);
-                    }
-                }
-            });
-
+            const categoryPool = getCategoryPoolForGame();
             let catNames = Object.keys(categoryPool);
             let chosenCats = [];
 
@@ -1386,6 +1545,10 @@
                             `Take your time and solve carefully.`;
 
             const proceedToNextLevel = () => {
+                if (gameMode === 'hardcore') {
+                    resetHardcoreLives();
+                }
+
                 if (newLvl > 1 && newLvl % 2 !== 0) {
                     showCustomAlert(`Level ${newLvl} Unlocked!`, message, () => {
                         const rewardShown = showRewardOptions();
@@ -1512,13 +1675,13 @@
             
             container.innerHTML = `
                 <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0;">
-                    <div style="font-size: 1.2em; color: var(--accent-color); font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">
+                    <div class="unlock-roller-title">
                         Checking ${themeName}...
                     </div>
-                    <div id="roll-box" style="font-size: 2.2rem; font-weight: 900; background: rgba(0,0,0,0.4); padding: 30px 40px; border-radius: 20px; border: 4px solid var(--accent-color); margin: 20px 0; min-width: 320px; text-align: center; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); overflow: hidden; position: relative;">
+                    <div id="roll-box" class="unlock-roller-box">
                         <span id="roll-text">---</span>
                     </div>
-                    <p id="roll-desc" style="font-size: 1.1em; opacity: 0.8; height: 1.5em; margin: 0 0 25px 0;">Analyzing word relations...</p>
+                    <p id="roll-desc" class="unlock-roller-desc">Analyzing word relations...</p>
                     <button id="roll-action-btn" class="modal-action-btn" style="display: none; width: 220px; font-size: 1.15em; box-shadow: 0 4px 0 #93224e;">Continue</button>
                 </div>
             `;
@@ -1552,10 +1715,10 @@
                     setTimeout(() => {
                         playCuteSuccess();
                         rollText.textContent = `New category unlocked`;
-                        rollText.style.color = "#ffbe0b";
-                        rollText.style.fontSize = "2.0rem";
+                        rollText.style.color = "var(--warning-color)";
+                        rollText.style.fontSize = "1.4rem";
                         rollText.style.textShadow = "0 0 15px rgba(255, 190, 11, 0.7)";
-                        document.getElementById("roll-box").style.borderColor = "#ffbe0b";
+                        document.getElementById("roll-box").style.borderColor = "var(--warning-color)";
                         document.getElementById("roll-box").style.boxShadow = "0 0 25px rgba(255, 190, 11, 0.4), inset 0 0 20px rgba(0,0,0,0.8)";
                         
                         rollDesc.innerHTML = `A new secret category has been added to your rotation under <strong>${themeName}</strong>. It will appear in future levels.`;
@@ -1588,6 +1751,8 @@
         function deselect() {
             if (selected) {
                 selected.classList.remove('is-selected');
+                selected.style.outline = "";
+                selected.classList.remove('shake');
                 selected = 0;
             }
         }
@@ -1633,7 +1798,6 @@
         function handleButtonClick(button) {
             if (selected === button) { 
                 playCutePop(true);
-                button.classList.remove('is-selected');
                 deselect(); 
                 return; 
             }
@@ -1647,7 +1811,7 @@
 
             if (button.category === selected.category) {
                 button.cluster = button.cluster.concat(selected.cluster);
-                button.innerHTML = '<b>' + button.cluster.join(', ') + '</b>';
+                button.innerHTML = '';
                 
                 const oldRow = selected.parentElement;
                 selected.classList.remove('is-selected');
@@ -1660,13 +1824,24 @@
                 } else {
                     playCutePop(true);
                     button.classList.add('partial-match');
-                    let b = button.querySelector('.word-count-badge') || document.createElement('span');
-                    b.className = 'word-count-badge';
-                    b.textContent = `${button.cluster.length}/${button.targetN}`;
-                    button.appendChild(b);
+                    const badge = document.createElement('span');
+                    badge.className = 'word-count-badge';
+                    badge.textContent = `${button.cluster.length}/${button.targetN}`;
 
-                    selected = button;
-                    button.classList.add('is-selected');
+                    const label = document.createElement('div');
+                    label.className = 'button-label';
+                    label.innerHTML = button.cluster.join(', ');
+
+                    button.appendChild(badge);
+                    button.appendChild(label);
+
+                    if (keepSelectionAfterMatch) {
+                        selected = button;
+                        button.classList.add('is-selected');
+                    } else {
+                        selected = 0;
+                        button.classList.remove('is-selected');
+                    }
                 }
                 saveState();
                 applyFontSizeScaling();
