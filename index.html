@@ -47,7 +47,6 @@
             100% { transform: translateY(-15px) rotate(10deg); }
         }
 
-        /* Fixed Header Bar styled like a bubbly cloud container */
         .floating {
             position: fixed;
             top: 10px;
@@ -155,7 +154,7 @@
             min-width: 5.1em;
             max-width: 13.5em;
             min-height: 2.8em;
-            padding: 0.45em 0.9em;
+            padding: 0.2em 0.2em;
             font-size: 0.92em;
             font-family: 'Fredoka', sans-serif;
             font-weight: 600;
@@ -209,11 +208,11 @@
             width: 100%;
         }
 
-        /* Dotted cute boundary for incomplete matches */
+        /* Dotted boundary for incomplete matches */
         .game-button.partial-match {
             border: 3px dashed var(--cat-color) !important;
             background-color: var(--button-bg) !important;
-            /* Blend lavender glaze with category pastel */
+            font-size: 0.65em;
             background-image: linear-gradient(135deg, var(--button-bg) 60%, var(--cat-bg)) !important;
             box-shadow: 0 6px 0 var(--button-shadow), 0 10px 18px rgba(0,0,0,0.4) !important;
             transform: translateY(2px) !important;
@@ -240,6 +239,7 @@
             box-shadow: none !important;
             transform: translateY(8px) !important;
             color: rgba(255,255,255,0.75);
+            font-size: 0.65em;
         }
 
         /* Bouncy tactile hover effect */
@@ -342,7 +342,7 @@
         }
 
         .unlock-roller-desc {
-            font-size: 0.95em;
+            font-size: 0.6em;
             opacity: 0.85;
             line-height: 1.45;
             height: 1.5em;
@@ -656,20 +656,20 @@
 }
         @media (max-width: 768px) {
             .floating {
-                padding: 8px 12px;
+                padding: 6px 10px;
                 min-height: auto;
                 border-radius: 16px;
-                flex-direction: column;
+                flex-direction: row;
                 align-items: stretch;
-                gap: 8px;
+                gap: 4px;
             }
             .floating h1 {
-                font-size: 1.05em;
+                font-size: 1.em;
                 white-space: nowrap;
             }
             .level-info {
-                padding: 4px 8px;
-                font-size: 0.8em;
+                padding: 3px 6px;
+                font-size: 0.75em;
                 white-space: nowrap;
             }
             .floating > div {
@@ -677,15 +677,15 @@
                 align-items: center;
                 justify-content: center;
                 flex-wrap: wrap;
-                gap: 6px;
+                gap: 4px;
                 width: 100%;
             }
             .floating button {
-                padding: 7px 8px;
-                font-size: 0.95em;
-                border-radius: 12px;
-                min-width: 44px;
-                min-height: 44px;
+                padding: 5px 6px;
+                font-size: 0.75em;
+                border-radius: 10px;
+                min-width: 36px;
+                min-height: 36px;
             }
             #board {
                 padding-top: 120px;
@@ -694,13 +694,13 @@
 
         @media (max-width: 640px) {
             .modal-container {
-                padding: 20px 15px;
-                border-radius: 22px;
+                padding: 6px 10px;
+                border-radius: 16px;
                 max-height: 90vh;
                 overflow-y: auto;
             }
             .reward-options, .mode-options {
-                gap: 12px;
+                gap: 14x;
                 margin-top: 15px;
             }
             .reward-card, .mode-card {
