@@ -352,7 +352,39 @@
         @media (max-width: 480px) {
             .intro-title {
                 font-size: 2.2rem;
-            }
+            }.floating {
+        padding: 6px 10px; 
+        min-height: auto;
+        border-radius: 16px;
+        flex-direction: row; /
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4px; /* Reduced gap */
+    }.floating h1 {
+        font-size: 1em; /* Slightly smaller title */
+        white-space: nowrap;
+    }
+    .level-info {
+        padding: 3px 6px; /* Reduced padding */
+        font-size: 0.75em; /* Smaller text */
+        white-space: nowrap;
+    }
+    .floating > div {
+        display: flex;
+        align-items: center;
+        gap: 4px; /* Tighter grouping */
+    }
+    .floating button {
+        padding: 5px 6px; /* Smaller padding */
+        font-size: 0.85em; /* Reduced text size */
+        border-radius: 10px;
+        min-width: 36px; /* Reduced from 44px to fit smaller screens */
+        min-height: 36px; /* Reduced from 44px */
+    }
+    #board {
+        padding-top: 120px;
+    }
             .unlock-roller-title {
                 font-size: 0.92em;
             }
