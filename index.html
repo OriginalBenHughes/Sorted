@@ -794,6 +794,16 @@
         </div>
     </div>
 
+    <!-- Post-Game Review Modal -->
+    <div id="reviewModal" class="custom-modal">
+        <div class="modal-container" style="max-width: 560px;">
+            <h1 style="color: var(--accent-color); font-size: 2.4em; margin-bottom: 5px; margin-top: 0; text-shadow: 0 3px 0 rgba(0,0,0,0.2);">Round Review</h1>
+            <p style="font-size: 1.05em; margin-bottom: 14px; line-height: 1.5; color: var(--text-color);">Here’s a quick summary of the categories you played in this round.</p>
+            <div id="reviewList" style="display: flex; flex-direction: column; gap: 10px; text-align: left; max-height: 320px; overflow-y: auto; padding-right: 4px;"></div>
+            <button id="reviewContinueBtn" class="modal-action-btn" style="width: 100%; margin-top: 18px;">Continue</button>
+        </div>
+    </div>
+
     <!-- Game Over Modal -->
     <div id="gameOverModal" class="custom-modal">
         <div class="modal-container">
@@ -962,6 +972,7 @@
         var N = 4;
         var selected = 0;
         var wordlist = [];
+        var roundReviewCategories = [];
         
         var gameMode = ''; 
         var remainingSeconds = 0;
@@ -1591,8 +1602,61 @@
             const nextTier = nextCompletions >= 15 ? 'expert' : nextCompletions >= 5 ? 'intermediate' : 'beginner';
             setCategoryProgress(b.category, { tier: nextTier, completions: nextCompletions });
 
+            if (!roundReviewCategories.includes(b.category)) {
+                roundReviewCategories.push(b.category);
+            }
+
             saveState();
             checkWin();
+        }
+
+        function getCategoriesPlayedThisGame() {
+            return roundReviewCategories;
+        }
+
+        function getCategoryTierLabel(category) {
+            const progress = getCategoryProgress()[category] || { tier: 'beginner', completions: 0 };
+            const tier = progress.tier || 'beginner';
+            return tier === 'expert' ? 'Expert' : tier === 'intermediate' ? 'Intermediate' : 'Beginner';
+        }
+
+        function showPostGameReview(onContinue = () => {}) {
+            const modal = document.getElementById('reviewModal');
+            const list = document.getElementById('reviewList');
+            const continueBtn = document.getElementById('reviewContinueBtn');
+            if (!modal || !list || !continueBtn) {
+                onContinue();
+                return;
+            }
+
+            const categories = getCategoriesPlayedThisGame();
+            list.innerHTML = '';
+
+            if (categories.length === 0) {
+                list.innerHTML = '<p style="margin: 0; opacity: 0.75;">No category data was captured for this round.</p>';
+            } else {
+                categories.forEach(category => {
+                    const progress = getCategoryProgress()[category] || { tier: 'beginner', completions: 0 };
+                    const plays = progress.completions || 0;
+                    const tierLabel = getCategoryTierLabel(category);
+                    const row = document.createElement('div');
+                    row.style.cssText = 'padding: 10px 12px; border: 2px solid rgba(255,255,255,0.14); border-radius: 12px; background: rgba(255,255,255,0.07);';
+                    row.innerHTML = `
+                        <div style="font-weight: 800; margin-bottom: 4px; color: var(--accent-color);">${category}</div>
+                        <div style="font-size: 0.95em; opacity: 0.9; line-height: 1.4;">
+                            <div><strong>Plays:</strong> ${plays}</div>
+                            <div><strong>Current level:</strong> ${tierLabel}</div>
+                        </div>
+                    `;
+                    list.appendChild(row);
+                });
+            }
+
+            continueBtn.onclick = () => {
+                modal.style.display = 'none';
+                onContinue();
+            };
+            modal.style.display = 'flex';
         }
 
         function checkWin() {
@@ -1603,7 +1667,7 @@
                 startFireworks();
                 setTimeout(() => { 
                     stopFireworks();
-                    triggerLevelUp(); 
+                    showPostGameReview(() => triggerLevelUp());
                 }, 2800);
             }
         }
@@ -2373,6 +2437,7 @@
             document.getElementById("currentLevelDisplay").innerText = lvl;
 
             const board = document.getElementById("board");
+            roundReviewCategories = [];
 
             if (!localStorage.getItem('game_state')) {
                 checkCategories();
