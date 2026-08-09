@@ -853,7 +853,6 @@
                                                                             "Otter",
                                                                             "Weasel",
                                                                             "Raccoon",
-                                                                            "Coati",
                                                                             "Seal",
                                                                             "Walrus",
                                                                             "Sea Lion",
@@ -920,6 +919,7 @@
                                                                            
                                                                             "Tapir",
                                                                           
+                                                                            "Coati",
                                                                           "Linsang",
                                                                           "Chinchilla",
                                                                           "Guinea Pig",
@@ -1543,7 +1543,6 @@
                                                                                   "Cold",
                                                                                   "Drizzle",
                                                                                   "Fair",
-                                                                                  "Fog",
                                                                                   "Freezing",
                                                                                   
                                                                                   "Foggy",
@@ -1609,6 +1608,42 @@
                                                                      ]
                                                       
                                        },
+                                       "Emotions": {
+    "beginner": [
+        "Happy",
+        "Sad",
+        "Angry",
+        "Excited",
+        "Scared",
+        "Calm",
+        "Proud",
+        "Lonely",
+        "Silly",
+        "Bored"
+    ],
+    "intermediate": [
+        "Anxious",
+        "Jealous",
+        "Grateful",
+        "Curious",
+        "Nervous",
+        "Confused",
+        "Guilty",
+        "Hopeful",
+        "Frustrated",
+        "Overwhelmed"
+    ],
+    "expert": [
+        "Melancholy",
+        "Nostalgic",
+        "Ambivalent",
+        "Apathetic",
+        "Euphoric",
+        "Apprehensive",
+        "Vulnerable",
+        "Serene"
+    ]
+},
                        "unlockPool":  {
                                           "Actors Who Have Played Doctor Who":  {
                                                                                     "beginner":  [
@@ -1779,7 +1814,7 @@
                                                                            "Michelangelo",
                                                                            "Salvador Dali",
                                                                            "Henri Matisse",
-                                                                           "Georgia O\u0027Keeffe",
+                                                                           "Georgia O'Keeffe",
                                                                            "Frida Kahlo",
                                                                            "Andy Warhol",
                                                                            "Jackson Pollock"
@@ -1884,8 +1919,8 @@
                                                                                  "And I Love Her",
                                                                                  "Dear Prudence",
                                                                                  "With A Little Help From My Friends",
-                                                                                 "Sgt. Pepper\u0027s Lonely Hearts Club Band",
-                                                                                 "I\u0027ve Just Seen A Face",
+                                                                                 "Sgt. Pepper's Lonely Hearts Club Band",
+                                                                                 "I've Just Seen A Face",
                                                                                  "Taxman",
                                                                                  "Helter Skelter",
                                                                                  "Got To Get You Into My Life",
@@ -1897,9 +1932,9 @@
                                                                              ],
                                                                 "intermediate":  [
                                                                                      "Penny Lane",
-                                                                                     "You\u0027ve Got To Hide Your Love Away",
+                                                                                     "You've Got To Hide Your Love Away",
                                                                                      "We Can Work It Out",
-                                                                                     "Can\u0027t Buy Me Love",
+                                                                                     "Can't Buy Me Love",
                                                                                      "Here Comes The Sun",
                                                                                      "Happiness Is A Warm Gun",
                                                                                      "Eleanor Rigby",
@@ -1914,7 +1949,7 @@
                                                                                      "Norwegian Wood"
                                                                                  ],
                                                                 "expert":  [
-                                                                               "A Hard Day\u0027s Night",
+                                                                               "A Hard Day's Night",
                                                                                "While My Guitar Gently Weeps",
                                                                                "Come Together",
                                                                                "Let It Be",
@@ -2195,7 +2230,7 @@
                                                                            "Rum Punch",
                                                                            "Singapore Sling",
                                                                            "French 75",
-                                                                           "Dark \u0027n\u0027 Stormy"
+                                                                           "Dark 'n' Stormy"
                                                                        ]
                                                         },
                                           "Collective Nouns":  {
@@ -2297,57 +2332,41 @@
                                                                                 "Pisces"
                                                                             ]
                                                              },
-                                          "D\u0026D Monsters":  {
+                                          "D&D Monsters":  {
                                                                     "beginner":  [
                                                                                      "Beholder",
-                                                                                     "Devil",
                                                                                      "Displacer Beast",
                                                                                      "Gelatinous Cube",
                                                                                      "Hell Hound",
                                                                                      "Lich",
                                                                                      "Mimic",
                                                                                      "Mind Flayer",
-                                                                                     "Mummy",
                                                                                      "Owlbear",
                                                                                      "Rust Monster",
                                                                                      "Grue",
-                                                                                     "Demon",
                                                                                      "Tarrasque",
                                                                                      "Bugbear",
                                                                                      "Carrion Crawler",
-                                                                                     "Chimera",
-                                                                                     "Cockatrice",
                                                                                      "Air Elemental",
                                                                                      "Fire Elemental",
                                                                                      "Water Elemental",
                                                                                      "Earth Elemental",
-                                                                                     "Djinn",
-                                                                                     "Ghost",
                                                                                      "Ghoul",
                                                                                      "Hill Giant",
                                                                                      "Gnoll"
                                                                                  ],
                                                                     "intermediate":  [
                                                                                          "Goblin",
-                                                                                         "Golem",
-                                                                                         "Harpy",
                                                                                          "Hobgoblin",
-                                                                                         "Hydra",
                                                                                          "Imp",
-                                                                                         "Werewolf",
                                                                                          "Manticore",
-                                                                                         "Medusa",
-                                                                                         "Minotaur",
                                                                                          "Ogre",
                                                                                          "Ochre Jelly",
                                                                                          "Troll",
                                                                                          "Umber Hulk",
-                                                                                         "Vampire",
                                                                                          "Wight",
                                                                                          "Wraith",
                                                                                          "Bulette",
-                                                                                         "Yeti",
-                                                                                         "Zombie",
                                                                                          "Kobold",
                                                                                          "Banshee",
                                                                                          "Basilisk",
@@ -2356,9 +2375,6 @@
                                                                     "expert":  [
                                                                                    "Dracolich",
                                                                                    "Frost Giant",
-                                                                                   "Gargoyle",
-                                                                                   "Griffon",
-                                                                                   "Hag",
                                                                                    "Kuo-Toa",
                                                                                    "Lamia",
                                                                                    "Marilith",
@@ -2367,7 +2383,6 @@
                                                                                    "Quasit",
                                                                                    "Remorhaz",
                                                                                    "Sahuagin",
-                                                                                   "Sphinx",
                                                                                    "Treant"
                                                                                ]
                                                                 },
@@ -2501,7 +2516,7 @@
                                                                                      ],
                                                                         "intermediate":  [
                                                                                              "Ruby Sunday",
-                                                                                             "Graham O\u0027Brien",
+                                                                                             "Graham O'Brien",
                                                                                              "Ryan Sinclair",
                                                                                              "Yasmin Khan",
                                                                                              "Mickey Smith",
@@ -2797,27 +2812,27 @@
                                                                                      "Robinson Crusoe",
                                                                                      "Invisible Man",
                                                                                      "The Sun Also Rises",
-                                                                                     "Gulliver\u0027s Travels",
+                                                                                     "Gulliver's Travels",
                                                                                      "Beloved",
                                                                                      "Madame Bovary",
                                                                                      "The Trial",
                                                                                      "The Age Of Innocence",
-                                                                                     "Midnight\u0027s Children",
+                                                                                     "Midnight's Children",
                                                                                      "Dracula",
-                                                                                     "Alice\u0027s Adventures In Wonderland",
+                                                                                     "Alice's Adventures In Wonderland",
                                                                                      "Treasure Island"
                                                                                  ],
                                                                 "expert":  [
                                                                                "Pride And Prejudice",
                                                                                "Moby Dick",
-                                                                               "The Pilgrim\u0027s Progress",
+                                                                               "The Pilgrim's Progress",
                                                                                "A Christmas Carol",
                                                                                "A Tale Of Two Cities",
                                                                                "Great Expectations",
                                                                                "The Hobbit",
                                                                                "Frankenstein",
                                                                                "Oliver Twist",
-                                                                               "Uncle Tom\u0027s Cabin",
+                                                                               "Uncle Tom's Cabin",
                                                                                "Crime And Punishment"
                                                                            ]
                                                             },
@@ -2870,7 +2885,7 @@
                                                                                  "Black Onyx",
                                                                                  "Rose Quartz",
                                                                                  "Malachite",
-                                                                                 "Tiger\u0027s Eye",
+                                                                                 "Tiger's Eye",
                                                                                  "Apatite"
                                                                              ],
                                                             "expert":  [
@@ -3133,14 +3148,14 @@
                                                              "beginner":  [
                                                                               "Their",
                                                                               "There",
-                                                                              "They\u0027re",
+                                                                              "They're",
                                                                               "To",
                                                                               "Too",
                                                                               "Two",
                                                                               "Your"
                                                                           ],
                                                              "intermediate":  [
-                                                                                  "You\u0027re",
+                                                                                  "You're",
                                                                                   "Here",
                                                                                   "Hear",
                                                                                   "Brake",
@@ -3375,7 +3390,7 @@
                                                                       "Radiology",
                                                                       "Orthopedics"
                                                                   ],
-                                          "Medieval Arms \u0026 Armour":  {
+                                          "Medieval Arms & Armour":  {
                                                                               "beginner":  [
                                                                                                "Broadsword",
                                                                                                "Halberd",
@@ -3616,7 +3631,7 @@
                                                                                           "Mjolnir",
                                                                                           "Aegis",
                                                                                           "Golden Fleece",
-                                                                                          "Pandora\u0027s Box",
+                                                                                          "Pandora's Box",
                                                                                           "Holy Grail"
                                                                                       ],
                                                                          "intermediate":  [
@@ -4145,7 +4160,7 @@
                                                                                       "Buck Rogers In The 25th Century",
                                                                                       "Stargate SG-1",
                                                                                       "The Jetsons",
-                                                                                      "Mork \u0026 Mindy",
+                                                                                      "Mork & Mindy",
                                                                                       "Alf",
                                                                                       "Foundation",
                                                                                       "The Last Of Us",
@@ -4153,7 +4168,7 @@
                                                                                       "The Mandalorian",
                                                                                       "The Outer Limits",
                                                                                       "Torchwood",
-                                                                                      "Blake\u0027s 7",
+                                                                                      "Blake's 7",
                                                                                       "Sense8"
                                                                                   ],
                                                                  "expert":  [
@@ -4268,6 +4283,7 @@
                                                                                       ],
                                                                      "expert":  [
                                                                                     "Optus Sport",
+                                                                                    "Plex",
                                                                                     "Tubi",
                                                                                     "Pluto TV"
                                                                                 ]
@@ -4673,10 +4689,10 @@
                                                                                      "Lincoln Memorial",
                                                                                      "Mount Fuji",
                                                                                      "London Eye",
-                                                                                     "St. Peter\u0027s Basilica",
+                                                                                     "St. Peter's Basilica",
                                                                                      "Notre Dame",
                                                                                      "Tokyo Tower",
-                                                                                     "St. Basil\u0027s Cathedral",
+                                                                                     "St. Basil's Cathedral",
                                                                                      "Arc De Triomphe",
                                                                                      "The Great Sphinx",
                                                                                      "Mount Kilimanjaro",
@@ -4703,7 +4719,7 @@
                                       }
                    },
     "UNLOCK_THEMES":  {
-                          "Art \u0026 Culture":  [
+                          "Art & Culture":  [
                                                      "Types of Art Movements",
                                                      "Artists",
                                                      "Art Mediums",
@@ -4712,7 +4728,7 @@
                                                      "Architectural Elements",
                                                      "Fashion brands"
                                                  ],
-                          "Food \u0026 Lifestyle":  [
+                          "Food & Lifestyle":  [
                                                         "Cheeses",
                                                         "Pastas",
                                                         "Cocktails",
@@ -4725,7 +4741,7 @@
                                                         "Board Games",
                                                         "Medical practices"
                                                     ],
-                          "Geography \u0026 Nature":  [
+                          "Geography & Nature":  [
                                                           "Major Mountain Ranges",
                                                           "Types of Clouds",
                                                           "Molluscs",
@@ -4734,7 +4750,7 @@
                                                           "Deserts",
                                                           "National Parks"
                                                       ],
-                          "History \u0026 Myth":  [
+                          "History & Myth":  [
                                                       "Mythical Creatures",
                                                       "Historical Periods",
                                                       "US State Capitols",
@@ -4743,12 +4759,12 @@
                                                       "Egyptian Gods",
                                                       "Roman Emperors",
                                                       "Books Of The Bible",
-                                                      "Medieval Arms \u0026 Armour",
+                                                      "Medieval Arms & Armour",
                                                       "Religions",
                                                       "British Monarchs",
                                                       "Mythological Artifacts"
                                                   ],
-                          "Language \u0026 Literature":  [
+                          "Language & Literature":  [
                                                              "Palindromes",
                                                              "Silent Letter Words",
                                                              "Heteronyms",
@@ -4789,7 +4805,7 @@
                                               "DC Characters",
                                               "Addams Family Characters"
                                           ],
-                          "Science \u0026 Tech":  [
+                          "Science & Tech":  [
                                                       "Geology Terms",
                                                       "Google Products",
                                                       "Keyboard",
