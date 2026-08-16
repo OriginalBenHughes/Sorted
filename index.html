@@ -14,6 +14,9 @@
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);} 
             gtag('js', new Date());
+            gtag('consent', 'default', {
+                analytics_storage: localStorage.getItem('analyticsEnabled') === 'true' ? 'granted' : 'denied'
+            });
             gtag('config', 'G-MF095Z9YK9', { anonymize_ip: true });
         </script>
     
@@ -137,6 +140,7 @@
         #board {
             display: flex;
             flex-direction: column;
+            position: relative;
             width: 100%;
             padding-top: 150px;
             padding-bottom: 48px;
@@ -808,8 +812,81 @@
             filter: drop-shadow(0 6px 8px rgba(0,0,0,0.28));
         }
         .red-fish-overlay.revealed { opacity: 1; transform: translateY(0); }
+        .red-fish-edge {
+            position: absolute;
+            top: 50%;
+            width: 42%;
+            height: auto;
+            pointer-events: none;
+            filter: drop-shadow(0 5px 6px rgba(0,0,0,0.32));
+            opacity: 0;
+            transform: translateY(-50%) scale(0.8);
+            transition: opacity 420ms ease, transform 420ms cubic-bezier(.2,.9,.25,1);
+            z-index: 5;
+        }
+        .red-fish-edge.left { left: -20%; transform: translateY(-50%) scaleX(-1) scale(0.8); }
+        .red-fish-edge.right { right: -20%; }
+        .red-fish-edge.revealed { opacity: 1; transform: translateY(-50%) scale(1); }
+        .red-fish-edge.left.revealed { transform: translateY(-50%) scaleX(-1) scale(1); }
+        .red-fish-edge svg { display: block; width: 100%; height: auto; }
         .game-button { position: relative; overflow: visible; }
         .red-fish-overlay svg { width: 56%; height: auto; display: block; }
+        .fog-effect-layer {
+            position: absolute;
+            inset: 110px 0 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 20;
+        }
+        .fog-wisp {
+            position: absolute;
+            width: 26%;
+            height: 12%;
+            min-height: 72px;
+            background: linear-gradient(135deg, rgba(247, 251, 255, 1), rgba(194, 210, 235, 0.88));
+            border-radius: 46% 54% 42% 58% / 58% 50% 50% 42%;
+            box-shadow: 12px 8px 18px rgba(178, 196, 224, 0.82), -10px 6px 16px rgba(248, 252, 255, 0.86);
+            filter: blur(6px);
+            opacity: 0;
+            animation: driftFog 24s linear infinite;
+        }
+        .fog-wisp::before,
+        .fog-wisp::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+        }
+        .fog-wisp::before {
+            width: 47%;
+            height: 116%;
+            top: -37%;
+            left: 12%;
+            border-radius: 58% 42% 48% 52% / 60% 56% 44% 40%;
+        }
+        .fog-wisp::after {
+            width: 42%;
+            height: 98%;
+            top: -24%;
+            right: 9%;
+            border-radius: 46% 54% 58% 42% / 64% 52% 48% 36%;
+        }
+        @keyframes driftFog {
+            0%, 100% { transform: translateX(0) scale(0.86) rotate(var(--fog-rotation, 0deg)); opacity: 0; }
+            18%, 76% { opacity: var(--fog-opacity, 1); }
+            55% { transform: translateX(460%) scale(1.08) rotate(var(--fog-rotation, 0deg)); opacity: var(--fog-opacity, 1); }
+        }
+        .roaming-red-fish {
+            position: fixed;
+            z-index: 40;
+            width: 44px;
+            height: 44px;
+            pointer-events: none;
+            filter: drop-shadow(0 5px 6px rgba(0,0,0,0.32));
+            transition: left 3000ms cubic-bezier(.2,.8,.25,1), top 3000ms cubic-bezier(.2,.8,.25,1), transform 3000ms cubic-bezier(.2,.8,.25,1);
+            animation: fishWiggle 0.8s ease-in-out infinite alternate;
+        }
+        .roaming-red-fish svg { display: block; width: 100%; height: 100%; }
+        @keyframes fishWiggle { from { rotate: -7deg; } to { rotate: 7deg; } }
     </style>
 </head>
 <body>
@@ -850,6 +927,10 @@
                         <span>Red Herring</span>
                     </h3>
                     <p style="font-size: 0.92em; opacity: 0.85; line-height: 1.45;">One sneaky extra word from an unused category — see if you can ignore it!</p>
+                </div>
+                <div class="mode-card" onclick="selectGameMode('fog')">
+                    <h3 style="margin: 5px 0; color: #d6e5ff; font-size: 1.3em;">🌫️ Fog</h3>
+                    <p style="font-size: 0.92em; opacity: 0.85; line-height: 1.45;">Drifting fog briefly hides parts of the board.</p>
                 </div>
             </div>
             <button type="button" onclick="showHowToPlay()" class="modal-action-btn" style="width: 100%; margin-top: 18px;">How to Play</button>
@@ -940,6 +1021,19 @@
         </div>
     </div>
 
+    <!-- One-time Analytics Consent Modal -->
+    <div id="analyticsConsentModal" class="custom-modal">
+        <div class="modal-container" style="max-width: 480px; text-align: left;">
+            <h2 style="color: var(--accent-color); margin-top: 0; font-size: 2em;">Help Shape Sorted!</h2>
+            <p style="font-size: 1.05em; line-height: 1.55;">Would you like to share anonymous game analytics to help this indie developer improve and grow Sorted!?</p>
+            <p style="font-size: 0.88em; line-height: 1.45; opacity: 0.75;">This includes game mode, level progress, and completion time. It never includes your words, name, or contact details. You can change this anytime in Settings.</p>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px;">
+                <button type="button" onclick="respondToAnalyticsConsent(true)" class="modal-action-btn" style="flex: 1 1 170px;">Help Improve Sorted!</button>
+                <button type="button" onclick="respondToAnalyticsConsent(false)" class="modal-action-btn" style="flex: 1 1 130px; background: transparent; color: var(--text-color); border: 3px solid var(--panel-border); box-shadow: none;">No Thanks</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Custom Settings Modal -->
     <div id="settingsModal" class="custom-modal">
         <div class="modal-container" style="max-width: 480px;">
@@ -955,12 +1049,18 @@
                     <span class="settings-label">Keep selection after match</span>
                     <input type="checkbox" id="selectionToggle" class="settings-checkbox" onchange="toggleSelectionBehavior(this.checked)" checked>
                 </div>
+
+                <div class="settings-row">
+                    <span class="settings-label">Anonymous game analytics</span>
+                    <input type="checkbox" id="analyticsToggle" class="settings-checkbox" onchange="toggleAnalytics(this.checked)">
+                </div>
+                <p style="margin: -4px 0 12px; font-size: 0.82em; line-height: 1.35; opacity: 0.75;">Help improve the game with anonymous mode, level, and completion data.</p>
                 
                 
 
 <button type="button" onclick="showCategorySettings()" class="modal-action-btn" style="width: 100%; margin-top: 6px;">Manage unlocked categories</button>
                 <button type="button" onclick="openFeedbackForm()" class="modal-action-btn" style="width: 100%; margin-top: 8px; background: transparent; color: var(--accent-color); border: 3px solid var(--accent-color); box-shadow: none;">Feedback</button>
-                <button type="button" onclick="showDebugRestartConfirm()" class="modal-action-btn" style="width: 100%; margin-top: 8px; background: transparent; color: var(--danger-color); border: 3px solid var(--danger-color); box-shadow: none;">Debug restart</button>
+                <button type="button" onclick="showRestartLevelConfirm()" class="modal-action-btn" style="width: 100%; margin-top: 8px; background: transparent; color: var(--danger-color); border: 3px solid var(--danger-color); box-shadow: none;">Restart level</button>
             </div>
 
             <div id="category-settings-view" style="display: none; margin: 20px 0 30px 0; text-align: left;">
@@ -1101,12 +1201,42 @@
         var selected = 0;
         var wordlist = [];
         var roundReviewCategories = [];
+        var roundStartedAt = Date.now();
         
         var gameMode = ''; 
         var remainingSeconds = 0;
         var totalTimerSeconds = 0;
         var clockInterval = null;
         var hardcoreLives = 3;
+
+        function analyticsEnabled() {
+            return localStorage.getItem('analyticsEnabled') === 'true';
+        }
+
+        function toggleAnalytics(enabled) {
+            localStorage.setItem('analyticsEnabled', enabled ? 'true' : 'false');
+            if (typeof gtag !== 'function') return;
+            gtag('consent', 'update', { analytics_storage: enabled ? 'granted' : 'denied' });
+            if (enabled) sendAnalyticsEvent('analytics_enabled');
+        }
+
+        function sendAnalyticsEvent(name, params = {}) {
+            if (!analyticsEnabled() || typeof gtag !== 'function') return;
+            gtag('event', name, params);
+        }
+
+        function requestAnalyticsConsent() {
+            if (localStorage.getItem('analyticsConsentAsked') === 'true') return;
+            const modal = document.getElementById('analyticsConsentModal');
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function respondToAnalyticsConsent(enabled) {
+            localStorage.setItem('analyticsConsentAsked', 'true');
+            toggleAnalytics(enabled);
+            const modal = document.getElementById('analyticsConsentModal');
+            if (modal) modal.style.display = 'none';
+        }
 
         function setHardcoreLives(lives) {
             hardcoreLives = Math.max(0, Math.min(3, lives));
@@ -1134,6 +1264,7 @@
             playCutePop(true);
             document.getElementById("soundToggle").checked = soundEnabled;
             document.getElementById("selectionToggle").checked = keepSelectionAfterMatch;
+            document.getElementById("analyticsToggle").checked = analyticsEnabled();
             showSettingsMainView();
             renderCategorySettings();
             document.getElementById("settingsModal").style.display = "flex";
@@ -1145,24 +1276,26 @@
             document.getElementById("settingsModal").style.display = "none";
         }
 
-        function showDebugRestartConfirm() {
+        function showRestartLevelConfirm() {
             const currentLvl = parseInt(localStorage.getItem('gameLevel') || '1', 10);
+            document.getElementById("settingsModal").style.display = "none";
             showCustomConfirm(
                 'Restart current level?',
-                `This will start a fresh board at Level ${currentLvl} while keeping your current level progress and unlocks. Use this if the current run is stuck.`,
+                `This will start a fresh board at Level ${currentLvl} while keeping your current level progress and unlocks. You can choose a game mode before the new round begins.`,
                 () => {
-                    debugRestartCurrentLevel();
+                    restartLevelWithModeSelection();
                 }
             );
         }
 
-        function debugRestartCurrentLevel() {
+        function restartLevelWithModeSelection() {
             clearPendingLevelAdvance();
             localStorage.removeItem('game_state');
             localStorage.removeItem('game_time_remaining');
             localStorage.removeItem('hardcoreLives');
             localStorage.removeItem('hardcoreLevelSeed');
             localStorage.removeItem('forcedNextCategory');
+            localStorage.removeItem('gameMode');
             selected = 0;
             closeSettings();
             window.location.reload();
@@ -1540,7 +1673,99 @@
             });
 
             applyFontSizeScaling();
+            setTimeout(startModeEffects, 0);
             return board;
+        }
+
+        let roamingFishTimers = new Set();
+        let lastFishTargets = new Map();
+
+        function redFishSvg() {
+            return `<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <g fill="#ff3b3b">
+                    <ellipse cx="28" cy="32" rx="18" ry="12" />
+                    <polygon points="46,32 60,20 60,44" />
+                    <circle cx="22" cy="28" r="2.2" fill="#fff" />
+                </g>
+            </svg>`;
+        }
+
+        function clearModeEffects() {
+            roamingFishTimers.forEach(timer => clearTimeout(timer));
+            roamingFishTimers.clear();
+            lastFishTargets.clear();
+            document.querySelectorAll('.fog-effect-layer, .roaming-red-fish').forEach(el => el.remove());
+        }
+
+        function moveRoamingFish(fish) {
+            const targets = Array.from(document.querySelectorAll('.game-button:not([disabled])'));
+            if (!fish || targets.length === 0) return;
+
+            const alternatives = targets.filter(target => target !== lastFishTargets.get(fish));
+            const target = (alternatives.length ? alternatives : targets)[Math.floor(Math.random() * (alternatives.length ? alternatives.length : targets.length))];
+            const rect = target.getBoundingClientRect();
+            const side = Math.random() < 0.5 ? -1 : 1;
+            const travelMs = 2400 + Math.floor(Math.random() * 1401);
+            const edgeGap = 2 + Math.floor(Math.random() * 13);
+            const verticalOffset = -7 + Math.floor(Math.random() * 15);
+            fish.style.transitionDuration = `${travelMs}ms`;
+            fish.style.left = `${side === -1 ? rect.left - edgeGap : rect.right + edgeGap}px`;
+            fish.style.top = `${rect.top + (rect.height / 2) + verticalOffset}px`;
+            fish.style.transform = `translate(${side === -1 ? '-100%' : '0'}, -50%) scaleX(${side})`;
+            lastFishTargets.set(fish, target);
+            return travelMs;
+        }
+
+        function scheduleRoamingFish(fish, initialDelay = 0) {
+            const move = () => {
+                if (!fish.isConnected) return;
+                const travelMs = moveRoamingFish(fish) || 3000;
+                // Vary travel and linger independently so multiple fish do not fall into a shared rhythm.
+                const lingerMs = 3500 + Math.floor(Math.random() * 2501);
+                const nextDelay = travelMs + lingerMs;
+                const timer = setTimeout(() => {
+                    roamingFishTimers.delete(timer);
+                    move();
+                }, nextDelay);
+                roamingFishTimers.add(timer);
+            };
+            const timer = setTimeout(() => {
+                roamingFishTimers.delete(timer);
+                move();
+            }, initialDelay);
+            roamingFishTimers.add(timer);
+        }
+
+        function startModeEffects() {
+            clearModeEffects();
+            if (gameMode === 'fog') {
+                const layer = document.createElement('div');
+                layer.className = 'fog-effect-layer';
+                layer.setAttribute('aria-hidden', 'true');
+                for (let index = 0; index < 10; index++) {
+                    const wisp = document.createElement('span');
+                    wisp.className = 'fog-wisp';
+                    wisp.style.top = `${Math.floor(Math.random() * 88)}%`;
+                    wisp.style.left = `${-25 - Math.floor(Math.random() * 35)}%`;
+                    wisp.style.animationDelay = `${-Math.floor(Math.random() * 90)}s`;
+                    wisp.style.animationDuration = `${60 + Math.floor(Math.random() * 31)}s`;
+                    wisp.style.setProperty('--fog-opacity', index < 5 ? '1' : (0.35 + Math.random() * 0.5).toFixed(2));
+                    layer.appendChild(wisp);
+                }
+                document.getElementById('board').appendChild(layer);
+            }
+
+            if (gameMode === 'redHerring') {
+                const fishCount = document.querySelectorAll('.game-button[data-red-herring]:not([disabled])').length;
+                for (let index = 0; index < fishCount; index++) {
+                    const fish = document.createElement('div');
+                    fish.className = 'roaming-red-fish';
+                    fish.setAttribute('aria-hidden', 'true');
+                    fish.innerHTML = redFishSvg();
+                    document.body.appendChild(fish);
+                    scheduleRoamingFish(fish, index * 420 + Math.floor(Math.random() * 650));
+                }
+            }
         }
 
         function rebuildBoardFromSnapshot(snapshot) {
@@ -1739,6 +1964,15 @@
                     });
                 }
             } catch (e) { /* no-op */ }
+
+            roundStartedAt = Date.now();
+            sendAnalyticsEvent('round_started', {
+                level: lvl,
+                mode: localStorage.getItem('gameMode') || 'unselected',
+                category_count: chosenCats.length,
+                red_herring_count: wordlist.filter(item => !Array.isArray(item) && item.isRedHerring).length,
+                tile_count: wordlist.length
+            });
         }
 
         const CATEGORY_TO_THEME_MAP = {
@@ -1894,6 +2128,11 @@
                 roundReviewCategories.push(b.category);
             }
 
+            sendAnalyticsEvent('category_completed', {
+                level: parseInt(localStorage.getItem('gameLevel') || '1', 10),
+                mode: gameMode || localStorage.getItem('gameMode') || 'unselected',
+                duration_seconds: Math.round((Date.now() - roundStartedAt) / 1000)
+            });
             saveState();
             checkWin();
         }
@@ -1952,9 +2191,17 @@
             const remaining = allButtons.filter(b => !b.dataset.redHerring);
             if (remaining.length === 0) {
                 const completedLevel = parseInt(localStorage.getItem('gameLevel') || '1', 10);
+                const redHerringCount = allButtons.filter(b => b.dataset.redHerring).length;
+                sendAnalyticsEvent('level_completed', {
+                    level: completedLevel,
+                    mode: gameMode || localStorage.getItem('gameMode') || 'unselected',
+                    duration_seconds: Math.round((Date.now() - roundStartedAt) / 1000),
+                    red_herring_count: redHerringCount
+                });
                 setPendingLevelAdvance(completedLevel + 1);
 
                 stopClock();
+                clearModeEffects();
                 playWinArpeggio();
                 revealRedHerring();
                 startFireworks();
@@ -1967,22 +2214,15 @@
 
         function revealRedHerring() {
             try {
-                const rhBtn = document.querySelector('.game-button[data-red-herring]');
-                if (!rhBtn) return;
-                if (rhBtn.querySelector('.red-fish-overlay')) return;
-                const overlay = document.createElement('div');
-                overlay.className = 'red-fish-overlay';
-                overlay.innerHTML = `
-                    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-                        <g fill="#ff3b3b">
-                            <ellipse cx="28" cy="32" rx="18" ry="12" />
-                            <polygon points="46,32 60,20 60,44" />
-                            <circle cx="22" cy="28" r="2.2" fill="#fff" />
-                        </g>
-                    </svg>
-                `;
-                rhBtn.appendChild(overlay);
-                requestAnimationFrame(() => overlay.classList.add('revealed'));
+                const rhButtons = document.querySelectorAll('.game-button[data-red-herring]');
+                rhButtons.forEach((rhBtn, index) => {
+                    if (rhBtn.querySelector('.red-fish-edge')) return;
+                    const overlay = document.createElement('div');
+                    overlay.className = `red-fish-edge ${index % 2 === 0 ? 'right' : 'left'}`;
+                    overlay.innerHTML = redFishSvg();
+                    rhBtn.appendChild(overlay);
+                    requestAnimationFrame(() => overlay.classList.add('revealed'));
+                });
             } catch (e) { /* no-op */ }
         }
 
@@ -2007,16 +2247,13 @@
                     resetHardcoreLives();
                 }
 
+                // A genuine new category unlock takes priority over moving directly into the next round.
                 if (newLvl > 1 && newLvl % 2 !== 0) {
-                    showCustomAlert(`Level ${newLvl} Unlocked!`, message, () => {
-                        const rewardShown = showRewardOptions();
-                        if (!rewardShown && !noReload) window.location.reload();
-                    });
-                } else {
-                    showCustomAlert(`Level ${newLvl} Unlocked!`, message, () => {
-                        if (!noReload) window.location.reload();
-                    });
+                    const rewardShown = showRewardOptions();
+                    if (rewardShown) return;
                 }
+
+                if (!noReload) window.location.reload();
             };
             function promptChangeOrContinue() {
                 showDialog({
@@ -2510,8 +2747,14 @@
 
         function selectGameMode(mode) {
             playCuteSuccess();
+            const previousMode = gameMode || localStorage.getItem('gameMode') || 'unselected';
             gameMode = mode;
             localStorage.setItem('gameMode', mode);
+            sendAnalyticsEvent('mode_selected', {
+                mode,
+                previous_mode: previousMode,
+                level: parseInt(localStorage.getItem('gameLevel') || '1', 10)
+            });
             if (mode === 'hardcore') {
                 resetHardcoreLives();
             } else {
@@ -2538,7 +2781,10 @@
             try {
                 const board = document.getElementById('board');
                 const hasSavedState = !!localStorage.getItem('game_state');
-                if (!hasSavedState) {
+                // The startup board is created before a mode is chosen, so regenerate it once
+                // after the first selection to apply mode-specific round rules.
+                const needsModeSpecificBoard = previousMode === 'unselected';
+                if (!hasSavedState || needsModeSpecificBoard) {
                     // Rebuild a fresh board for the chosen mode so mode-specific items (like red-herring) are included
                     roundReviewCategories = [];
                     checkCategories();
@@ -2666,6 +2912,12 @@
         function triggerGameOver() {
             playSadBoop();
             stopClock();
+            sendAnalyticsEvent('level_failed', {
+                level: parseInt(localStorage.getItem('gameLevel') || '1', 10),
+                mode: gameMode || 'timed',
+                duration_seconds: Math.round((Date.now() - roundStartedAt) / 1000),
+                remaining_lives: gameMode === 'hardcore' ? hardcoreLives : undefined
+            });
             document.querySelectorAll('.game-button').forEach(btn => {
                 btn.style.pointerEvents = 'none';
             });
@@ -2860,6 +3112,7 @@
                     updateHardcoreLivesUI();
                 }
                 document.getElementById("modeModal").style.display = "none";
+                startModeEffects();
                 startClockEngine();
             } else {
                 updateHardcoreLivesUI();
@@ -2881,6 +3134,7 @@
                 window.UNLOCK_THEMES = UNLOCK_THEMES;
                 
                 initializeGameLogic();
+                setTimeout(requestAnalyticsConsent, 300);
             } catch (error) {
                 console.error("Game data load failed:", error);
             }
