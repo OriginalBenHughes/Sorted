@@ -8,6 +8,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Load Tone.js for high-quality synthetic cute sound effects -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+        <!-- Google Analytics (gtag) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-MF095Z9YK9"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);} 
+            gtag('js', new Date());
+            gtag('config', 'G-MF095Z9YK9', { anonymize_ip: true });
+        </script>
     
     <style>
 
@@ -784,6 +792,25 @@
 
 		
     </style>
+    <style>
+        .red-fish-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            transform: translateY(-6%);
+            opacity: 0;
+            transition: opacity 420ms ease, transform 420ms cubic-bezier(.2,.9,.25,1);
+            filter: drop-shadow(0 6px 8px rgba(0,0,0,0.28));
+        }
+        .red-fish-overlay.revealed { opacity: 1; transform: translateY(0); }
+        .game-button { position: relative; overflow: visible; }
+        .red-fish-overlay svg { width: 56%; height: auto; display: block; }
+    </style>
 </head>
 <body>
 
@@ -808,6 +835,21 @@
                 <div class="mode-card" onclick="selectGameMode('hardcore')">
                     <h3 style="margin: 5px 0; color: var(--accent-color); font-size: 1.3em;">⚡ Hard Core</h3>
                     <p style="font-size: 0.92em; opacity: 0.85; line-height: 1.45;">Sharper challenge with limited retries.</p>
+                </div>
+                <div class="mode-card" onclick="selectGameMode('redHerring')">
+                    <h3 style="margin: 5px 0; color: #ff6b6b; font-size: 1.3em; display:flex; align-items:center; gap:8px;">
+                        <span aria-hidden="true" style="display:inline-block; width:1.4em; height:1.2em;">
+                            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" focusable="false" style="width:100%; height:100%; display:block;">
+                                <g fill="#ff3b3b">
+                                    <ellipse cx="28" cy="32" rx="18" ry="12" />
+                                    <polygon points="46,32 60,20 60,44" />
+                                    <circle cx="22" cy="28" r="2.2" fill="#fff" />
+                                </g>
+                            </svg>
+                        </span>
+                        <span>Red Herring</span>
+                    </h3>
+                    <p style="font-size: 0.92em; opacity: 0.85; line-height: 1.45;">One sneaky extra word from an unused category — see if you can ignore it!</p>
                 </div>
             </div>
             <button type="button" onclick="showHowToPlay()" class="modal-action-btn" style="width: 100%; margin-top: 18px;">How to Play</button>
@@ -913,6 +955,8 @@
                     <span class="settings-label">Keep selection after match</span>
                     <input type="checkbox" id="selectionToggle" class="settings-checkbox" onchange="toggleSelectionBehavior(this.checked)" checked>
                 </div>
+                
+                
 
 <button type="button" onclick="showCategorySettings()" class="modal-action-btn" style="width: 100%; margin-top: 6px;">Manage unlocked categories</button>
                 <button type="button" onclick="openFeedbackForm()" class="modal-action-btn" style="width: 100%; margin-top: 8px; background: transparent; color: var(--accent-color); border: 3px solid var(--accent-color); box-shadow: none;">Feedback</button>
@@ -1210,6 +1254,99 @@
             return categoryPool;
         }
 
+        // Map words to the categories they appear in (built once)
+        let WORD_CATEGORY_MAP = null;
+        function buildWordCategoryMap() {
+            if (WORD_CATEGORY_MAP) return WORD_CATEGORY_MAP;
+            WORD_CATEGORY_MAP = {};
+            const allThemes = { ...THEME_DATA.starterPool, ...THEME_DATA.unlockPool };
+            Object.keys(allThemes).forEach(cat => {
+                const src = allThemes[cat];
+                let words = [];
+                if (Array.isArray(src)) words = src;
+                else {
+                    Object.values(src).forEach(arr => { words = words.concat(arr || []); });
+                }
+                words.forEach(w => {
+                    if (!w) return;
+                    const norm = String(w).trim().toLowerCase();
+                    WORD_CATEGORY_MAP[norm] = WORD_CATEGORY_MAP[norm] || new Set();
+                    WORD_CATEGORY_MAP[norm].add(cat);
+                });
+            });
+            return WORD_CATEGORY_MAP;
+        }
+
+        // Select up to `count` red-herring words from eligible categories.
+        // Ensures chosen red herrings come from distinct categories when possible.
+        function selectRedHerrings(chosenCats, usedWordsSet = new Set(), count = 1, levelSeed = null) {
+            try {
+                const discovered = JSON.parse(localStorage.getItem('discoveredThemes')) || Object.keys(THEME_DATA.starterPool);
+                const allThemes = { ...THEME_DATA.starterPool, ...THEME_DATA.unlockPool };
+                const map = buildWordCategoryMap();
+
+                // Eligible categories are discovered but not chosen for this round
+                const eligibleCats = discovered.filter(c => !chosenCats.includes(c));
+                if (eligibleCats.length === 0 || count <= 0) return [];
+
+                // collect candidate words that are single-category and not already used on board
+                const candidates = [];
+                eligibleCats.forEach(cat => {
+                    const src = allThemes[cat];
+                    let words = [];
+                    if (Array.isArray(src)) words = src;
+                    else Object.values(src).forEach(arr => { words = words.concat(arr || []); });
+
+                    (words || []).forEach(w => {
+                        if (!w) return;
+                        const norm = String(w).trim().toLowerCase();
+                        if (usedWordsSet.has(norm)) return;
+                        const cats = map[norm];
+                        if (!cats || cats.size !== 1) return; // exclude multi-category words
+                        candidates.push({ word: w, category: cat, norm });
+                    });
+                });
+
+                if (candidates.length === 0) return [];
+
+                // deterministic-ish shuffle based on levelSeed or game level
+                const lvl = parseInt(localStorage.getItem('gameLevel') || '1', 10);
+                const seed = (levelSeed || lvl) >>> 0;
+                let x = (seed * 9301 + 49297) % 233280;
+                const rnd = () => { x = (x * 9301 + 49297) % 233280; return x / 233280; };
+
+                // simple Fisher-Yates shuffle using seeded RNG
+                for (let i = candidates.length - 1; i > 0; i--) {
+                    const j = Math.floor(rnd() * (i + 1));
+                    [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
+                }
+
+                const picked = [];
+                const usedCats = new Set();
+                for (let i = 0; i < candidates.length && picked.length < count; i++) {
+                    const c = candidates[i];
+                    if (usedCats.has(c.category)) continue; // prefer distinct categories
+                    picked.push({ word: c.word, category: c.category });
+                    usedCats.add(c.category);
+                }
+
+                // If we still need more and there are remaining candidates, pick regardless of category
+                if (picked.length < count) {
+                    for (let i = 0; i < candidates.length && picked.length < count; i++) {
+                        const c = candidates[i];
+                        if (picked.find(p => p.word.trim().toLowerCase() === c.norm)) continue;
+                        picked.push({ word: c.word, category: c.category });
+                    }
+                }
+
+                return picked;
+            } catch (e) {
+                return [];
+            }
+        }
+
+        
+
         function showSettingsMainView() {
             const mainView = document.getElementById('settings-main-view');
             const categoryView = document.getElementById('category-settings-view');
@@ -1320,7 +1457,7 @@
             };
         }
 
-        function showDialog({ title, message, confirmText = "Confirm", showCancel = true, onConfirm = null, onCancel = null }) {
+        function showDialog({ title, message, confirmText = "Confirm", showCancel = true, cancelText = "Cancel", onConfirm = null, onCancel = null }) {
             playCutePop(true);
             const { modal, titleEl, messageEl, confirmBtn, cancelBtn } = getDialogElements();
 
@@ -1328,6 +1465,7 @@
             messageEl.innerText = message;
             confirmBtn.innerText = confirmText;
             cancelBtn.style.display = showCancel ? "inline-block" : "none";
+            cancelBtn.innerText = cancelText;
 
             confirmBtn.onclick = () => {
                 playCutePop();
@@ -1583,6 +1721,24 @@
                     wordlist.push([w, cat, tempWords.length]);
                 });
             });
+
+            // After categories built, optionally add a single red-herring
+            try {
+                const redEnabled = localStorage.getItem('gameMode') === 'redHerring';
+                if (redEnabled) {
+                    const lvl = parseInt(localStorage.getItem('gameLevel') || '1', 10);
+                    // number of red herrings: 1 for every 5 levels (rounded up)
+                    const redCount = Math.ceil(lvl / 5);
+                    const seed = parseInt(localStorage.getItem('hardcoreLevelSeed') || String(lvl), 10) || lvl;
+                    const rhs = selectRedHerrings(chosenCats, usedWordsOnBoard, redCount, seed);
+                    rhs.forEach(rh => {
+                        if (rh && rh.word) {
+                            wordlist.push({ word: rh.word, category: rh.category, targetN: 1, isRedHerring: true });
+                            usedWordsOnBoard.add(String(rh.word).trim().toLowerCase());
+                        }
+                    });
+                }
+            } catch (e) { /* no-op */ }
         }
 
         const CATEGORY_TO_THEME_MAP = {
@@ -1792,19 +1948,42 @@
         }
 
         function checkWin() {
-            const remaining = document.querySelectorAll('.game-button:not([disabled])');
+            const allButtons = Array.from(document.querySelectorAll('.game-button:not([disabled])'));
+            const remaining = allButtons.filter(b => !b.dataset.redHerring);
             if (remaining.length === 0) {
                 const completedLevel = parseInt(localStorage.getItem('gameLevel') || '1', 10);
                 setPendingLevelAdvance(completedLevel + 1);
 
                 stopClock();
                 playWinArpeggio();
+                revealRedHerring();
                 startFireworks();
                 setTimeout(() => { 
                     stopFireworks();
                     showPostGameReview(() => triggerLevelUp());
                 }, 2800);
             }
+        }
+
+        function revealRedHerring() {
+            try {
+                const rhBtn = document.querySelector('.game-button[data-red-herring]');
+                if (!rhBtn) return;
+                if (rhBtn.querySelector('.red-fish-overlay')) return;
+                const overlay = document.createElement('div');
+                overlay.className = 'red-fish-overlay';
+                overlay.innerHTML = `
+                    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="#ff3b3b">
+                            <ellipse cx="28" cy="32" rx="18" ry="12" />
+                            <polygon points="46,32 60,20 60,44" />
+                            <circle cx="22" cy="28" r="2.2" fill="#fff" />
+                        </g>
+                    </svg>
+                `;
+                rhBtn.appendChild(overlay);
+                requestAnimationFrame(() => overlay.classList.add('revealed'));
+            } catch (e) { /* no-op */ }
         }
 
         function triggerLevelUp() {
@@ -1823,7 +2002,7 @@
                             `${config.m} categories will be in play, with ${config.n} words in each.\n\n` +
                             `Take your time and solve carefully.`;
 
-            const proceedToNextLevel = () => {
+            function proceedToNextLevel(noReload = false) {
                 if (gameMode === 'hardcore') {
                     resetHardcoreLives();
                 }
@@ -1831,25 +2010,41 @@
                 if (newLvl > 1 && newLvl % 2 !== 0) {
                     showCustomAlert(`Level ${newLvl} Unlocked!`, message, () => {
                         const rewardShown = showRewardOptions();
-                        if (!rewardShown) window.location.reload();
+                        if (!rewardShown && !noReload) window.location.reload();
                     });
                 } else {
                     showCustomAlert(`Level ${newLvl} Unlocked!`, message, () => {
-                        window.location.reload();
+                        if (!noReload) window.location.reload();
                     });
                 }
             };
+            function promptChangeOrContinue() {
+                showDialog({
+                    title: `Level ${newLvl} Unlocked!`,
+                    message,
+                    confirmText: 'Change Mode',
+                    cancelText: 'Continue',
+                    showCancel: true,
+                    onConfirm: () => {
+                        // when the player picks Change Mode, open the mode modal and set a callback
+                        window.afterLevelUpModeChangeCallback = () => proceedToNextLevel(true);
+                        const modeModal = document.getElementById('modeModal');
+                        if (modeModal) modeModal.style.display = 'flex';
+                    },
+                    onCancel: () => proceedToNextLevel(false)
+                });
+            }
 
             if ((newLvl - 1) % 10 === 0) {
                 let highestCheckpoint = parseInt(localStorage.getItem('highestCheckpoint') || 1);
                 if (newLvl > highestCheckpoint) {
                     localStorage.setItem('highestCheckpoint', newLvl);
-                    showCustomAlert("Checkpoint Reached", `You have unlocked a permanent checkpoint at Level ${newLvl}.`, proceedToNextLevel);
+                    showCustomAlert("Checkpoint Reached", `You have unlocked a permanent checkpoint at Level ${newLvl}.`, promptChangeOrContinue);
                 } else {
-                    proceedToNextLevel();
+                    promptChangeOrContinue();
                 }
             } else {
-                proceedToNextLevel();
+                promptChangeOrContinue();
             }
         }
 
@@ -2074,6 +2269,9 @@
             btn.cluster = data.cluster || [];
             btn.targetN = data.targetN || N;
             btn.disabled = data.disabled || false;
+            if (data.isRedHerring || data.rh) {
+                btn.dataset.redHerring = '1';
+            }
 
             applyCategoryStyle(btn, btn.category);
 
@@ -2257,7 +2455,8 @@
                 clu: btn.cluster,
                 htm: btn.innerHTML,
                 dis: btn.disabled,
-                tN:  btn.targetN 
+                tN:  btn.targetN,
+                rh: btn.dataset.redHerring ? true : false
             }));
             localStorage.setItem('game_state', JSON.stringify(state));
             localStorage.setItem('categoryProgress', JSON.stringify(getCategoryProgress()));
@@ -2278,7 +2477,8 @@
                 cluster: d.clu,
                 innerHTML: d.htm,
                 disabled: d.dis,
-                targetN: d.tN
+                targetN: d.tN,
+                isRedHerring: d.rh || false
             })), board);
         }
 
@@ -2294,7 +2494,8 @@
                     category: btn.category,
                     cluster: btn.cluster,
                     disabled: btn.disabled,
-                    targetN: btn.targetN
+                    targetN: btn.targetN,
+                    rh: btn.dataset.redHerring ? true : false
                 };
                 if (btn.disabled) completed.push(item);
                 else if (btn.cluster.length > 1) partials.push(item);
@@ -2326,12 +2527,45 @@
                         "Some words may fit into more than one category!\n\nExample: Orange could be a fruit or a colour...\n\nIf you feel unsure, solve all the words you can and that orange will only fit into the one that remains.",
                         () => {
                             localStorage.setItem('hardcoreIntroShown', 'true');
-                            startClockEngine();
+                            // proceed to initialize board below
                         }
                     );
-                    return;
                 }
+
             }
+
+            // If there's an existing saved game state, preserve it so mode switches don't reset progress.
+            try {
+                const board = document.getElementById('board');
+                const hasSavedState = !!localStorage.getItem('game_state');
+                if (!hasSavedState) {
+                    // Rebuild a fresh board for the chosen mode so mode-specific items (like red-herring) are included
+                    roundReviewCategories = [];
+                    checkCategories();
+                    shuffleArray(wordlist);
+                    renderBoardLayout(wordlist.map(w => {
+                        if (Array.isArray(w)) return { category: w[1], cluster: [w[0]], targetN: w[2] };
+                        return { category: w.category, cluster: w.cluster || [w.word], targetN: w.targetN || 1, innerHTML: w.innerHTML || w.word || (w.word && String(w.word)), isRedHerring: w.isRedHerring };
+                    }), board);
+                    localStorage.setItem('hardcoreLevelSeed', JSON.stringify(captureBoardSnapshot()));
+                    saveState();
+                } else {
+                    // Load existing saved board without clearing progress
+                    loadState();
+                }
+                attachBoardDeselectHandler();
+            } catch (e) {
+                console.error('Error initializing board for mode', e);
+            }
+
+            // If a level-up flow requested a mode change, call its callback now so it can continue.
+            try {
+                if (typeof window.afterLevelUpModeChangeCallback === 'function') {
+                    const cb = window.afterLevelUpModeChangeCallback;
+                    window.afterLevelUpModeChangeCallback = null;
+                    cb();
+                }
+            } catch (e) { /* no-op */ }
 
             startClockEngine();
         }
@@ -2603,11 +2837,10 @@
                 checkCategories();
                 shuffleArray(wordlist);
 
-                renderBoardLayout(wordlist.map(w => ({
-                    category: w[1],
-                    cluster: [w[0]],
-                    targetN: w[2]
-                })), board);
+                renderBoardLayout(wordlist.map(w => {
+                    if (Array.isArray(w)) return { category: w[1], cluster: [w[0]], targetN: w[2] };
+                    return { category: w.category, cluster: w.cluster || [w.word], targetN: w.targetN || 1, innerHTML: w.innerHTML || w.word || (w.word && String(w.word)), isRedHerring: w.isRedHerring };
+                }), board);
 
                 localStorage.setItem('hardcoreLevelSeed', JSON.stringify(captureBoardSnapshot()));
                 saveState();
