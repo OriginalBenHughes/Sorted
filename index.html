@@ -1418,8 +1418,13 @@
                 const allThemes = { ...THEME_DATA.starterPool, ...THEME_DATA.unlockPool };
                 const map = buildWordCategoryMap();
 
-                // Eligible categories are discovered but not chosen for this round
-                const eligibleCats = discovered.filter(c => !chosenCats.includes(c));
+                // Prefer discovered categories not chosen for this round. At higher levels the
+                // board can use every discovered category, so fall back to locked categories
+                // to keep Red Herring Mode populated.
+                let eligibleCats = discovered.filter(c => !chosenCats.includes(c));
+                if (eligibleCats.length === 0) {
+                    eligibleCats = Object.keys(allThemes).filter(c => !chosenCats.includes(c));
+                }
                 if (eligibleCats.length === 0 || count <= 0) return [];
 
                 // collect candidate words that are single-category and not already used on board
@@ -1439,6 +1444,28 @@
                         candidates.push({ word: w, category: cat, norm });
                     });
                 });
+
+                // A discovered spare category can contain only overlapping words. Search
+                // locked, unselected categories as a second pass so a herring is still found.
+                if (candidates.length === 0) {
+                    Object.keys(allThemes)
+                        .filter(cat => !chosenCats.includes(cat) && !eligibleCats.includes(cat))
+                        .forEach(cat => {
+                            const src = allThemes[cat];
+                            let words = [];
+                            if (Array.isArray(src)) words = src;
+                            else Object.values(src).forEach(arr => { words = words.concat(arr || []); });
+
+                            words.forEach(w => {
+                                if (!w) return;
+                                const norm = String(w).trim().toLowerCase();
+                                const cats = map[norm];
+                                if (!usedWordsSet.has(norm) && cats && cats.size === 1) {
+                                    candidates.push({ word: w, category: cat, norm });
+                                }
+                            });
+                        });
+                }
 
                 if (candidates.length === 0) return [];
 
