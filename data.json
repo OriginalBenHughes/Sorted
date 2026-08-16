@@ -1,4 +1,4 @@
-{
+﻿{
     "THEME_DATA":  {
                        "starterPool":  {
                                            "Beverages":  {
@@ -10,14 +10,13 @@
                                                                               "Juice",
                                                                               "Soda",
                                                                               "Lemonade",
-                                                                              "Smoothie"
+                                                                              "Smoothie",
+                                                                              "Hot Chocolate",
+                                                                              "Cider",
+                                                                              "Beer",
+                                                                              "Wine"
                                                                           ],
                                                              "intermediate":  [
-                                                                                  "Hot Chocolate",
-                                                                                  
-                                                                                  "Cider",
-                                                                                  "Beer",
-                                                                                  "Wine",
                                                                                   "Cocktail",
                                                                                   "Mocktail",
                                                                                   "Energy Drink"
@@ -62,7 +61,7 @@
                                                          "intermediate":  [
                                                                               "Snipe",
                                                                               "Budgerigar",
-                                                                        "Canary",
+                                                                              "Canary",
                                                                               "Puffin",
                                                                               "Penguin",
                                                                               "Gull",
@@ -88,7 +87,6 @@
                                                                           ],
                                                          "expert":  [
                                                                         "Lorikeet",
-                                                                        
                                                                         "Finch",
                                                                         "Lovebird",
                                                                         "Quetzal",
@@ -162,25 +160,22 @@
                                                                              "Metatarsals"
                                                                          ]
                                                           },
-                                           "Card Game Ranks":   [
-                                                                                    "Ace",
-                                                                                    "King",
-                                                                                    "Queen",
-                                                                                    "Jack",
-                                                                                    "Ten",
-                                                                                    "Nine",
-                                                                               
-                                                                                        "Eight",
-                                                                                        "Seven",
-                                                                                        "Six",
-                                                                                        "Five",
-                                                                                        "Four",
-                                                                                  
-                                                                                  "Three",
-                                                                                  "Two",
-                                                                                  "Joker"
-                                                                              ]
-                                                               ,
+                                           "Card Game Ranks":  [
+                                                                   "Ace",
+                                                                   "King",
+                                                                   "Queen",
+                                                                   "Jack",
+                                                                   "Ten",
+                                                                   "Nine",
+                                                                   "Eight",
+                                                                   "Seven",
+                                                                   "Six",
+                                                                   "Five",
+                                                                   "Four",
+                                                                   "Three",
+                                                                   "Two",
+                                                                   "Joker"
+                                                               ],
                                            "Cardinal Directions":  [
                                                                        "North",
                                                                        "East",
@@ -254,13 +249,13 @@
                                                                             "Orange",
                                                                             "Purple",
                                                                             "Pink",
-                                                                            "White"
+                                                                            "White",
+                                                                            "Black",
+                                                                            "Grey",
+                                                                            "Brown",
+                                                                            "Violet"
                                                                         ],
                                                            "intermediate":  [
-                                                                                "Black",
-                                                                                "Grey",
-                                                                                "Brown",
-                                                                                "Violet",
                                                                                 "Indigo",
                                                                                 "Cyan",
                                                                                 "Magenta"
@@ -270,7 +265,12 @@
                                                                           "Teal",
                                                                           "Maroon",
                                                                           "Beige",
-                                                                          "Cahrtreuse", "Vermillion", "Cerulean", "Saffron", "Lavender", "Periwinkle"
+                                                                          "Cahrtreuse",
+                                                                          "Vermillion",
+                                                                          "Cerulean",
+                                                                          "Saffron",
+                                                                          "Lavender",
+                                                                          "Periwinkle"
                                                                       ]
                                                        },
                                            "Containers":  {
@@ -280,17 +280,18 @@
                                                                                "Jar",
                                                                                "Can",
                                                                                "Basket",
-                                                                               "Bucket"
+                                                                               "Bucket",
+                                                                               "Tin",
+                                                                               "Mug",
+                                                                               "Tub",
+                                                                               "Carton",
+                                                                               "Bag",
+                                                                               "Barrel"
                                                                            ],
                                                               "intermediate":  [
-                                                                                   "Tin",
-                                                                                   "Mug",
-                                                                                   "Tub",
-                                                                                   "Carton",
-                                                                                   "Bag"
+
                                                                                ],
                                                               "expert":  [
-                                                                             "Barrel",
                                                                              "Flask",
                                                                              "Crate"
                                                                          ]
@@ -309,7 +310,7 @@
                                                                                   "Bake",
                                                                                   "Boil",
                                                                                   "Fry",
-                                                                                  "SautÃ©",
+                                                                                  "SautÃƒÂ©",
                                                                                   "Simmer",
                                                                                   "Poach",
                                                                                   "Grill",
@@ -457,7 +458,7 @@
                                                                                    "Cream",
                                                                                    "Yogurt"
                                                                                ],
-                                                                  "intermediate":  [                                                                                 
+                                                                  "intermediate":  [
                                                                                        "Sour Cream",
                                                                                        "Custard",
                                                                                        "Buttermilk"
@@ -524,13 +525,12 @@
                                            "Flowers":  {
                                                            "beginner":  [
                                                                             "Buttercup",
-                                                                            
                                                                             "Marigold",
                                                                             "Bluebell",
                                                                             "Violet",
                                                                             "Chrysanthemum",
-                                                                             "Lily",
-                                                                          "Tulip",
+                                                                            "Lily",
+                                                                            "Tulip",
                                                                             "Primrose",
                                                                             "Orchid",
                                                                             "Dahlia",
@@ -542,8 +542,11 @@
                                                                             "Jasmine",
                                                                             "Lilac",
                                                                             "Delphinium",
-                                                                            "Pansy","Daisy","Dandelion",
-                                                                          "Daffodil","Sunflower",
+                                                                            "Pansy",
+                                                                            "Daisy",
+                                                                            "Dandelion",
+                                                                            "Daffodil",
+                                                                            "Sunflower",
                                                                             "Bougainvillea"
                                                                         ],
                                                            "intermediate":  [
@@ -568,12 +571,10 @@
                                                            "expert":  [
                                                                           "Geranium",
                                                                           "Amaryllis",
-                                                                         
                                                                           "Yarrow",
                                                                           "Calla Lily",
                                                                           "Iris",
                                                                           "Plumeria",
-                                                                          
                                                                           "Hyacinth"
                                                                       ]
                                                        },
@@ -632,8 +633,12 @@
                                                                          "Passionfruit",
                                                                          "Guava",
                                                                          "Dragonfruit",
-                                                                         "Melon", "Tangerine", "Cantaloupe", "Honeydew", "Jackfruit", "Durian"
-                                                                         
+                                                                         "Melon",
+                                                                         "Tangerine",
+                                                                         "Cantaloupe",
+                                                                         "Honeydew",
+                                                                         "Jackfruit",
+                                                                         "Durian"
                                                                      ]
                                                       },
                                            "Furniture":  {
@@ -645,13 +650,13 @@
                                                                               "Desk",
                                                                               "Cabinet",
                                                                               "Shelf",
-                                                                              "Dresser"
+                                                                              "Dresser",
+                                                                              "Mirror",
+                                                                              "Stool",
+                                                                              "Bench",
+                                                                              "Wardrobe"
                                                                           ],
                                                              "intermediate":  [
-                                                                                  "Mirror",
-                                                                                  "Stool",
-                                                                                  "Bench",
-                                                                                  "Wardrobe",
                                                                                   "Nightstand",
                                                                                   "Couch",
                                                                                   "Ottoman"
@@ -688,17 +693,18 @@
                                                                                   "Adjective",
                                                                                   "Adverb",
                                                                                   "Pronoun",
-                                                                                  "Preposition"
+                                                                                  "Preposition",
+                                                                                  "Conjunction",
+                                                                                  "Interjection",
+                                                                                  "Synonym",
+                                                                                  "Antonym",
+                                                                                  "Homophone",
+                                                                                  "Anagram"
                                                                               ],
                                                                  "intermediate":  [
-                                                                                      "Conjunction",
-                                                                                      "Interjection",
-                                                                                      "Synonym",
-                                                                                      "Antonym",
-                                                                                      "Homophone"
+
                                                                                   ],
                                                                  "expert":  [
-                                                                                "Anagram",
                                                                                 "Palindrome",
                                                                                 "Acronym"
                                                                             ]
@@ -791,10 +797,10 @@
                                                                                        "Microwave",
                                                                                        "Kettle",
                                                                                        "Fryer",
-                                                                                       "Grill"
+                                                                                       "Grill",
+                                                                                       "Steamer"
                                                                                    ],
                                                                       "intermediate":  [
-                                                                                           "Steamer",
                                                                                            "Processor",
                                                                                            "Slow Cooker",
                                                                                            "Toaster Oven",
@@ -821,13 +827,13 @@
                                                                                     "Mystery",
                                                                                     "Fantasy",
                                                                                     "Science Fiction",
-                                                                                    "Biography"
+                                                                                    "Biography",
+                                                                                    "Horror",
+                                                                                    "Romance",
+                                                                                    "Thriller",
+                                                                                    "Adventure"
                                                                                 ],
                                                                    "intermediate":  [
-                                                                                        "Horror",
-                                                                                        "Romance",
-                                                                                        "Thriller",
-                                                                                        "Adventure",
                                                                                         "Historical Fiction",
                                                                                         "Satire",
                                                                                         "Memoir"
@@ -842,7 +848,6 @@
                                                                },
                                            "Mammals":  {
                                                            "beginner":  [
-                                                                            
                                                                             "Dog",
                                                                             "Fox",
                                                                             "Wolf",
@@ -864,7 +869,6 @@
                                                                             "Lynx",
                                                                             "Cougar",
                                                                             "Cheetah",
-                                                                            
                                                                             "Hyena",
                                                                             "Mongoose",
                                                                             "Camel",
@@ -908,18 +912,19 @@
                                                                                 "Mouse",
                                                                                 "Beaver",
                                                                                 "Gopher",
-                                                                                "Rat","Koala",
+                                                                                "Rat",
+                                                                                "Koala",
                                                                                 "Porcupine",
-                                                                                "Aardvark", "Shrew",
-                                                                            "Mole","Platypus",
+                                                                                "Aardvark",
+                                                                                "Shrew",
+                                                                                "Mole",
+                                                                                "Platypus",
                                                                                 "Manatee"
                                                                             ],
                                                            "expert":  [
                                                                           "Tenrec",
-                                                                           
-                                                                            "Tapir",
-                                                                          
-                                                                            "Coati",
+                                                                          "Tapir",
+                                                                          "Coati",
                                                                           "Linsang",
                                                                           "Chinchilla",
                                                                           "Guinea Pig",
@@ -952,13 +957,13 @@
                                                                               "Metal",
                                                                               "Paper",
                                                                               "Rubber",
-                                                                              "Stone"
+                                                                              "Stone",
+                                                                              "Concrete",
+                                                                              "Clay",
+                                                                              "Wool",
+                                                                              "Cotton"
                                                                           ],
                                                              "intermediate":  [
-                                                                                  "Concrete",
-                                                                                  "Clay",
-                                                                                  "Wool",
-                                                                                  "Cotton",
                                                                                   "Silk",
                                                                                   "Linen",
                                                                                   "Bamboo"
@@ -976,21 +981,20 @@
                                                                           "Multiplication",
                                                                           "Division"
                                                                       ],
-                                           "Months":    [
-                                                                           "January",
-                                                                           "February",
-                                                                           "March",
-                                                                           "April",
-                                                                           "May",
-                                                                           "June",
-                                                                               "July",
-                                                                               "August",
-                                                                               "September",
-                                                                               "October",
-                                                                         "November",
-                                                                         "December"
-                                                                     ],
-                                                      
+                                           "Months":  [
+                                                          "January",
+                                                          "February",
+                                                          "March",
+                                                          "April",
+                                                          "May",
+                                                          "June",
+                                                          "July",
+                                                          "August",
+                                                          "September",
+                                                          "October",
+                                                          "November",
+                                                          "December"
+                                                      ],
                                            "Music Genres":  {
                                                                 "beginner":  [
                                                                                  "Rock",
@@ -1011,7 +1015,7 @@
                                                                                      "Soul",
                                                                                      "Gospel",
                                                                                      "Synthwave",
-                                                                                     "R&B",
+                                                                                     "R\u0026B",
                                                                                      "Techno",
                                                                                      "House",
                                                                                      "Trance",
@@ -1084,10 +1088,10 @@
                                                                                       "Hotel",
                                                                                       "India",
                                                                                       "Juliet",
-                                                                                      "Kilo"
+                                                                                      "Kilo",
+                                                                                      "Lima"
                                                                                   ],
                                                                      "intermediate":  [
-                                                                                          "Lima",
                                                                                           "Mike",
                                                                                           "November",
                                                                                           "Oscar",
@@ -1123,15 +1127,16 @@
                                                                                       "Exclamation Point",
                                                                                       "Question Mark",
                                                                                       "Colon",
-                                                                                      "Semicolon"
+                                                                                      "Semicolon",
+                                                                                      "Apostrophe",
+                                                                                      "Quotation Mark",
+                                                                                      "Hyphen",
+                                                                                      "Dash",
+                                                                                      "Parentheses",
+                                                                                      "Brackets"
                                                                                   ],
                                                                      "intermediate":  [
-                                                                                          "Apostrophe",
-                                                                                          "Quotation Mark",
-                                                                                          "Hyphen",
-                                                                                          "Dash",
-                                                                                          "Parentheses",
-                                                                                          "Brackets"
+
                                                                                       ],
                                                                      "expert":  [
                                                                                     "Ellipsis",
@@ -1147,14 +1152,14 @@
                                                                                     "Thesaurus",
                                                                                     "Almanac",
                                                                                     "Manual",
-                                                                                    "Handbook"
+                                                                                    "Handbook",
+                                                                                    "Guide",
+                                                                                    "Compendium",
+                                                                                    "Gazetteer",
+                                                                                    "Lexicon",
+                                                                                    "Directory"
                                                                                 ],
                                                                    "intermediate":  [
-                                                                                        "Guide",
-                                                                                        "Compendium",
-                                                                                        "Gazetteer",
-                                                                                        "Lexicon",
-                                                                                        "Directory",
                                                                                         "Yearbook"
                                                                                     ],
                                                                    "expert":  [
@@ -1213,13 +1218,13 @@
                                                                           "Dining Room",
                                                                           "Hallway",
                                                                           "Study",
-                                                                          "Garage"
+                                                                          "Garage",
+                                                                          "Basement",
+                                                                          "Attic",
+                                                                          "Pantry",
+                                                                          "Laundry"
                                                                       ],
                                                          "intermediate":  [
-                                                                              "Basement",
-                                                                              "Attic",
-                                                                              "Pantry",
-                                                                              "Laundry",
                                                                               "Office",
                                                                               "Library",
                                                                               "Sunroom"
@@ -1243,10 +1248,10 @@
                                                                            "Diamond",
                                                                            "Octagon",
                                                                            "Sphere",
-                                                                           "Cube"
+                                                                           "Cube",
+                                                                           "Cylinder"
                                                                        ],
                                                           "intermediate":  [
-                                                                               "Cylinder",
                                                                                "Pyramid",
                                                                                "Cone",
                                                                                "Torus",
@@ -1278,10 +1283,10 @@
                                                                            "Swimming",
                                                                            "Baseball",
                                                                            "Volleyball",
-                                                                           "Boxing"
+                                                                           "Boxing",
+                                                                           "Martial Arts"
                                                                        ],
                                                           "intermediate":  [
-                                                                               "Martial Arts",
                                                                                "Gymnastics",
                                                                                "Track and Field",
                                                                                "Skiing",
@@ -1310,12 +1315,12 @@
                                                                                "Notebook",
                                                                                "Binder",
                                                                                "Scissors",
-                                                                               "Marker"
+                                                                               "Marker",
+                                                                               "Highlighter",
+                                                                               "Envelope",
+                                                                               "Glue"
                                                                            ],
                                                               "intermediate":  [
-                                                                                   "Highlighter",
-                                                                                   "Envelope",
-                                                                                   "Glue",
                                                                                    "Tape",
                                                                                    "Paperclip",
                                                                                    "Pushpin",
@@ -1337,14 +1342,14 @@
                                                                                    "Decade",
                                                                                    "Year",
                                                                                    "Month",
-                                                                                   "Week"
+                                                                                   "Week",
+                                                                                   "Day",
+                                                                                   "Hour",
+                                                                                   "Minute",
+                                                                                   "Second",
+                                                                                   "Millisecond"
                                                                                ],
                                                                   "intermediate":  [
-                                                                                       "Day",
-                                                                                       "Hour",
-                                                                                       "Minute",
-                                                                                       "Second",
-                                                                                       "Millisecond",
                                                                                        "Microsecond"
                                                                                    ],
                                                                   "expert":  [
@@ -1516,12 +1521,12 @@
                                                                              "Train",
                                                                              "Plane",
                                                                              "Boat",
-                                                                             "Ship"
+                                                                             "Ship",
+                                                                             "Helicopter",
+                                                                             "Submarine",
+                                                                             "Tram"
                                                                          ],
                                                             "intermediate":  [
-                                                                                 "Helicopter",
-                                                                                 "Submarine",
-                                                                                 "Tram",
                                                                                  "Scooter",
                                                                                  "Van",
                                                                                  "RV",
@@ -1538,51 +1543,51 @@
                                                         },
                                            "Weather Words":  {
                                                                  "beginner":  [
-                                                                                  
                                                                                   "Cloudy",
                                                                                   "Cold",
                                                                                   "Drizzle",
                                                                                   "Fair",
                                                                                   "Freezing",
-                                                                                  
                                                                                   "Foggy",
                                                                                   "Frost",
                                                                                   "Gale",
-                                                                                 
                                                                                   "Humid",
                                                                                   "Hail",
                                                                                   "Hot",
                                                                                   "Hurricane",
-                                                                                  "Icy",                                                                                "Windy",
-                                                                                "Warm",
-                                                                                "Sunny",
+                                                                                  "Icy",
+                                                                                  "Windy",
+                                                                                  "Warm",
+                                                                                  "Sunny",
                                                                                   "Lightning",
-                                                                                "Cool",
-                                                                                "Chilly"
+                                                                                  "Cool",
+                                                                                  "Chilly"
                                                                               ],
                                                                  "intermediate":  [
-                                                                                      "Breezy", "Gusty",
-                                                                                  "Hazy",
-                                                                                  "Calm","Muggy",
+                                                                                      "Breezy",
+                                                                                      "Gusty",
+                                                                                      "Hazy",
+                                                                                      "Calm",
+                                                                                      "Muggy",
                                                                                       "Misty",
-                                                                                      
                                                                                       "Monsoon",
-                                                                                    
                                                                                       "Overcast",
                                                                                       "Rainy",
                                                                                       "Rainbow",
                                                                                       "Sleet",
                                                                                       "Snowy",
-                                                                                      
                                                                                       "Stormy",
                                                                                       "Smog",
-                                                                                      
                                                                                       "Thunderstorm",
                                                                                       "Tornado",
                                                                                       "Typhoon"
                                                                                   ],
                                                                  "expert":  [
-"Flurry","Moist",  "Nor'easter","Slush","Squall",
+                                                                                "Flurry",
+                                                                                "Moist",
+                                                                                "Nor\u0027easter",
+                                                                                "Slush",
+                                                                                "Squall",
                                                                                 "Dry",
                                                                                 "Clear",
                                                                                 "Blizzard",
@@ -1590,60 +1595,57 @@
                                                                                 "Downpour"
                                                                             ]
                                                              },
-                                           "Zodiac":   [
-                                                                           "Aries",
-                                                                           "Taurus",
-                                                                           "Gemini",
-                                                                           "Cancer",
-                                                                           "Leo",
-                                                                      
-                                                                               "Virgo",
-                                                                               "Libra",
-                                                                               "Scorpio",
-                                                                               "Sagittarius",
-                                                                               "Capricorn",
-                                                                         
-                                                                         "Aquarius",
-                                                                         "Pisces"
-                                                                     ]
-                                                      
+                                           "Zodiac":  [
+                                                          "Aries",
+                                                          "Taurus",
+                                                          "Gemini",
+                                                          "Cancer",
+                                                          "Leo",
+                                                          "Virgo",
+                                                          "Libra",
+                                                          "Scorpio",
+                                                          "Sagittarius",
+                                                          "Capricorn",
+                                                          "Aquarius",
+                                                          "Pisces"
+                                                      ]
                                        },
-                                       "Emotions": {
-    "beginner": [
-        "Happy",
-        "Sad",
-        "Angry",
-        "Excited",
-        "Scared",
-        "Calm",
-        "Proud",
-        "Lonely",
-        "Silly",
-        "Bored"
-    ],
-    "intermediate": [
-        "Anxious",
-        "Jealous",
-        "Grateful",
-        "Curious",
-        "Nervous",
-        "Confused",
-        "Guilty",
-        "Hopeful",
-        "Frustrated",
-        "Overwhelmed"
-    ],
-    "expert": [
-        "Melancholy",
-        "Nostalgic",
-        "Ambivalent",
-        "Apathetic",
-        "Euphoric",
-        "Apprehensive",
-        "Vulnerable",
-        "Serene"
-    ]
-},
+                       "Emotions":  {
+                                        "beginner":  [
+                                                         "Happy",
+                                                         "Sad",
+                                                         "Angry",
+                                                         "Excited",
+                                                         "Scared",
+                                                         "Calm",
+                                                         "Proud",
+                                                         "Lonely",
+                                                         "Silly",
+                                                         "Bored"
+                                                     ],
+                                        "intermediate":  [
+                                                             "Anxious",
+                                                             "Jealous",
+                                                             "Grateful",
+                                                             "Curious",
+                                                             "Nervous",
+                                                             "Confused",
+                                                             "Guilty",
+                                                             "Hopeful",
+                                                             "Frustrated",
+                                                             "Overwhelmed"
+                                                         ],
+                                        "expert":  [
+                                                       "Melancholy",
+                                                       "Nostalgic",
+                                                       "Ambivalent",
+                                                       "Apathetic",
+                                                       "Euphoric",
+                                                       "Apprehensive",
+                                                       "Vulnerable",
+                                                       "Serene"
+                                                   ]
+                                    },
                        "unlockPool":  {
                                           "Actors Who Have Played Doctor Who":  {
                                                                                     "beginner":  [
@@ -1653,14 +1655,14 @@
                                                                                                      "Peter Capaldi",
                                                                                                      "Peter Davison",
                                                                                                      "Christopher Eccleston",
-                                                                                                     "Ncuti Gatwa"
+                                                                                                     "Ncuti Gatwa",
+                                                                                                     "William Hartnell",
+                                                                                                     "John Hurt",
+                                                                                                     "Jo Martin",
+                                                                                                     "Sylvester McCoy",
+                                                                                                     "Paul McGann"
                                                                                                  ],
                                                                                     "intermediate":  [
-                                                                                                         "William Hartnell",
-                                                                                                         "John Hurt",
-                                                                                                         "Jo Martin",
-                                                                                                         "Sylvester McCoy",
-                                                                                                         "Paul McGann",
                                                                                                          "Jon Pertwee"
                                                                                                      ],
                                                                                     "expert":  [
@@ -1699,13 +1701,13 @@
                                                                               "Caecilian",
                                                                               "Axolotl",
                                                                               "Tree Frog",
-                                                                              "Bullfrog"
+                                                                              "Bullfrog",
+                                                                              "Glass Frog",
+                                                                              "Fire Salamander",
+                                                                              "Tiger Salamander",
+                                                                              "Hellbender"
                                                                           ],
                                                              "intermediate":  [
-                                                                                  "Glass Frog",
-                                                                                  "Fire Salamander",
-                                                                                  "Tiger Salamander",
-                                                                                  "Hellbender",
                                                                                   "Mudpuppy",
                                                                                   "Olm",
                                                                                   "Surinam Toad"
@@ -1728,11 +1730,11 @@
                                                                                 "My Hero Academia",
                                                                                 "Demon Slayer",
                                                                                 "Fullmetal Alchemist",
-                                                                                "Jujutsu Kaisen"
+                                                                                "Jujutsu Kaisen",
+                                                                                "Neon Genesis Evangelion",
+                                                                                "Cowboy Bebop"
                                                                             ],
                                                                "intermediate":  [
-                                                                                    "Neon Genesis Evangelion",
-                                                                                    "Cowboy Bebop",
                                                                                     "Sailor Moon",
                                                                                     "Hunter X Hunter",
                                                                                     "One Punch Man",
@@ -1759,13 +1761,13 @@
                                                                                           "Facade",
                                                                                           "Spire",
                                                                                           "Buttress",
-                                                                                          "Cornice"
+                                                                                          "Cornice",
+                                                                                          "Gable",
+                                                                                          "Portico",
+                                                                                          "Pediment",
+                                                                                          "Balustrade"
                                                                                       ],
                                                                          "intermediate":  [
-                                                                                              "Gable",
-                                                                                              "Portico",
-                                                                                              "Pediment",
-                                                                                              "Balustrade",
                                                                                               "Pilaster",
                                                                                               "Lintel",
                                                                                               "Tracery"
@@ -1814,13 +1816,13 @@
                                                                            "Michelangelo",
                                                                            "Salvador Dali",
                                                                            "Henri Matisse",
-                                                                           "Georgia O'Keeffe",
+                                                                           "Georgia O\u0027Keeffe",
                                                                            "Frida Kahlo",
                                                                            "Andy Warhol",
-                                                                           "Jackson Pollock"
+                                                                           "Jackson Pollock",
+                                                                           "Rembrandt"
                                                                        ],
                                                           "intermediate":  [
-                                                                               "Rembrandt",
                                                                                "Johannes Vermeer",
                                                                                "Edvard Munch",
                                                                                "Gustav Klimt",
@@ -1851,10 +1853,10 @@
                                                                            "Leo Tolstoy",
                                                                            "Fyodor Dostoevsky",
                                                                            "Mary Shelley",
-                                                                           "Edgar Allan Poe"
+                                                                           "Edgar Allan Poe",
+                                                                           "Agatha Christie"
                                                                        ],
                                                           "intermediate":  [
-                                                                               "Agatha Christie",
                                                                                "Stephen King",
                                                                                "Gabriel Garcia Marquez",
                                                                                "Franz Kafka",
@@ -1886,10 +1888,10 @@
                                                                               "Water Polo",
                                                                               "Netball",
                                                                               "Dodgeball",
-                                                                              "Billiards"
+                                                                              "Billiards",
+                                                                              "Squash"
                                                                           ],
                                                              "intermediate":  [
-                                                                                  "Squash",
                                                                                   "Cricket",
                                                                                   "Bowling",
                                                                                   "Golf",
@@ -1919,8 +1921,8 @@
                                                                                  "And I Love Her",
                                                                                  "Dear Prudence",
                                                                                  "With A Little Help From My Friends",
-                                                                                 "Sgt. Pepper's Lonely Hearts Club Band",
-                                                                                 "I've Just Seen A Face",
+                                                                                 "Sgt. Pepper\u0027s Lonely Hearts Club Band",
+                                                                                 "I\u0027ve Just Seen A Face",
                                                                                  "Taxman",
                                                                                  "Helter Skelter",
                                                                                  "Got To Get You Into My Life",
@@ -1932,9 +1934,9 @@
                                                                              ],
                                                                 "intermediate":  [
                                                                                      "Penny Lane",
-                                                                                     "You've Got To Hide Your Love Away",
+                                                                                     "You\u0027ve Got To Hide Your Love Away",
                                                                                      "We Can Work It Out",
-                                                                                     "Can't Buy Me Love",
+                                                                                     "Can\u0027t Buy Me Love",
                                                                                      "Here Comes The Sun",
                                                                                      "Happiness Is A Warm Gun",
                                                                                      "Eleanor Rigby",
@@ -1949,7 +1951,7 @@
                                                                                      "Norwegian Wood"
                                                                                  ],
                                                                 "expert":  [
-                                                                               "A Hard Day's Night",
+                                                                               "A Hard Day\u0027s Night",
                                                                                "While My Guitar Gently Weeps",
                                                                                "Come Together",
                                                                                "Let It Be",
@@ -2148,13 +2150,13 @@
                                                                                   "Milky Way",
                                                                                   "Kit Kat",
                                                                                   "Crunch",
-                                                                                  "Aero"
+                                                                                  "Aero",
+                                                                                  "Flake",
+                                                                                  "Picnic",
+                                                                                  "Boost",
+                                                                                  "Skor"
                                                                               ],
                                                                  "intermediate":  [
-                                                                                      "Flake",
-                                                                                      "Picnic",
-                                                                                      "Boost",
-                                                                                      "Skor",
                                                                                       "Heath",
                                                                                       "Butterfinger",
                                                                                       "Toblerone"
@@ -2178,11 +2180,11 @@
                                                                                        "Debussy",
                                                                                        "Wagner",
                                                                                        "Schubert",
-                                                                                       "Handel"
+                                                                                       "Handel",
+                                                                                       "Brahms",
+                                                                                       "Liszt"
                                                                                    ],
                                                                       "intermediate":  [
-                                                                                           "Brahms",
-                                                                                           "Liszt",
                                                                                            "Haydn",
                                                                                            "Rachmaninoff",
                                                                                            "Mendelssohn",
@@ -2211,11 +2213,11 @@
                                                                              "Manhattan",
                                                                              "Mojito",
                                                                              "Bloody Mary",
-                                                                             "Cosmopolitan"
+                                                                             "Cosmopolitan",
+                                                                             "Mai Tai",
+                                                                             "Pina Colada"
                                                                          ],
                                                             "intermediate":  [
-                                                                                 "Mai Tai",
-                                                                                 "Pina Colada",
                                                                                  "Tom Collins",
                                                                                  "Caipirinha",
                                                                                  "Sazerac",
@@ -2230,7 +2232,7 @@
                                                                            "Rum Punch",
                                                                            "Singapore Sling",
                                                                            "French 75",
-                                                                           "Dark 'n' Stormy"
+                                                                           "Dark \u0027n\u0027 Stormy"
                                                                        ]
                                                         },
                                           "Collective Nouns":  {
@@ -2313,13 +2315,13 @@
                                                                                   "Pegasus",
                                                                                   "Andromeda",
                                                                                   "Perseus",
-                                                                                  "Hercules"
+                                                                                  "Hercules",
+                                                                                  "Cygnus",
+                                                                                  "Lyra",
+                                                                                  "Aquila",
+                                                                                  "Scorpius"
                                                                               ],
                                                                  "intermediate":  [
-                                                                                      "Cygnus",
-                                                                                      "Lyra",
-                                                                                      "Aquila",
-                                                                                      "Scorpius",
                                                                                       "Sagittarius",
                                                                                       "Leo",
                                                                                       "Taurus"
@@ -2332,7 +2334,7 @@
                                                                                 "Pisces"
                                                                             ]
                                                              },
-                                          "D&D Monsters":  {
+                                          "D\u0026D Monsters":  {
                                                                     "beginner":  [
                                                                                      "Beholder",
                                                                                      "Displacer Beast",
@@ -2450,14 +2452,14 @@
                                                                            "Kalahari",
                                                                            "Atacama",
                                                                            "Namib",
-                                                                           "Patagonian"
+                                                                           "Patagonian",
+                                                                           "Syrian",
+                                                                           "Karakum",
+                                                                           "Kyzylkum",
+                                                                           "Thar",
+                                                                           "Gibson"
                                                                        ],
                                                           "intermediate":  [
-                                                                               "Syrian",
-                                                                               "Karakum",
-                                                                               "Kyzylkum",
-                                                                               "Thar",
-                                                                               "Gibson",
                                                                                "Great Victoria"
                                                                            ],
                                                           "expert":  [
@@ -2478,10 +2480,10 @@
                                                                                     "Spinosaurus",
                                                                                     "Allosaurus",
                                                                                     "Diplodocus",
-                                                                                    "Parasaurolophus"
+                                                                                    "Parasaurolophus",
+                                                                                    "Iguanodon"
                                                                                 ],
                                                                    "intermediate":  [
-                                                                                        "Iguanodon",
                                                                                         "Pachycephalosaurus",
                                                                                         "Deinonychus",
                                                                                         "Compsognathus",
@@ -2512,11 +2514,11 @@
                                                                                          "Bill Potts",
                                                                                          "Sarah Jane",
                                                                                          "Ace",
-                                                                                         "Leela"
+                                                                                         "Leela",
+                                                                                         "Ruby Sunday",
+                                                                                         "Graham O\u0027Brien"
                                                                                      ],
                                                                         "intermediate":  [
-                                                                                             "Ruby Sunday",
-                                                                                             "Graham O'Brien",
                                                                                              "Ryan Sinclair",
                                                                                              "Yasmin Khan",
                                                                                              "Mickey Smith",
@@ -2599,13 +2601,13 @@
                                                                                  "Seth",
                                                                                  "Anubis",
                                                                                  "Thoth",
-                                                                                 "Bastet"
+                                                                                 "Bastet",
+                                                                                 "Sekhmet",
+                                                                                 "Hathor",
+                                                                                 "Sobek",
+                                                                                 "Amun"
                                                                              ],
                                                                 "intermediate":  [
-                                                                                     "Sekhmet",
-                                                                                     "Hathor",
-                                                                                     "Sobek",
-                                                                                     "Amun",
                                                                                      "Ptah",
                                                                                      "Nut",
                                                                                      "Geb"
@@ -2678,17 +2680,18 @@
                                                                                   "Skydiving",
                                                                                   "Base Jumping",
                                                                                   "Motocross",
-                                                                                  "Whitewater Rafting"
+                                                                                  "Whitewater Rafting",
+                                                                                  "Free Climbing",
+                                                                                  "Snowboarding",
+                                                                                  "Skateboarding",
+                                                                                  "Surfing",
+                                                                                  "BMX",
+                                                                                  "Kitesurfing"
                                                                               ],
                                                                  "intermediate":  [
-                                                                                      "Free Climbing",
-                                                                                      "Snowboarding",
-                                                                                      "Skateboarding",
-                                                                                      "Surfing",
-                                                                                      "BMX"
+
                                                                                   ],
                                                                  "expert":  [
-                                                                                "Kitesurfing",
                                                                                 "Caving",
                                                                                 "Abseiling"
                                                                             ]
@@ -2757,18 +2760,20 @@
                                                                                    "Muhammad Ali",
                                                                                    "Serena Williams",
                                                                                    "Roger Federer",
-                                                                                   "Usain Bolt"
+                                                                                   "Usain Bolt",
+                                                                                   "Lionel Messi",
+                                                                                   "Cristiano Ronaldo",
+                                                                                   "Simone Biles",
+                                                                                   "LeBron James",
+                                                                                   "Michael Phelps",
+                                                                                   "Tiger Woods",
+                                                                                   "Tom Brady"
                                                                                ],
                                                                   "intermediate":  [
-                                                                                       "Lionel Messi",
-                                                                                       "Cristiano Ronaldo",
-                                                                                       "Simone Biles",
-                                                                                       "LeBron James",
-                                                                                       "Michael Phelps"
+
                                                                                    ],
                                                                   "expert":  [
-                                                                                 "Tiger Woods",
-                                                                                 "Tom Brady"
+
                                                                              ]
                                                               },
                                           "Famous Boybands":  [
@@ -2812,27 +2817,27 @@
                                                                                      "Robinson Crusoe",
                                                                                      "Invisible Man",
                                                                                      "The Sun Also Rises",
-                                                                                     "Gulliver's Travels",
+                                                                                     "Gulliver\u0027s Travels",
                                                                                      "Beloved",
                                                                                      "Madame Bovary",
                                                                                      "The Trial",
                                                                                      "The Age Of Innocence",
-                                                                                     "Midnight's Children",
+                                                                                     "Midnight\u0027s Children",
                                                                                      "Dracula",
-                                                                                     "Alice's Adventures In Wonderland",
+                                                                                     "Alice\u0027s Adventures In Wonderland",
                                                                                      "Treasure Island"
                                                                                  ],
                                                                 "expert":  [
                                                                                "Pride And Prejudice",
                                                                                "Moby Dick",
-                                                                               "The Pilgrim's Progress",
+                                                                               "The Pilgrim\u0027s Progress",
                                                                                "A Christmas Carol",
                                                                                "A Tale Of Two Cities",
                                                                                "Great Expectations",
                                                                                "The Hobbit",
                                                                                "Frankenstein",
                                                                                "Oliver Twist",
-                                                                               "Uncle Tom's Cabin",
+                                                                               "Uncle Tom\u0027s Cabin",
                                                                                "Crime And Punishment"
                                                                            ]
                                                             },
@@ -2885,7 +2890,7 @@
                                                                                  "Black Onyx",
                                                                                  "Rose Quartz",
                                                                                  "Malachite",
-                                                                                 "Tiger's Eye",
+                                                                                 "Tiger\u0027s Eye",
                                                                                  "Apatite"
                                                                              ],
                                                             "expert":  [
@@ -2908,15 +2913,16 @@
                                                                                    "Peninsula",
                                                                                    "Archipelago",
                                                                                    "Isthmus",
-                                                                                   "Plateau"
+                                                                                   "Plateau",
+                                                                                   "Canyon",
+                                                                                   "Valley",
+                                                                                   "Delta",
+                                                                                   "Lagoon",
+                                                                                   "Strait",
+                                                                                   "Equator"
                                                                                ],
                                                                   "intermediate":  [
-                                                                                       "Canyon",
-                                                                                       "Valley",
-                                                                                       "Delta",
-                                                                                       "Lagoon",
-                                                                                       "Strait",
-                                                                                       "Equator"
+
                                                                                    ],
                                                                   "expert":  [
                                                                                  "Latitude",
@@ -2933,13 +2939,13 @@
                                                                                    "Hadean",
                                                                                    "Archean",
                                                                                    "Proterozoic",
-                                                                                   "Cambrian"
+                                                                                   "Cambrian",
+                                                                                   "Ordovician",
+                                                                                   "Silurian",
+                                                                                   "Devonian",
+                                                                                   "Carboniferous"
                                                                                ],
                                                                   "intermediate":  [
-                                                                                       "Ordovician",
-                                                                                       "Silurian",
-                                                                                       "Devonian",
-                                                                                       "Carboniferous",
                                                                                        "Permian",
                                                                                        "Triassic",
                                                                                        "Jurassic"
@@ -2958,17 +2964,18 @@
                                                                                  "Granite",
                                                                                  "Obsidian",
                                                                                  "Limestone",
-                                                                                 "Marble"
+                                                                                 "Marble",
+                                                                                 "Quartz",
+                                                                                 "Fossil",
+                                                                                 "Erosion",
+                                                                                 "Sediment",
+                                                                                 "Tectonic",
+                                                                                 "Fault"
                                                                              ],
                                                                 "intermediate":  [
-                                                                                     "Quartz",
-                                                                                     "Fossil",
-                                                                                     "Erosion",
-                                                                                     "Sediment",
-                                                                                     "Tectonic"
+
                                                                                  ],
                                                                 "expert":  [
-                                                                               "Fault",
                                                                                "Crystal",
                                                                                "Bedrock"
                                                                            ]
@@ -2982,13 +2989,13 @@
                                                                                     "Handicap",
                                                                                     "Bunker",
                                                                                     "Fairway",
-                                                                                    "Green"
+                                                                                    "Green",
+                                                                                    "Putt",
+                                                                                    "Tee",
+                                                                                    "Albatross",
+                                                                                    "Rough"
                                                                                 ],
                                                                    "intermediate":  [
-                                                                                        "Putt",
-                                                                                        "Tee",
-                                                                                        "Albatross",
-                                                                                        "Rough",
                                                                                         "Divot",
                                                                                         "Caddy",
                                                                                         "Driver"
@@ -3065,12 +3072,12 @@
                                                                               "Apollo",
                                                                               "Artemis",
                                                                               "Ares",
-                                                                              "Aphrodite"
+                                                                              "Aphrodite",
+                                                                              "Hephaestus",
+                                                                              "Hermes",
+                                                                              "Hestia"
                                                                           ],
                                                              "intermediate":  [
-                                                                                  "Hephaestus",
-                                                                                  "Hermes",
-                                                                                  "Hestia",
                                                                                   "Dionysus",
                                                                                   "Hades",
                                                                                   "Persephone",
@@ -3092,17 +3099,18 @@
                                                                               "Tear",
                                                                               "Desert",
                                                                               "Close",
-                                                                              "Live"
+                                                                              "Live",
+                                                                              "Minute",
+                                                                              "Object",
+                                                                              "Produce",
+                                                                              "Refuse",
+                                                                              "Subject",
+                                                                              "Content"
                                                                           ],
                                                              "intermediate":  [
-                                                                                  "Minute",
-                                                                                  "Object",
-                                                                                  "Produce",
-                                                                                  "Refuse",
-                                                                                  "Subject"
+
                                                                               ],
                                                              "expert":  [
-                                                                            "Content",
                                                                             "Invalid",
                                                                             "Console"
                                                                         ]
@@ -3127,13 +3135,13 @@
                                                                                       "Middle Ages",
                                                                                       "Renaissance",
                                                                                       "Reformation",
-                                                                                      "Enlightenment"
+                                                                                      "Enlightenment",
+                                                                                      "Industrial Revolution",
+                                                                                      "Victorian Era",
+                                                                                      "Edwardian Era",
+                                                                                      "Roaring Twenties"
                                                                                   ],
                                                                      "intermediate":  [
-                                                                                          "Industrial Revolution",
-                                                                                          "Victorian Era",
-                                                                                          "Edwardian Era",
-                                                                                          "Roaring Twenties",
                                                                                           "Space Age",
                                                                                           "Information Age",
                                                                                           "Mesozoic"
@@ -3148,18 +3156,18 @@
                                                              "beginner":  [
                                                                               "Their",
                                                                               "There",
-                                                                              "They're",
+                                                                              "They\u0027re",
                                                                               "To",
                                                                               "Too",
                                                                               "Two",
-                                                                              "Your"
+                                                                              "Your",
+                                                                              "You\u0027re",
+                                                                              "Here",
+                                                                              "Hear",
+                                                                              "Brake",
+                                                                              "Break"
                                                                           ],
                                                              "intermediate":  [
-                                                                                  "You're",
-                                                                                  "Here",
-                                                                                  "Hear",
-                                                                                  "Brake",
-                                                                                  "Break",
                                                                                   "Flour"
                                                                               ],
                                                              "expert":  [
@@ -3177,13 +3185,13 @@
                                                                                 "Billie Holiday",
                                                                                 "Duke Ellington",
                                                                                 "Thelonious Monk",
-                                                                                "Charlie Parker"
+                                                                                "Charlie Parker",
+                                                                                "Nina Simone",
+                                                                                "Chet Baker",
+                                                                                "Dizzy Gillespie",
+                                                                                "Count Basie"
                                                                             ],
                                                                "intermediate":  [
-                                                                                    "Nina Simone",
-                                                                                    "Chet Baker",
-                                                                                    "Dizzy Gillespie",
-                                                                                    "Count Basie",
                                                                                     "Sarah Vaughan",
                                                                                     "Art Blakey",
                                                                                     "Herbie Hancock"
@@ -3201,18 +3209,20 @@
                                                                                 "Blackpink",
                                                                                 "Twice",
                                                                                 "Red Velvet",
-                                                                                "Exo"
+                                                                                "Exo",
+                                                                                "Seventeen",
+                                                                                "Stray Kids",
+                                                                                "NewJeans",
+                                                                                "Aespa",
+                                                                                "Itzy",
+                                                                                "NCT",
+                                                                                "TXT"
                                                                             ],
                                                                "intermediate":  [
-                                                                                    "Seventeen",
-                                                                                    "Stray Kids",
-                                                                                    "NewJeans",
-                                                                                    "Aespa",
-                                                                                    "Itzy"
+
                                                                                 ],
                                                                "expert":  [
-                                                                              "NCT",
-                                                                              "TXT"
+
                                                                           ]
                                                            },
                                           "Keyboard":  {
@@ -3236,18 +3246,18 @@
                                                                             "U",
                                                                             "W",
                                                                             "X",
-                                                                                "Y",
-                                                                                "Z",
-                                                                                "0",
-                                                                                "1",
-                                                                                "2",
-                                                                                "3",
-                                                                                "4",
-                                                                                "5",
-                                                                                "6",
-                                                                                "7",
-                                                                                "8",
-                                                                                "9"                                                                            
+                                                                            "Y",
+                                                                            "Z",
+                                                                            "0",
+                                                                            "1",
+                                                                            "2",
+                                                                            "3",
+                                                                            "4",
+                                                                            "5",
+                                                                            "6",
+                                                                            "7",
+                                                                            "8",
+                                                                            "9"
                                                                         ],
                                                            "intermediate":  [
                                                                                 "`",
@@ -3255,17 +3265,16 @@
                                                                                 "=",
                                                                                 "ESC",
                                                                                 "TAB",
-                                                                          "SHIFT",
-                                                                          "CTRL",
-                                                                          "ALT",
-                                                                           "ENTER"
+                                                                                "SHIFT",
+                                                                                "CTRL",
+                                                                                "ALT",
+                                                                                "ENTER"
                                                                             ],
                                                            "expert":  [
-
                                                                           "[",
                                                                           "]",
                                                                           ";",
-                                                                          "'",
+                                                                          "\u0027",
                                                                           ",",
                                                                           ".",
                                                                           "/"
@@ -3278,15 +3287,16 @@
                                                                                      "Porsche",
                                                                                      "Maserati",
                                                                                      "Aston Martin",
-                                                                                     "Bentley"
+                                                                                     "Bentley",
+                                                                                     "Rolls-Royce",
+                                                                                     "Bugatti",
+                                                                                     "McLaren",
+                                                                                     "Pagani",
+                                                                                     "Lotus",
+                                                                                     "Maybach"
                                                                                  ],
                                                                     "intermediate":  [
-                                                                                         "Rolls-Royce",
-                                                                                         "Bugatti",
-                                                                                         "McLaren",
-                                                                                         "Pagani",
-                                                                                         "Lotus",
-                                                                                         "Maybach"
+
                                                                                      ],
                                                                     "expert":  [
                                                                                    "Lexus",
@@ -3374,7 +3384,7 @@
                                                                                    "Beta Ray Bill",
                                                                                    "Shuri",
                                                                                    "Okoye",
-                                                                                   "M'Baku",
+                                                                                   "M\u0027Baku",
                                                                                    "Yondu",
                                                                                    "Nebula",
                                                                                    "Dagger",
@@ -3390,22 +3400,23 @@
                                                                       "Radiology",
                                                                       "Orthopedics"
                                                                   ],
-                                          "Medieval Arms & Armour":  {
+                                          "Medieval Arms \u0026 Armour":  {
                                                                               "beginner":  [
                                                                                                "Broadsword",
                                                                                                "Halberd",
                                                                                                "Mace",
                                                                                                "Crossbow",
                                                                                                "Longbow",
-                                                                                               "Trebuchet"
+                                                                                               "Trebuchet",
+                                                                                               "Chainmail",
+                                                                                               "Plate Armour",
+                                                                                               "Gauntlet",
+                                                                                               "Visor",
+                                                                                               "Shield",
+                                                                                               "Morningstar"
                                                                                            ],
                                                                               "intermediate":  [
-                                                                                                   "Chainmail",
-                                                                                                   "Plate Armour",
-                                                                                                   "Gauntlet",
-                                                                                                   "Visor",
-                                                                                                   "Shield",
-                                                                                                   "Morningstar"
+
                                                                                                ],
                                                                               "expert":  [
                                                                                              "Lance",
@@ -3631,18 +3642,19 @@
                                                                                           "Mjolnir",
                                                                                           "Aegis",
                                                                                           "Golden Fleece",
-                                                                                          "Pandora's Box",
-                                                                                          "Holy Grail"
+                                                                                          "Pandora\u0027s Box",
+                                                                                          "Holy Grail",
+                                                                                          "Trident",
+                                                                                          "Gungnir",
+                                                                                          "Caduceus",
+                                                                                          "Dainsleif",
+                                                                                          "Spear of Longinus",
+                                                                                          "Fleece"
                                                                                       ],
                                                                          "intermediate":  [
-                                                                                              "Trident",
-                                                                                              "Gungnir",
-                                                                                              "Caduceus",
-                                                                                              "Dainsleif",
-                                                                                              "Spear of Longinus"
+
                                                                                           ],
                                                                          "expert":  [
-                                                                                        "Fleece",
                                                                                         "Covenant",
                                                                                         "Scepter"
                                                                                     ]
@@ -3655,14 +3667,14 @@
                                                                                   "Serengeti",
                                                                                   "Kruger",
                                                                                   "Glacier",
-                                                                                  "Zion"
+                                                                                  "Zion",
+                                                                                  "Grand Canyon",
+                                                                                  "Acadia",
+                                                                                  "Bryce Canyon",
+                                                                                  "Joshua Tree",
+                                                                                  "Everglades"
                                                                               ],
                                                                  "intermediate":  [
-                                                                                      "Grand Canyon",
-                                                                                      "Acadia",
-                                                                                      "Bryce Canyon",
-                                                                                      "Joshua Tree",
-                                                                                      "Everglades",
                                                                                       "Smoky Mountains"
                                                                                   ],
                                                                  "expert":  [
@@ -3696,18 +3708,20 @@
                                                                                "Kayak",
                                                                                "Racecar",
                                                                                "Level",
-                                                                               "Noon"
+                                                                               "Noon",
+                                                                               "Deified",
+                                                                               "Rotator",
+                                                                               "Refer",
+                                                                               "Tenet",
+                                                                               "Sagas",
+                                                                               "Stats",
+                                                                               "Madam"
                                                                            ],
                                                               "intermediate":  [
-                                                                                   "Deified",
-                                                                                   "Rotator",
-                                                                                   "Refer",
-                                                                                   "Tenet",
-                                                                                   "Sagas"
+
                                                                                ],
                                                               "expert":  [
-                                                                             "Stats",
-                                                                             "Madam"
+
                                                                          ]
                                                           },
                                           "Pastas":  {
@@ -3770,17 +3784,18 @@
                                                                                      "Opera",
                                                                                      "Mime",
                                                                                      "Stand-up Comedy",
-                                                                                     "Puppetry"
+                                                                                     "Puppetry",
+                                                                                     "Spoken Word",
+                                                                                     "Performance Art",
+                                                                                     "Circus Arts",
+                                                                                     "Burlesque",
+                                                                                     "Improvisation",
+                                                                                     "Street Performance"
                                                                                  ],
                                                                     "intermediate":  [
-                                                                                         "Spoken Word",
-                                                                                         "Performance Art",
-                                                                                         "Circus Arts",
-                                                                                         "Burlesque",
-                                                                                         "Improvisation"
+
                                                                                      ],
                                                                     "expert":  [
-                                                                                   "Street Performance",
                                                                                    "Musical Theatre",
                                                                                    "Clowning"
                                                                                ]
@@ -3911,7 +3926,7 @@
                                           "Pop Divas":  {
                                                             "beginner":  [
                                                                              "Madonna",
-                                                                             "BeyoncÃ©",
+                                                                             "BeyoncÃƒÂ©",
                                                                              "Whitney Houston",
                                                                              "Mariah Carey",
                                                                              "Celine Dion",
@@ -3961,13 +3976,13 @@
                                                                                      "Asteroids",
                                                                                      "Galaga",
                                                                                      "Centipede",
-                                                                                     "Dig Dug"
+                                                                                     "Dig Dug",
+                                                                                     "Q*bert",
+                                                                                     "Space Invaders",
+                                                                                     "Pitfall",
+                                                                                     "Pong"
                                                                                  ],
                                                                     "intermediate":  [
-                                                                                         "Q*bert",
-                                                                                         "Space Invaders",
-                                                                                         "Pitfall",
-                                                                                         "Pong",
                                                                                          "Defender",
                                                                                          "Joust",
                                                                                          "Gauntlet"
@@ -3989,13 +4004,13 @@
                                                                                        "Danube",
                                                                                        "Mekong",
                                                                                        "Thames",
-                                                                                       "Ganges"
+                                                                                       "Ganges",
+                                                                                       "Volga",
+                                                                                       "Yukon",
+                                                                                       "Colorado",
+                                                                                       "Rhine"
                                                                                    ],
                                                                       "intermediate":  [
-                                                                                           "Volga",
-                                                                                           "Yukon",
-                                                                                           "Colorado",
-                                                                                           "Rhine",
                                                                                            "Seine",
                                                                                            "Loire",
                                                                                            "Po"
@@ -4019,7 +4034,7 @@
                                                                               "Foo Fighters",
                                                                               "Metallica",
                                                                               "Queen",
-                                                                              "Guns 'N' Roses",
+                                                                              "Guns \u0027N\u0027 Roses",
                                                                               "Aerosmith",
                                                                               "U2",
                                                                               "REM",
@@ -4071,12 +4086,12 @@
                                                                                   "Galba",
                                                                                   "Otho",
                                                                                   "Vitellius",
-                                                                                  "Vespasian"
+                                                                                  "Vespasian",
+                                                                                  "Titus",
+                                                                                  "Domitian",
+                                                                                  "Nerva"
                                                                               ],
                                                                  "intermediate":  [
-                                                                                      "Titus",
-                                                                                      "Domitian",
-                                                                                      "Nerva",
                                                                                       "Trajan",
                                                                                       "Hadrian",
                                                                                       "Antoninus Pius",
@@ -4101,11 +4116,11 @@
                                                                                        "Candela",
                                                                                        "Hertz",
                                                                                        "Newton",
-                                                                                       "Pascal"
+                                                                                       "Pascal",
+                                                                                       "Joule",
+                                                                                       "Watt"
                                                                                    ],
                                                                       "intermediate":  [
-                                                                                           "Joule",
-                                                                                           "Watt",
                                                                                            "Coulomb",
                                                                                            "Volt",
                                                                                            "Farad",
@@ -4160,7 +4175,7 @@
                                                                                       "Buck Rogers In The 25th Century",
                                                                                       "Stargate SG-1",
                                                                                       "The Jetsons",
-                                                                                      "Mork & Mindy",
+                                                                                      "Mork \u0026 Mindy",
                                                                                       "Alf",
                                                                                       "Foundation",
                                                                                       "The Last Of Us",
@@ -4168,7 +4183,7 @@
                                                                                       "The Mandalorian",
                                                                                       "The Outer Limits",
                                                                                       "Torchwood",
-                                                                                      "Blake's 7",
+                                                                                      "Blake\u0027s 7",
                                                                                       "Sense8"
                                                                                   ],
                                                                  "expert":  [
@@ -4234,12 +4249,12 @@
                                                                                     "Puck",
                                                                                     "Skis",
                                                                                     "Surfboard",
-                                                                                    "Club"
+                                                                                    "Club",
+                                                                                    "Paddle",
+                                                                                    "Gloves",
+                                                                                    "Ball"
                                                                                 ],
                                                                    "intermediate":  [
-                                                                                        "Paddle",
-                                                                                        "Gloves",
-                                                                                        "Ball",
                                                                                         "Net",
                                                                                         "Wetsuit",
                                                                                         "Pads",
@@ -4272,17 +4287,18 @@
                                                                                       "Prime Video",
                                                                                       "Apple TV Plus",
                                                                                       "Stan",
-                                                                                      "Binge"
+                                                                                      "Binge",
+                                                                                      "Paramount Plus",
+                                                                                      "Crunchyroll",
+                                                                                      "YouTube Premium",
+                                                                                      "Hayu",
+                                                                                      "Kayo Sports",
+                                                                                      "Optus Sport"
                                                                                   ],
                                                                      "intermediate":  [
-                                                                                          "Paramount Plus",
-                                                                                          "Crunchyroll",
-                                                                                          "YouTube Premium",
-                                                                                          "Hayu",
-                                                                                          "Kayo Sports"
+
                                                                                       ],
                                                                      "expert":  [
-                                                                                    "Optus Sport",
                                                                                     "Plex",
                                                                                     "Tubi",
                                                                                     "Pluto TV"
@@ -4295,15 +4311,16 @@
                                                                                         "Point Guard",
                                                                                         "Quarterback",
                                                                                         "Pitcher",
-                                                                                        "Wicketkeeper"
+                                                                                        "Wicketkeeper",
+                                                                                        "Scrum-half",
+                                                                                        "Center",
+                                                                                        "Forward",
+                                                                                        "Winger",
+                                                                                        "Defenceman",
+                                                                                        "Catcher"
                                                                                     ],
                                                                        "intermediate":  [
-                                                                                            "Scrum-half",
-                                                                                            "Center",
-                                                                                            "Forward",
-                                                                                            "Winger",
-                                                                                            "Defenceman",
-                                                                                            "Catcher"
+
                                                                                         ],
                                                                        "expert":  [
                                                                                       "Shortstop",
@@ -4375,13 +4392,13 @@
                                                                          "Chisel",
                                                                          "Level",
                                                                          "Saw",
-                                                                         "Drill"
+                                                                         "Drill",
+                                                                         "Mallet",
+                                                                         "Plane",
+                                                                         "Clamp",
+                                                                         "Sander"
                                                                      ],
                                                         "intermediate":  [
-                                                                             "Mallet",
-                                                                             "Plane",
-                                                                             "Clamp",
-                                                                             "Sander",
                                                                              "Router",
                                                                              "File",
                                                                              "Vice"
@@ -4402,14 +4419,14 @@
                                                                                           "Expressionism",
                                                                                           "Abstract Expressionism",
                                                                                           "Dadaism",
-                                                                                          "Baroque"
+                                                                                          "Baroque",
+                                                                                          "Renaissance",
+                                                                                          "Romanticism",
+                                                                                          "Pop Art",
+                                                                                          "Minimalism",
+                                                                                          "Art Nouveau"
                                                                                       ],
                                                                          "intermediate":  [
-                                                                                              "Renaissance",
-                                                                                              "Romanticism",
-                                                                                              "Pop Art",
-                                                                                              "Minimalism",
-                                                                                              "Art Nouveau",
                                                                                               "Fauvism"
                                                                                           ],
                                                                          "expert":  [
@@ -4553,17 +4570,18 @@
                                                                                        "PlayStation",
                                                                                        "Xbox",
                                                                                        "Sega",
-                                                                                       "Game Boy"
+                                                                                       "Game Boy",
+                                                                                       "GameCube",
+                                                                                       "Wii",
+                                                                                       "Dreamcast",
+                                                                                       "Genesis",
+                                                                                       "Mega Drive",
+                                                                                       "Saturn"
                                                                                    ],
                                                                       "intermediate":  [
-                                                                                           "GameCube",
-                                                                                           "Wii",
-                                                                                           "Dreamcast",
-                                                                                           "Genesis",
-                                                                                           "Mega Drive"
+
                                                                                        ],
                                                                       "expert":  [
-                                                                                     "Saturn",
                                                                                      "ColecoVision"
                                                                                  ]
                                                                   },
@@ -4575,14 +4593,14 @@
                                                                              "Kilimanjaro",
                                                                              "St. Helens",
                                                                              "Mauna Loa",
-                                                                             "Fuji"
+                                                                             "Fuji",
+                                                                             "Tambora",
+                                                                             "Pinatubo",
+                                                                             "Eyjafjallajokull",
+                                                                             "Mauna Kea",
+                                                                             "Mount Hood"
                                                                          ],
                                                             "intermediate":  [
-                                                                                 "Tambora",
-                                                                                 "Pinatubo",
-                                                                                 "Eyjafjallajokull",
-                                                                                 "Mauna Kea",
-                                                                                 "Mount Hood",
                                                                                  "Rainier"
                                                                              ],
                                                             "expert":  [
@@ -4600,13 +4618,13 @@
                                                                                 "Diving",
                                                                                 "Rowing",
                                                                                 "Sailing",
-                                                                                "Snorkeling"
+                                                                                "Snorkeling",
+                                                                                "Wakeboarding",
+                                                                                "Rafting",
+                                                                                "Canoeing",
+                                                                                "Kitesurfing"
                                                                             ],
                                                                "intermediate":  [
-                                                                                    "Wakeboarding",
-                                                                                    "Rafting",
-                                                                                    "Canoeing",
-                                                                                    "Kitesurfing",
                                                                                     "Jet Skiing",
                                                                                     "Stand Up Paddleboarding",
                                                                                     "Bodyboarding"
@@ -4689,10 +4707,10 @@
                                                                                      "Lincoln Memorial",
                                                                                      "Mount Fuji",
                                                                                      "London Eye",
-                                                                                     "St. Peter's Basilica",
+                                                                                     "St. Peter\u0027s Basilica",
                                                                                      "Notre Dame",
                                                                                      "Tokyo Tower",
-                                                                                     "St. Basil's Cathedral",
+                                                                                     "St. Basil\u0027s Cathedral",
                                                                                      "Arc De Triomphe",
                                                                                      "The Great Sphinx",
                                                                                      "Mount Kilimanjaro",
@@ -4719,7 +4737,7 @@
                                       }
                    },
     "UNLOCK_THEMES":  {
-                          "Art & Culture":  [
+                          "Art \u0026 Culture":  [
                                                      "Types of Art Movements",
                                                      "Artists",
                                                      "Art Mediums",
@@ -4728,7 +4746,7 @@
                                                      "Architectural Elements",
                                                      "Fashion brands"
                                                  ],
-                          "Food & Lifestyle":  [
+                          "Food \u0026 Lifestyle":  [
                                                         "Cheeses",
                                                         "Pastas",
                                                         "Cocktails",
@@ -4741,7 +4759,7 @@
                                                         "Board Games",
                                                         "Medical practices"
                                                     ],
-                          "Geography & Nature":  [
+                          "Geography \u0026 Nature":  [
                                                           "Major Mountain Ranges",
                                                           "Types of Clouds",
                                                           "Molluscs",
@@ -4750,7 +4768,7 @@
                                                           "Deserts",
                                                           "National Parks"
                                                       ],
-                          "History & Myth":  [
+                          "History \u0026 Myth":  [
                                                       "Mythical Creatures",
                                                       "Historical Periods",
                                                       "US State Capitols",
@@ -4759,12 +4777,12 @@
                                                       "Egyptian Gods",
                                                       "Roman Emperors",
                                                       "Books Of The Bible",
-                                                      "Medieval Arms & Armour",
+                                                      "Medieval Arms \u0026 Armour",
                                                       "Religions",
                                                       "British Monarchs",
                                                       "Mythological Artifacts"
                                                   ],
-                          "Language & Literature":  [
+                          "Language \u0026 Literature":  [
                                                              "Palindromes",
                                                              "Silent Letter Words",
                                                              "Heteronyms",
@@ -4805,7 +4823,7 @@
                                               "DC Characters",
                                               "Addams Family Characters"
                                           ],
-                          "Science & Tech":  [
+                          "Science \u0026 Tech":  [
                                                       "Geology Terms",
                                                       "Google Products",
                                                       "Keyboard",

@@ -1505,6 +1505,34 @@
             }
         }
 
+        function selectRedHerringFallback(chosenCats, usedWordsSet = new Set(), count = 1) {
+            const allThemes = { ...THEME_DATA.starterPool, ...THEME_DATA.unlockPool };
+            const candidates = [];
+
+            Object.keys(allThemes)
+                .filter(category => !chosenCats.includes(category))
+                .forEach(category => {
+                    const source = allThemes[category];
+                    const words = Array.isArray(source) ? source : Object.values(source || {}).flat();
+                    words.forEach(word => {
+                        const normalized = String(word || '').trim().toLowerCase();
+                        if (normalized && !usedWordsSet.has(normalized)) {
+                            candidates.push({ word, category, normalized });
+                        }
+                    });
+                });
+
+            shuffleArray(candidates);
+            const picked = [];
+            const usedCategories = new Set();
+            candidates.forEach(candidate => {
+                if (picked.length >= count || usedCategories.has(candidate.category)) return;
+                picked.push({ word: candidate.word, category: candidate.category });
+                usedCategories.add(candidate.category);
+            });
+            return picked;
+        }
+
         
 
         function showSettingsMainView() {
@@ -1982,7 +2010,14 @@
                     // number of red herrings: 1 for every 5 levels (rounded up)
                     const redCount = Math.ceil(lvl / 5);
                     const seed = parseInt(localStorage.getItem('hardcoreLevelSeed') || String(lvl), 10) || lvl;
-                    const rhs = selectRedHerrings(chosenCats, usedWordsOnBoard, redCount, seed);
+                    let rhs = selectRedHerrings(chosenCats, usedWordsOnBoard, redCount, seed);
+                    // Strict mode avoids overlapping words. If the high-level board exhausts
+                    // those candidates, keep the mode's promise by using a safe unused word.
+                    if (rhs.length < redCount) {
+                        const selectedWords = new Set(rhs.map(rh => String(rh.word).trim().toLowerCase()));
+                        const fallbackUsedWords = new Set([...usedWordsOnBoard, ...selectedWords]);
+                        rhs = rhs.concat(selectRedHerringFallback(chosenCats, fallbackUsedWords, redCount - rhs.length));
+                    }
                     rhs.forEach(rh => {
                         if (rh && rh.word) {
                             wordlist.push({ word: rh.word, category: rh.category, targetN: 1, isRedHerring: true });
