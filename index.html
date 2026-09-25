@@ -1056,6 +1056,7 @@
                 </div>
                 <p style="margin: -4px 0 12px; font-size: 0.82em; line-height: 1.35; opacity: 0.75;">Help improve the game with anonymous mode, level, and completion data.</p>
                 
+                <button type="button" onclick="showHowToPlay('settingsModal')" class="modal-action-btn" style="width: 100%; margin-top: 6px;">How to Play</button>
                 
 
 <button type="button" onclick="showCategorySettings()" class="modal-action-btn" style="width: 100%; margin-top: 6px;">Manage unlocked categories</button>
@@ -1678,18 +1679,21 @@
             window.open('https://forms.gle/aCG1JMq8cub3hm4R7', '_blank');
         }
 
-        function showHowToPlay() {
-            const modeModal = document.getElementById('modeModal');
+        let howToPlayReturnModal = 'modeModal';
+
+        function showHowToPlay(returnModalId = 'modeModal') {
+            howToPlayReturnModal = returnModalId;
+            const returnModal = document.getElementById(howToPlayReturnModal);
             const howToModal = document.getElementById('howToModal');
-            if (modeModal) modeModal.style.display = 'none';
+            if (returnModal) returnModal.style.display = 'none';
             if (howToModal) howToModal.style.display = 'flex';
         }
 
         function closeHowToPlay() {
-            const modeModal = document.getElementById('modeModal');
+            const returnModal = document.getElementById(howToPlayReturnModal);
             const howToModal = document.getElementById('howToModal');
             if (howToModal) howToModal.style.display = 'none';
-            if (modeModal) modeModal.style.display = 'flex';
+            if (returnModal) returnModal.style.display = 'flex';
         }
 
         function showCustomAlert(title, message, onOk = null) {
@@ -3196,7 +3200,6 @@
                 window.UNLOCK_THEMES = UNLOCK_THEMES;
                 
                 initializeGameLogic();
-                setTimeout(requestAnalyticsConsent, 300);
             } catch (error) {
                 console.error("Game data load failed:", error);
             }
